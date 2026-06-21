@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GameStore — Nosotros</title>
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="inicio.html" class="logo">
+      <img src="IMAGENES/mysite.png" alt="GameStore" />
+    </a>
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <div class="menu" id="menu">
+      <a href="inicio.html">Home</a>
+      <a href="grillas.html">Catálogo</a>
+      <a href="acerca_de.html" class="active">Nosotros</a>
+      <a href="contacto.html">Contacto</a>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <div class="section-title" style="padding-top:48px;">
+    <span class="eyebrow">Quiénes somos</span>
+    <h2>Acerca de <span>GameStore</span></h2>
+  </div>
+
+  <!-- MISIÓN + IMAGEN -->
+  <div class="about-hero">
+    <img src="IMAGENES/pexels-tombrand-1637438.jpg" alt="Nuestra misión" />
+    <div class="about-text">
+      <h2>Nuestra <span>Misión</span></h2>
+      <p>
+        Ofrecer productos de tecnología de punta especializados en el mundo de los videojuegos,
+        brindando a nuestros clientes experiencias únicas y accesibles que combinen innovación,
+        calidad y entretenimiento.
+      </p>
+      <h2>Nuestra <span>Visión</span></h2>
+      <p>
+        Ser reconocidos como la tienda líder en promoción y venta de artículos tecnológicos y de
+        videojuegos en el mercado, destacándonos por nuestra confiabilidad, servicio al cliente
+        y compromiso con la innovación constante.
+      </p>
+      <a href="contacto.html" class="btn-primary" style="margin-top:8px;">Contáctanos →</a>
+    </div>
+  </div>
+
+  <!-- VISIÓN + IMAGEN (invertida) -->
+  <div class="about-hero" style="margin-top:0;">
+    <div class="about-text">
+      <h2>¿Por qué <span>elegirnos</span>?</h2>
+      <p>
+        En GameStore no solo vendemos consolas — somos gamers también. Entendemos lo que buscas:
+        calidad garantizada, precios justos, asesoría real y productos originales. Cada artículo
+        que ofrecemos pasa por nuestra selección rigurosa para que tu inversión valga la pena.
+      </p>
+      <p>
+        Trabajamos con las mejores marcas del mundo y nos mantenemos al día con cada lanzamiento
+        para que siempre encuentres lo último del mercado gamer.
+      </p>
+    </div>
+    <img src="IMAGENES/pexels-viniciusvieirafotografia-29825629.jpg" alt="Por qué elegirnos" />
+  </div>
+
+  <!-- VALORES -->
+  <div class="section-title">
+    <span class="eyebrow">Lo que nos mueve</span>
+    <h2>Nuestros <span>valores</span></h2>
+  </div>
+  <div class="about-values">
+    <div class="value-card">
+      <div class="icon">🎮</div>
+      <h3>Pasión Gamer</h3>
+      <p>Somos jugadores antes que vendedores. Vivimos el mundo gamer desde adentro.</p>
+    </div>
+    <div class="value-card">
+      <div class="icon">⚡</div>
+      <h3>Innovación</h3>
+      <p>Siempre al tanto de los últimos lanzamientos y tendencias del mercado.</p>
+    </div>
+    <div class="value-card">
+      <div class="icon">🏆</div>
+      <h3>Calidad</h3>
+      <p>Solo productos originales y garantizados. Tu confianza es nuestra prioridad.</p>
+    </div>
+    <div class="value-card">
+      <div class="icon">🤝</div>
+      <h3>Servicio</h3>
+      <p>Asesoría personalizada para que siempre encuentres lo que necesitas.</p>
+    </div>
+    <div class="value-card">
+      <div class="icon">🌐</div>
+      <h3>Comunidad</h3>
+      <p>Creemos en el poder del gaming para conectar personas y crear comunidades.</p>
+    </div>
+    <div class="value-card">
+      <div class="icon">💡</div>
+      <h3>Accesibilidad</h3>
+      <p>Gaming para todos los niveles, edades y presupuestos. Sin exclusiones.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="IMAGENES/mysite.png" alt="GameStore" />
+        <p>Tu tienda de videojuegos de confianza.<br>Consolas, periféricos y mucho más.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <a href="inicio.html">Home</a>
+        <a href="grillas.html">Catálogo</a>
+        <a href="acerca_de.html">Nosotros</a>
+        <a href="contacto.html">Contacto</a>
+      </div>
+      <div class="footer-col">
+        <h4>Categorías</h4>
+        <a href="grillas.html#nintendo">Nintendo</a>
+        <a href="grillas.html#microsoft">Xbox</a>
+        <a href="grillas.html#ps_sony">PlayStation</a>
+        <a href="grillas.html#oldschool">Old School</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 <span>GameStore</span> · Programación y Servicios WEB · CIAF IV Semestre</p>
+      <p>Hecho con <span>♥</span> para gamers</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('menuToggle').addEventListener('click', function () {
+      document.getElementById('menu').classList.toggle('active');
+    });
+  </script>
+</body>
+</html>

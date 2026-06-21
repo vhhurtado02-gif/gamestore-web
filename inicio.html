@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GameStore — Inicio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="estilos.css" />
+  <style>
+    /* Hero tagline sobre carrusel */
+    .carousel-wrapper { position: relative; }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(10,10,15,0.7) 35%, transparent 80%);
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      padding: 0 56px;
+      pointer-events: none;
+    }
+    .hero-text { max-width: 460px; }
+    .hero-text .tag {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-bottom: 14px;
+    }
+    .hero-text h1 {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.05;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.7);
+      margin-bottom: 14px;
+    }
+    .hero-text h1 span { color: var(--red); }
+    .hero-text p {
+      color: rgba(255,255,255,0.75);
+      font-size: 15px;
+      margin-bottom: 24px;
+    }
+    .hero-btns { display: flex; gap: 12px; pointer-events: all; }
+
+    /* Ticker */
+    .ticker-bar {
+      background: var(--red);
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 9px 0;
+    }
+    .ticker-inner {
+      display: inline-block;
+      animation: ticker 22s linear infinite;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+    @keyframes ticker {
+      0%   { transform: translateX(100vw); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="inicio.html" class="logo">
+      <img src="IMAGENES/mysite.png" alt="GameStore" />
+    </a>
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <div class="menu" id="menu">
+      <a href="inicio.html" class="active">Home</a>
+      <a href="grillas.html">Catálogo</a>
+      <a href="acerca_de.html">Nosotros</a>
+      <a href="contacto.html">Contacto</a>
+    </div>
+  </nav>
+
+  <!-- CARRUSEL CON OVERLAY -->
+  <div class="carousel-wrapper">
+    <div class="hero-overlay">
+      <div class="hero-text">
+        <span class="tag">🎮 Tienda Gamer</span>
+        <h1>Tu próxima<br><span>partida</span><br>empieza aquí</h1>
+        <p>Consolas, periféricos y coleccionables para el jugador que llevas dentro.</p>
+        <div class="hero-btns">
+          <a href="grillas.html" class="btn-primary">Ver catálogo</a>
+          <a href="acerca_de.html" class="btn-outline">Nosotros</a>
+        </div>
+      </div>
+    </div>
+    <div id="Carrusel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3500">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="IMAGENES/chip.jpg" class="d-block w-100" alt="Hardware gamer" />
+        </div>
+        <div class="carousel-item">
+          <img src="IMAGENES/control.jpg" class="d-block w-100" alt="Control" />
+        </div>
+        <div class="carousel-item">
+          <img src="IMAGENES/cuarto_1920x1080.jpg" class="d-block w-100" alt="Setup gamer" />
+        </div>
+        <div class="carousel-item">
+          <img src="IMAGENES/kids.jpg" class="d-block w-100" alt="Familia gamer" />
+        </div>
+        <div class="carousel-item">
+          <img src="IMAGENES/gameboy.jpg" class="d-block w-100" alt="Gameboy" />
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#Carrusel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#Carrusel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- TICKER -->
+  <div class="ticker-bar">
+    <span class="ticker-inner">
+      🎮 Nintendo Switch &nbsp;·&nbsp; Xbox Series X &nbsp;·&nbsp; PlayStation 5 &nbsp;·&nbsp;
+      Periféricos Gaming &nbsp;·&nbsp; Old School &nbsp;·&nbsp; Torneos Online &nbsp;·&nbsp;
+      🎮 Nintendo Switch &nbsp;·&nbsp; Xbox Series X &nbsp;·&nbsp; PlayStation 5 &nbsp;·&nbsp;
+      Periféricos Gaming &nbsp;·&nbsp; Old School &nbsp;·&nbsp; Torneos Online
+    </span>
+  </div>
+
+  <!-- CATEGORÍAS -->
+  <div class="section-title">
+    <span class="eyebrow">Oferta especial</span>
+    <h2>Explora nuestro <span>catálogo</span></h2>
+  </div>
+
+  <div class="grid-container">
+    <div class="grid-item">
+      <img src="IMAGENES/gifmario.gif" alt="Nintendo" />
+      <div class="grid-item-body">
+        <h3>Nintendo</h3>
+        <p>Lo de ayer, hoy y siempre. Clásicos y novedades.</p>
+        <a href="grillas.html#nintendo" class="btn-card">Ver más →</a>
+      </div>
+    </div>
+    <div class="grid-item">
+      <img src="IMAGENES/gifxbox.gif" alt="Microsoft Xbox" />
+      <div class="grid-item-body">
+        <h3>Microsoft Xbox</h3>
+        <p>A la vanguardia del gaming moderno.</p>
+        <a href="grillas.html#microsoft" class="btn-card">Ver más →</a>
+      </div>
+    </div>
+    <div class="grid-item">
+      <img src="IMAGENES/playstation.gif" alt="PlayStation Sony" />
+      <div class="grid-item-body">
+        <h3>PlayStation · Sony</h3>
+        <p>Siempre innovando, siempre jugando.</p>
+        <a href="grillas.html#ps_sony" class="btn-card">Ver más →</a>
+      </div>
+    </div>
+    <div class="grid-item">
+      <img src="IMAGENES/perifericos.jpg" alt="Periféricos" />
+      <div class="grid-item-body">
+        <h3>Periféricos</h3>
+        <p>Todo en hardware para tu setup perfecto.</p>
+        <a href="grillas.html#perifericos" class="btn-card">Ver más →</a>
+      </div>
+    </div>
+    <div class="grid-item">
+      <img src="IMAGENES/oldschool.jpg" alt="Old School" />
+      <div class="grid-item-body">
+        <h3>Old School</h3>
+        <p>Coleccionables y consolas retro únicas.</p>
+        <a href="grillas.html#oldschool" class="btn-card">Ver más →</a>
+      </div>
+    </div>
+    <div class="grid-item">
+      <img src="IMAGENES/torneo.jpg" alt="Online" />
+      <div class="grid-item-body">
+        <h3>Online · Torneos</h3>
+        <p>Competencias y comunidad para todos los niveles.</p>
+        <a href="grillas.html#online" class="btn-card">Ver más →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- REGISTRO -->
+  <div class="section-title">
+    <span class="eyebrow">Únete</span>
+    <h2>Regístrate y <span>juega</span> con ventajas</h2>
+  </div>
+
+  <div class="form-section">
+    <div class="steps-indicator">
+      <div class="step-dot active" id="dot1">1</div>
+      <div class="step-line" id="line1"></div>
+      <div class="step-dot" id="dot2">2</div>
+      <div class="step-line" id="line2"></div>
+      <div class="step-dot" id="dot3">3</div>
+    </div>
+    <form id="multiStepForm">
+      <!-- Paso 1 -->
+      <div class="step">
+        <div class="form-group">
+          <label>Nombre completo</label>
+          <input type="text" id="nombre" placeholder="Ej: Juan Pérez" required />
+        </div>
+        <div class="form-group">
+          <label>Correo electrónico</label>
+          <input type="email" id="email" placeholder="ejemplo@mail.com" required />
+        </div>
+        <div class="form-btns">
+          <button type="button" class="btn-next">Siguiente →</button>
+        </div>
+      </div>
+      <!-- Paso 2 -->
+      <div class="step" style="display:none">
+        <div class="form-group">
+          <label>Teléfono</label>
+          <input type="tel" id="telefono" placeholder="300 000 0000" required />
+        </div>
+        <div class="form-group">
+          <label>Edad</label>
+          <input type="number" id="edad" min="1" max="120" placeholder="Tu edad" required />
+        </div>
+        <div class="form-btns">
+          <button type="button" class="btn-prev">← Anterior</button>
+          <button type="button" class="btn-next">Siguiente →</button>
+        </div>
+      </div>
+      <!-- Paso 3 -->
+      <div class="step" style="display:none">
+        <div class="form-group">
+          <label>Mensaje</label>
+          <textarea id="mensaje" placeholder="¿Qué buscas en GameStore?" required></textarea>
+        </div>
+        <div class="form-btns">
+          <button type="button" class="btn-prev">← Anterior</button>
+          <button type="submit" class="btn-submit">Enviar ✓</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="IMAGENES/mysite.png" alt="GameStore" />
+        <p>Tu tienda de videojuegos de confianza.<br>Consolas, periféricos y mucho más.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <a href="inicio.html">Home</a>
+        <a href="grillas.html">Catálogo</a>
+        <a href="acerca_de.html">Nosotros</a>
+        <a href="contacto.html">Contacto</a>
+      </div>
+      <div class="footer-col">
+        <h4>Categorías</h4>
+        <a href="grillas.html#nintendo">Nintendo</a>
+        <a href="grillas.html#microsoft">Xbox</a>
+        <a href="grillas.html#ps_sony">PlayStation</a>
+        <a href="grillas.html#oldschool">Old School</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 <span>GameStore</span> · Programación y Servicios WEB · CIAF IV Semestre</p>
+      <p>Hecho con <span>♥</span> para gamers</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Navbar hamburguesa
+    document.getElementById('menuToggle').addEventListener('click', function () {
+      document.getElementById('menu').classList.toggle('active');
+    });
+
+    // Carrusel
+    document.addEventListener('DOMContentLoaded', function () {
+      const el = document.querySelector('#Carrusel');
+      if (el && typeof bootstrap !== 'undefined') {
+        new bootstrap.Carousel(el, { interval: 3500, ride: 'carousel' });
+      }
+    });
+
+    // Formulario multi-paso
+    const steps   = document.querySelectorAll('.step');
+    const dots    = [document.getElementById('dot1'), document.getElementById('dot2'), document.getElementById('dot3')];
+    const lines   = [document.getElementById('line1'), document.getElementById('line2')];
+    let current   = 0;
+
+    function goTo(n) {
+      steps[current].style.display = 'none';
+      dots[current].classList.remove('active');
+      if (n > current) { dots[current].classList.add('done'); lines[current - 1 + 1] && lines[current].classList.add('done'); }
+      current = n;
+      steps[current].style.display = 'block';
+      dots[current].classList.add('active');
+    }
+
+    document.querySelectorAll('.btn-next').forEach(btn => btn.addEventListener('click', () => {
+      const inputs = steps[current].querySelectorAll('input, textarea');
+      for (let i of inputs) { if (!i.checkValidity()) { i.reportValidity(); return; } }
+      if (current < steps.length - 1) goTo(current + 1);
+    }));
+
+    document.querySelectorAll('.btn-prev').forEach(btn => btn.addEventListener('click', () => {
+      if (current > 0) goTo(current - 1);
+    }));
+
+    document.getElementById('multiStepForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      Swal.fire({
+        title: '¡Registro exitoso!',
+        text: 'Bienvenido a GameStore. ¡A jugar!',
+        icon: 'success',
+        confirmButtonColor: '#ff2d55',
+        timer: 3000,
+        timerProgressBar: true,
+      });
+      this.reset();
+      steps.forEach((s, i) => { s.style.display = i === 0 ? 'block' : 'none'; });
+      dots.forEach(d => { d.classList.remove('active','done'); });
+      lines.forEach(l => l.classList.remove('done'));
+      dots[0].classList.add('active');
+      current = 0;
+    });
+  </script>
+</body>
+</html>

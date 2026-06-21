@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GameStore — Catálogo</title>
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="inicio.html" class="logo">
+      <img src="IMAGENES/mysite.png" alt="GameStore" />
+    </a>
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <div class="menu" id="menu">
+      <a href="inicio.html">Home</a>
+      <a href="grillas.html" class="active">Catálogo</a>
+      <a href="acerca_de.html">Nosotros</a>
+      <a href="contacto.html">Contacto</a>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <div class="section-title" style="padding-top:48px;">
+    <span class="eyebrow">Explora todo</span>
+    <h2>Nuestro <span>Catálogo</span></h2>
+  </div>
+
+  <!-- ── NINTENDO ── -->
+  <div id="nintendo" class="cat-header">
+    <img src="IMAGENES/gifnintendo.gif" class="cat-hero" alt="Nintendo" />
+    <div class="cat-header-overlay">
+      <h2><span>Nintendo</span> · Lo de siempre</h2>
+    </div>
+  </div>
+  <div class="cat-section">
+    <div class="cat-images">
+      <img src="IMAGENES/mario_kart.jpg" alt="Mario Kart" />
+      <img src="IMAGENES/swith2.jpg" alt="Nintendo Switch" />
+    </div>
+    <div class="cat-text">
+      <h3>La magia de Nintendo</h3>
+      <p>
+        Desde las primeras pantallas del Game & Watch hasta la versatilidad de la Nintendo Switch,
+        Nintendo ha definido generaciones enteras de jugadores. Sus franquicias son íconos de la cultura
+        pop: Mario, Zelda, Pokémon, Metroid y más. Encuentra consolas, juegos originales y accesorios
+        oficiales para vivir la experiencia Nintendo en su máxima expresión.
+      </p>
+      <br />
+      <p style="color:var(--red); font-family:'Rajdhani',sans-serif; font-weight:700; font-size:0.95rem; letter-spacing:0.05em;">
+        ✦ Switch · Switch OLED · Switch Lite · Juegos Físicos y Digitales
+      </p>
+    </div>
+    <div class="cat-images">
+      <img src="IMAGENES/consols.jpg" alt="Consolas Nintendo" />
+      <img src="IMAGENES/switc.jpg" alt="Switch" />
+      <img src="IMAGENES/swithmario.jpg" alt="Switch Mario" />
+    </div>
+  </div>
+  <hr class="cat-divider" />
+
+  <!-- ── MICROSOFT ── -->
+  <div id="microsoft" class="cat-header">
+    <img src="IMAGENES/MICROSOFT.jpg" class="cat-hero" alt="Microsoft Xbox" />
+    <div class="cat-header-overlay">
+      <h2><span>Microsoft</span> · Xbox</h2>
+    </div>
+  </div>
+  <div class="cat-section">
+    <div class="cat-images">
+      <img src="IMAGENES/gaming.jpg" alt="Gaming Xbox" />
+      <img src="IMAGENES/arena.jpg" alt="Arena gaming" />
+    </div>
+    <div class="cat-text">
+      <h3>La vanguardia del gaming</h3>
+      <p>
+        Xbox Series X y Series S redefinieron el rendimiento en consolas con carga ultrarrápida,
+        retrocompatibilidad y el poder de Game Pass. Microsoft apostó por el ecosistema: juega en
+        consola, PC o móvil con una sola suscripción. Encuentra hardware, controles inalámbricos
+        y accesorios para dominar cada partida.
+      </p>
+      <br />
+      <p style="color:var(--red); font-family:'Rajdhani',sans-serif; font-weight:700; font-size:0.95rem; letter-spacing:0.05em;">
+        ✦ Xbox Series X · Series S · Game Pass · Controles Elite
+      </p>
+    </div>
+    <div class="cat-images">
+      <img src="IMAGENES/pexels-cottonbro-4009603.jpg" alt="Gaming" />
+      <img src="IMAGENES/pexels-cottonbro-4009624.jpg" alt="Gaming 2" />
+    </div>
+  </div>
+  <hr class="cat-divider" />
+
+  <!-- ── PLAYSTATION ── -->
+  <div id="ps_sony" class="cat-header">
+    <img src="IMAGENES/dualshok.jpg" class="cat-hero" alt="PlayStation Sony" />
+    <div class="cat-header-overlay">
+      <h2><span>PlayStation</span> · Sony</h2>
+    </div>
+  </div>
+  <div class="cat-section">
+    <div class="cat-images">
+      <img src="IMAGENES/pexels-ron-lach-7856014.jpg" alt="PlayStation" />
+      <img src="IMAGENES/pexels-mart-production-7329518.jpg" alt="PS gaming" />
+    </div>
+    <div class="cat-text">
+      <h3>Siempre innovando</h3>
+      <p>
+        PlayStation 5 lleva la inmersión a otro nivel con el DualSense — vibración háptica y
+        gatillos adaptativos que hacen sentir cada disparo, cada aceleración, cada impacto.
+        Títulos exclusivos de talla mundial como God of War, Spider-Man y Horizon convierten a
+        PlayStation en el hogar de las mejores experiencias narrativas del videojuego.
+      </p>
+      <br />
+      <p style="color:var(--red); font-family:'Rajdhani',sans-serif; font-weight:700; font-size:0.95rem; letter-spacing:0.05em;">
+        ✦ PS5 · PS4 · DualSense · PlayStation VR2 · Exclusivos
+      </p>
+    </div>
+    <div class="cat-images">
+      <img src="IMAGENES/pexels-tima-miroshnichenko-6498789.jpg" alt="Gaming PS" />
+      <img src="IMAGENES/pexels-yankrukov-9069368.jpg" alt="Gaming 2" />
+    </div>
+  </div>
+  <hr class="cat-divider" />
+
+  <!-- ── PERIFÉRICOS ── -->
+  <div id="perifericos" class="cat-header">
+    <img src="IMAGENES/perifericos.jpg" class="cat-hero" alt="Periféricos" />
+    <div class="cat-header-overlay">
+      <h2><span>Periféricos</span> · Setup</h2>
+    </div>
+  </div>
+  <div class="cat-section">
+    <div class="cat-images">
+      <img src="IMAGENES/tecladocontr.jpg" alt="Teclado y control" />
+      <img src="IMAGENES/room2.jpg" alt="Setup gamer" />
+    </div>
+    <div class="cat-text">
+      <h3>Todo para tu setup perfecto</h3>
+      <p>
+        Un buen setup va más allá de la consola. Teclados mecánicos con switches personalizables,
+        mouse de alta precisión, audífonos con sonido envolvente 7.1, sillas ergonómicas y monitores
+        de alta frecuencia de refresco transforman tu espacio en una estación de combate. Tenemos
+        todo lo que necesitas de las mejores marcas: ASUS ROG, Logitech, Razer y más.
+      </p>
+      <br />
+      <p style="color:var(--red); font-family:'Rajdhani',sans-serif; font-weight:700; font-size:0.95rem; letter-spacing:0.05em;">
+        ✦ Teclados · Mouse · Audífonos · Sillas · Monitores · Webcams
+      </p>
+    </div>
+    <div class="cat-images">
+      <img src="IMAGENES/tv_headphones.jpg" alt="TV y audífonos" />
+      <img src="IMAGENES/estudio.jpg" alt="Estudio gamer" />
+    </div>
+  </div>
+  <hr class="cat-divider" />
+
+  <!-- ── OLD SCHOOL ── -->
+  <div id="oldschool" class="cat-header">
+    <img src="IMAGENES/oldschool.jpg" class="cat-hero" alt="Old School" />
+    <div class="cat-header-overlay">
+      <h2><span>Old School</span> · Coleccionables</h2>
+    </div>
+  </div>
+  <div class="cat-section">
+    <div class="cat-images">
+      <img src="IMAGENES/gameboy.jpg" alt="Gameboy" />
+      <img src="IMAGENES/3ds.png" alt="3DS" />
+    </div>
+    <div class="cat-text">
+      <h3>El pasado que no pasa de moda</h3>
+      <p>
+        Las consolas retro son historia viva del entretenimiento. Atari, NES, SNES, Sega Genesis,
+        Game Boy, Nintendo 64: piezas que definieron a generaciones enteras. Ya sea que busques
+        revivir tu infancia o iniciar una colección, aquí encontrarás consolas en buen estado,
+        cartuchos originales y accesorios de época cuidadosamente seleccionados.
+      </p>
+      <br />
+      <p style="color:var(--red); font-family:'Rajdhani',sans-serif; font-weight:700; font-size:0.95rem; letter-spacing:0.05em;">
+        ✦ Atari · NES · SNES · Game Boy · N64 · Sega Genesis
+      </p>
+    </div>
+    <div class="cat-images">
+      <img src="IMAGENES/arcade.jpg" alt="Arcade" />
+      <img src="IMAGENES/mario_bros.jpg" alt="Mario Bros" />
+    </div>
+  </div>
+  <hr class="cat-divider" />
+
+  <!-- ── ONLINE ── -->
+  <div id="online" class="cat-header">
+    <img src="IMAGENES/torneo.jpg" class="cat-hero" alt="Torneos Online" />
+    <div class="cat-header-overlay">
+      <h2><span>Online</span> · Torneos</h2>
+    </div>
+  </div>
+  <div class="cat-section">
+    <div class="cat-images">
+      <img src="IMAGENES/friends.jpg" alt="Amigos gamers" />
+      <img src="IMAGENES/family.jpg" alt="Familia gamer" />
+    </div>
+    <div class="cat-text">
+      <h3>Compite, conecta, gana</h3>
+      <p>
+        El gaming online ha transformado el videojuego en un deporte global. Desde partidas casuales
+        con amigos hasta torneos profesionales de eSports, la comunidad es parte del juego. Ofrecemos
+        suscripciones online, kits para streaming, cámaras y todo lo que necesitas para subir tu nivel
+        y compartirlo con el mundo.
+      </p>
+      <br />
+      <p style="color:var(--red); font-family:'Rajdhani',sans-serif; font-weight:700; font-size:0.95rem; letter-spacing:0.05em;">
+        ✦ Torneos · eSports · Streaming · Comunidad · Suscripciones
+      </p>
+    </div>
+    <div class="cat-images">
+      <img src="IMAGENES/pexels-viniciusvieirafotografia-29825629.jpg" alt="Gaming online" />
+      <img src="IMAGENES/pexels-tombrand-1637438.jpg" alt="Gaming pro" />
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="IMAGENES/mysite.png" alt="GameStore" />
+        <p>Tu tienda de videojuegos de confianza.<br>Consolas, periféricos y mucho más.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <a href="inicio.html">Home</a>
+        <a href="grillas.html">Catálogo</a>
+        <a href="acerca_de.html">Nosotros</a>
+        <a href="contacto.html">Contacto</a>
+      </div>
+      <div class="footer-col">
+        <h4>Categorías</h4>
+        <a href="#nintendo">Nintendo</a>
+        <a href="#microsoft">Xbox</a>
+        <a href="#ps_sony">PlayStation</a>
+        <a href="#oldschool">Old School</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 <span>GameStore</span> · Programación y Servicios WEB · CIAF IV Semestre</p>
+      <p>Hecho con <span>♥</span> para gamers</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('menuToggle').addEventListener('click', function () {
+      document.getElementById('menu').classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
