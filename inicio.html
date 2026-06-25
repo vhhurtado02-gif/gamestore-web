@@ -49,7 +49,17 @@
       font-size: 15px;
       margin-bottom: 24px;
     }
-    .hero-btns { display: flex; gap: 12px; pointer-events: all; }
+    .hero-btns { display: flex; gap: 12px; pointer-events: all; flex-wrap: wrap; }
+    @media (max-width: 600px) {
+      .hero-overlay { padding: 0 20px; align-items: flex-end; padding-bottom: 20px; }
+      .hero-text .tag { font-size: 10px; }
+      .hero-text h1 { font-size: 1.8rem; }
+      .hero-text p { font-size: 13px; margin-bottom: 16px; }
+    }
+    @media (max-width: 380px) {
+      .hero-text h1 { font-size: 1.4rem; }
+      .hero-text { max-width: 100%; }
+    }
 
     /* Ticker */
     .ticker-bar {
