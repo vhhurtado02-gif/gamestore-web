@@ -49,17 +49,7 @@
       font-size: 15px;
       margin-bottom: 24px;
     }
-    .hero-btns { display: flex; gap: 12px; pointer-events: all; flex-wrap: wrap; }
-    @media (max-width: 600px) {
-      .hero-overlay { padding: 0 20px; align-items: flex-end; padding-bottom: 20px; }
-      .hero-text .tag { font-size: 10px; }
-      .hero-text h1 { font-size: 1.8rem; }
-      .hero-text p { font-size: 13px; margin-bottom: 16px; }
-    }
-    @media (max-width: 380px) {
-      .hero-text h1 { font-size: 1.4rem; }
-      .hero-text { max-width: 100%; }
-    }
+    .hero-btns { display: flex; gap: 12px; pointer-events: all; }
 
     /* Ticker */
     .ticker-bar {
@@ -81,6 +71,72 @@
     @keyframes ticker {
       0%   { transform: translateX(100vw); }
       100% { transform: translateX(-100%); }
+    }
+
+    /* ── HERO RESPONSIVE MOBILE ── */
+    @media (max-width: 600px) {
+      /* En mobile sacamos el overlay del flujo absoluto y lo convertimos en bloque debajo del carrusel */
+      .carousel-wrapper {
+        display: flex;
+        flex-direction: column;
+      }
+      .hero-overlay {
+        position: static;
+        background: linear-gradient(180deg, rgba(10,10,15,0.95) 0%, rgba(10,10,15,0.85) 100%);
+        padding: 20px 20px 24px;
+        order: 2; /* aparece debajo del carrusel */
+        align-items: flex-start;
+        pointer-events: all;
+      }
+      /* El carrusel va arriba */
+      #Carrusel {
+        order: 1;
+      }
+      .hero-text {
+        max-width: 100%;
+        width: 100%;
+      }
+      .hero-text .tag {
+        font-size: 10px;
+        padding: 3px 10px;
+        margin-bottom: 10px;
+      }
+      .hero-text h1 {
+        font-size: 1.75rem;
+        margin-bottom: 10px;
+        text-shadow: none;
+      }
+      .hero-text p {
+        font-size: 13px;
+        margin-bottom: 16px;
+        color: rgba(255,255,255,0.7);
+      }
+      .hero-btns {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .hero-btns .btn-primary,
+      .hero-btns .btn-outline {
+        flex: 1 1 auto;
+        min-width: 120px;
+        text-align: center;
+        justify-content: center;
+        padding: 10px 16px;
+        font-size: 13px;
+      }
+    }
+
+    @media (min-width: 601px) and (max-width: 900px) {
+      .hero-overlay {
+        padding: 0 32px;
+      }
+      .hero-text h1 {
+        font-size: 2.2rem;
+      }
+      .hero-text p {
+        font-size: 14px;
+      }
     }
   </style>
 </head>

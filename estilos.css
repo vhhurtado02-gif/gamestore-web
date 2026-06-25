@@ -30,7 +30,6 @@ body {
   font-size: 15px;
   line-height: 1.6;
   padding-top: var(--nav-h);
-  overflow-x: hidden;
 }
 
 /* ── NAVBAR ── */
@@ -50,7 +49,7 @@ body {
   z-index: 1000;
 }
 
-.navbar .logo img { height: 44px; display: block; max-width: 160px; }
+.navbar .logo img { height: 44px; display: block; }
 
 .menu { display: flex; gap: 6px; align-items: center; }
 
@@ -80,7 +79,6 @@ body {
   background: none;
   border: none;
   line-height: 1;
-  padding: 4px 8px;
 }
 
 /* ── CARRUSEL ── */
@@ -226,7 +224,6 @@ body {
   font-size: 13px; font-weight: 700;
   color: var(--muted);
   transition: all 0.3s;
-  flex-shrink: 0;
 }
 .step-dot.active { background: var(--red); border-color: var(--red); color: #fff; }
 .step-dot.done  { background: transparent; border-color: var(--red); color: var(--red); }
@@ -300,7 +297,7 @@ footer {
   gap: 40px;
   margin-bottom: 32px;
 }
-.footer-brand img { height: 40px; margin-bottom: 12px; max-width: 140px; }
+.footer-brand img { height: 40px; margin-bottom: 12px; }
 .footer-brand p { color: var(--muted); font-size: 13px; line-height: 1.7; }
 .footer-col h4 {
   font-family: 'Rajdhani', sans-serif;
@@ -328,8 +325,6 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
 }
 .footer-bottom p { color: var(--muted); font-size: 12px; }
 .footer-bottom span { color: var(--red); }
@@ -492,7 +487,6 @@ footer {
   border: none;
   cursor: pointer;
   transition: background 0.2s, transform 0.15s;
-  white-space: nowrap;
 }
 .btn-primary:hover { background: #e0003f; transform: scale(1.03); color: #fff; }
 .btn-outline {
@@ -512,112 +506,58 @@ footer {
   border: 1px solid rgba(255,255,255,0.2);
   cursor: pointer;
   transition: border-color 0.2s, background 0.2s;
-  white-space: nowrap;
 }
 .btn-outline:hover { border-color: var(--red); background: rgba(255,45,85,0.1); color: #fff; }
 
-/* ══════════════════════════════════════════
-   RESPONSIVE — tablet (≤ 900px)
-══════════════════════════════════════════ */
+/* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .grid-container { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .about-hero { grid-template-columns: 1fr; }
-  .about-hero img { height: 280px; }
   .about-values { grid-template-columns: repeat(2, 1fr); }
   .cat-section { grid-template-columns: 1fr; }
-  .cat-images { flex-direction: row; flex-wrap: wrap; }
-  .cat-images img { flex: 1 1 calc(50% - 7px); min-width: 140px; }
 }
 
-/* ══════════════════════════════════════════
-   RESPONSIVE — móvil grande (≤ 768px)
-══════════════════════════════════════════ */
-@media (max-width: 768px) {
-  .section-title h2 { font-size: 1.8rem; }
-  .contact-hero h1 { font-size: 2rem; }
-  .cat-header-overlay h2 { font-size: 2rem; }
-  .about-text h2 { font-size: 1.5rem; }
-  footer { padding: 40px 20px 24px; }
-}
-
-/* ══════════════════════════════════════════
-   RESPONSIVE — móvil (≤ 600px)
-══════════════════════════════════════════ */
 @media (max-width: 600px) {
-  :root { --nav-h: 60px; }
-
   /* Navbar */
-  .navbar { padding: 0 16px; }
+  .navbar {
+    padding: 0 16px;
+    height: var(--nav-h);
+  }
   .navbar .logo img { height: 36px; }
   .menu {
     display: none;
     flex-direction: column;
-    position: absolute;
+    position: fixed;
     top: var(--nav-h);
     left: 0; right: 0;
     background: rgba(10,10,15,0.98);
     border-bottom: 1px solid rgba(255,45,85,0.2);
     padding: 12px 0;
     gap: 0;
-    width: 100%;
+    z-index: 999;
   }
   .menu.active { display: flex; }
-  .menu a { padding: 14px 24px; border-radius: 0; width: 100%; }
+  .menu a { padding: 14px 24px; border-radius: 0; font-size: 16px; }
   .menu-toggle { display: block; }
 
-  /* Grids */
-  .grid-container { grid-template-columns: 1fr; padding: 0 16px 48px; }
-  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
-  .about-values { grid-template-columns: 1fr; }
+  /* Carrusel más compacto en mobile */
+  .carousel-inner img { height: 220px; }
+  .carousel-caption-custom { left: 20px; bottom: 20px; }
+  .carousel-caption-custom h2 { font-size: 1.4rem; }
+
+  /* Grid */
+  .grid-container { grid-template-columns: 1fr; }
 
   /* Footer */
-  footer { padding: 36px 16px 24px; }
-  .footer-bottom { flex-direction: column; gap: 6px; text-align: center; }
-
-  /* Carrusel */
-  .carousel-inner img { height: 220px; }
-  .carousel-caption-custom { left: 16px; bottom: 16px; right: 16px; }
-  .carousel-caption-custom h2 { font-size: 1.2rem; }
-  .carousel-caption-custom p { font-size: 0.85rem; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .about-values { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
 
   /* Formulario */
-  .form-section { padding: 24px 16px; margin: 0 16px 60px; width: auto; max-width: 100%; }
+  .form-section { padding: 24px 20px; margin: 0 16px 60px; }
 
-  /* Catálogo */
-  .cat-header-overlay { padding: 20px 16px; }
-  .cat-header-overlay h2 { font-size: 1.5rem; }
-  .cat-hero { height: 180px; }
-  .cat-images { flex-direction: column; }
-  .cat-images img { flex: 1 1 100%; height: 160px; }
-
-  /* About */
-  .about-hero { margin: 32px auto; gap: 28px; padding: 0 16px; }
-  .about-hero img { height: 220px; }
-  .about-values { padding: 0 16px; gap: 14px; }
-
-  /* Títulos */
-  .section-title { padding: 40px 16px 24px; }
-  .section-title h2 { font-size: 1.6rem; }
-  .contact-hero { padding: 40px 16px 36px; }
-  .contact-hero h1 { font-size: 1.7rem; }
-
-  /* Botones hero */
-  .hero-btns { flex-direction: column; gap: 10px; align-items: flex-start; }
-  .btn-primary, .btn-outline { width: 100%; justify-content: center; }
-}
-
-/* ══════════════════════════════════════════
-   RESPONSIVE — móvil pequeño (≤ 380px)
-══════════════════════════════════════════ */
-@media (max-width: 380px) {
-  .carousel-inner img { height: 180px; }
-  .section-title h2 { font-size: 1.4rem; }
-  .contact-hero h1 { font-size: 1.4rem; }
-  .cat-header-overlay h2 { font-size: 1.2rem; }
-  .grid-item img { height: 160px; }
-  .form-section { margin: 0 8px 48px; padding: 20px 12px; }
-  .step-line { max-width: 36px; }
-  footer { padding: 28px 12px 20px; }
-  .navbar { padding: 0 12px; }
+  /* Grillas / catálogo */
+  .cat-header-overlay h2 { font-size: 1.8rem; }
+  .cat-hero { height: 200px; }
 }
