@@ -51,6 +51,12 @@
     }
     .hero-btns { display: flex; gap: 12px; pointer-events: all; }
 
+    .MySiteGamesLogo:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 30px rgba(206, 1, 1, 0.4);
+        border-radius: 40px;
+      }
+
     /* Ticker */
     .ticker-bar {
       background: var(--red);
@@ -145,7 +151,7 @@
   <!-- NAVBAR -->
   <nav class="navbar">
     <a href="inicio.html" class="logo">
-      <img src="IMAGENES/mysite.png" alt="GameStore" />
+      <img src="IMAGENES/mysite.png" alt="GameStore" class="MySiteGamesLogo" />
     </a>
     <button class="menu-toggle" id="menuToggle">☰</button>
     <div class="menu" id="menu">
@@ -286,7 +292,7 @@
         </div>
         <div class="form-group">
           <label>Correo electrónico</label>
-          <input type="email" id="email" placeholder="ejemplo@mail.com" required />
+          <input type="email" id="email" placeholder="vhhm@mail.com" required />
         </div>
         <div class="form-btns">
           <button type="button" class="btn-next">Siguiente →</button>
@@ -344,7 +350,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2025 <span>GameStore</span> · Programación y Servicios WEB · CIAF IV Semestre</p>
+      <p>© 2025 <span>GameStore</span> · Programación y Servicios WEB · CIAF III Semestre</p>
       <p>Hecho con <span>♥</span> para gamers</p>
     </div>
   </footer>
