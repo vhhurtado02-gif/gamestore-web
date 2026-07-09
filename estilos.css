@@ -39,8 +39,8 @@ body {
   width: 100%;
   height: var(--nav-h);
   background: rgba(10,10,15,0.92);
-  backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255,45,85,0.25);
   display: flex;
   align-items: center;
@@ -203,6 +203,8 @@ body {
 .form-section--flush { margin: 0; }
 /* Oculta el paso del formulario que no está activo (antes era un style="display:none" inline) */
 .step-hidden { display: none; }
+/* Medidas del carrusel de la página de contacto (antes estaban en un style inline) */
+.contact-carousel--sized { max-width: 900px; margin: 32px auto; padding: 0 20px; }
 .form-section h2 {
   font-family: 'Rajdhani', sans-serif;
   font-size: 1.6rem;
