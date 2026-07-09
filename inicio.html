@@ -350,67 +350,20 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2025 <span>GameStore</span> · DISEÑO WEB II· VHHM</p>
+      <p>© 2025 <span>GameStore</span> · Programación y Servicios WEB · CIAF III Semestre</p>
       <p>Hecho con <span>♥</span> para gamers</p>
     </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
   <script>
-    // Navbar hamburguesa
-    document.getElementById('menuToggle').addEventListener('click', function () {
-      document.getElementById('menu').classList.toggle('active');
-    });
-
-    // Carrusel
-    document.addEventListener('DOMContentLoaded', function () {
-      const el = document.querySelector('#Carrusel');
-      if (el && typeof bootstrap !== 'undefined') {
-        new bootstrap.Carousel(el, { interval: 3500, ride: 'carousel' });
-      }
-    });
-
-    // Formulario multi-paso
-    const steps   = document.querySelectorAll('.step');
-    const dots    = [document.getElementById('dot1'), document.getElementById('dot2'), document.getElementById('dot3')];
-    const lines   = [document.getElementById('line1'), document.getElementById('line2')];
-    let current   = 0;
-
-    function goTo(n) {
-      steps[current].style.display = 'none';
-      dots[current].classList.remove('active');
-      if (n > current) { dots[current].classList.add('done'); lines[current - 1 + 1] && lines[current].classList.add('done'); }
-      current = n;
-      steps[current].style.display = 'block';
-      dots[current].classList.add('active');
-    }
-
-    document.querySelectorAll('.btn-next').forEach(btn => btn.addEventListener('click', () => {
-      const inputs = steps[current].querySelectorAll('input, textarea');
-      for (let i of inputs) { if (!i.checkValidity()) { i.reportValidity(); return; } }
-      if (current < steps.length - 1) goTo(current + 1);
-    }));
-
-    document.querySelectorAll('.btn-prev').forEach(btn => btn.addEventListener('click', () => {
-      if (current > 0) goTo(current - 1);
-    }));
-
-    document.getElementById('multiStepForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      Swal.fire({
-        title: '¡Registro exitoso!',
-        text: 'Bienvenido a GameStore. ¡A jugar!',
-        icon: 'success',
-        confirmButtonColor: '#ff2d55',
-        timer: 3000,
-        timerProgressBar: true,
-      });
-      this.reset();
-      steps.forEach((s, i) => { s.style.display = i === 0 ? 'block' : 'none'; });
-      dots.forEach(d => { d.classList.remove('active','done'); });
-      lines.forEach(l => l.classList.remove('done'));
-      dots[0].classList.add('active');
-      current = 0;
+    GameStore.initMenuToggle();
+    GameStore.initCarousel('#Carrusel', 3500);
+    GameStore.initMultiStepForm({
+      formId: 'multiStepForm',
+      successTitle: '¡Registro exitoso!',
+      successText: 'Bienvenido a GameStore. ¡A jugar!'
     });
   </script>
 </body>
