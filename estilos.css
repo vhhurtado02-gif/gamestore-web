@@ -199,6 +199,10 @@ body {
   border: 1px solid rgba(255,255,255,0.07);
   box-shadow: 0 24px 64px rgba(0,0,0,0.5);
 }
+/* Variante sin margen externo, usada cuando el form-section va dentro de otro contenedor con su propio espaciado (ej: contacto.html) */
+.form-section--flush { margin: 0; }
+/* Oculta el paso del formulario que no está activo (antes era un style="display:none" inline) */
+.step-hidden { display: none; }
 .form-section h2 {
   font-family: 'Rajdhani', sans-serif;
   font-size: 1.6rem;
