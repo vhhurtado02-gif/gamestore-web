@@ -96,6 +96,34 @@ const GameStore = (function () {
     });
   }
 
+  // ── Toggle de tema claro/oscuro, persistido en localStorage ──
+  function initThemeToggle() {
+    const btn = document.getElementById('themeToggle');
+    if (!btn) return;
+
+    const STORAGE_KEY = 'gs-theme';
+
+    function applyIcon() {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      btn.textContent = isLight ? '☀️' : '🌙';
+      btn.setAttribute('aria-label', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
+    }
+
+    applyIcon(); // el <head> ya aplicó el tema guardado; aquí solo sincronizamos el ícono
+
+    btn.addEventListener('click', function () {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+      if (isLight) {
+        document.documentElement.removeAttribute('data-theme');
+        try { localStorage.setItem(STORAGE_KEY, 'dark'); } catch (e) {}
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        try { localStorage.setItem(STORAGE_KEY, 'light'); } catch (e) {}
+      }
+      applyIcon();
+    });
+  }
+
   // ── Formulario multi-paso (usado en inicio.html y contacto.html) ──
   // options: { formId, successTitle, successText }
   function initMultiStepForm(options) {
@@ -154,6 +182,7 @@ const GameStore = (function () {
       initScrollReveal();
       initNavbarScroll();
       initRippleButtons();
+      initThemeToggle();
     });
   }
 

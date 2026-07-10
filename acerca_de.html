@@ -3,6 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Aplica el tema guardado ANTES de pintar la página, para evitar parpadeo -->
+  <script>
+  (function () {
+    try {
+      var t = localStorage.getItem('gs-theme');
+      if (t === 'light') { document.documentElement.setAttribute('data-theme', 'light'); }
+    } catch (e) {}
+  })();
+  </script>
   <title>GameStore — Nosotros</title>
   <link rel="stylesheet" href="estilos.css" />
   <style>
@@ -27,6 +36,7 @@
       <a href="acerca_de.html" class="active">Nosotros</a>
       <a href="contacto.html">Contacto</a>
     </div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar a modo claro" title="Cambiar tema">🌙</button>
   </nav>
 
   <!-- HEADER -->
