@@ -59,6 +59,18 @@
       margin-bottom: 24px;
     }
     .hero-btns { display: flex; gap: 12px; pointer-events: all; }
+    /* El fondo del hero (.hero-overlay) siempre es oscuro, sin importar el tema activo.
+       Por eso este botón se fija a los colores de modo oscuro y no usa var(--white) /
+       var(--border-strong), que cambiarían en modo claro y lo volverían casi invisible. */
+    .hero-btns .btn-outline {
+      color: #f0f0f0;
+      border-color: rgba(255,255,255,0.15);
+    }
+    .hero-btns .btn-outline:hover {
+      border-color: var(--red);
+      background: rgba(255,45,85,0.1);
+      color: #fff;
+    }
 
     .MySiteGamesLogo:hover {
         transform: translateY(-5px);
