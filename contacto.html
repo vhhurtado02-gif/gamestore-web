@@ -121,28 +121,28 @@
       <h3>¿Cómo podemos<br>ayudarte?</h3>
       <p>Estamos disponibles para resolver tus dudas sobre productos, envíos, garantías y todo lo relacionado con tu experiencia gamer.</p>
 
-      <div class="info-item">
+      <div class="info-item reveal">
         <div class="info-icon">📍</div>
         <div>
           <h4>Dirección</h4>
           <p>Pereira, Risaralda, Colombia</p>
         </div>
       </div>
-      <div class="info-item">
+      <div class="info-item reveal">
         <div class="info-icon">📧</div>
         <div>
           <h4>Email</h4>
           <p>contacto@gamestore.com.co</p>
         </div>
       </div>
-      <div class="info-item">
+      <div class="info-item reveal">
         <div class="info-icon">📱</div>
         <div>
           <h4>WhatsApp</h4>
           <p>+57 300 000 0000</p>
         </div>
       </div>
-      <div class="info-item">
+      <div class="info-item reveal">
         <div class="info-icon">🕐</div>
         <div>
           <h4>Horario de atención</h4>
@@ -152,7 +152,7 @@
     </div>
 
     <!-- FORMULARIO -->
-    <div class="form-section form-section--flush">
+    <div class="form-section form-section--flush reveal">
       <h2>Envíanos un mensaje</h2>
       <div class="steps-indicator">
         <div class="step-dot active" id="dot1">1</div>
@@ -239,6 +239,7 @@
   <script>
     GameStore.initMenuToggle();
     GameStore.initCarousel('#CarruselContact', 3000);
+    GameStore.initInteractions();
     GameStore.initMultiStepForm({
       formId: 'contactForm',
       successTitle: '¡Mensaje enviado!',

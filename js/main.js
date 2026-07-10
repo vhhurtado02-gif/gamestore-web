@@ -1,7 +1,7 @@
 /**
  * GameStore — main.js
- * Lógica compartida entre páginas: menú hamburguesa, carrusel y formulario multi-paso.
- * Antes esta lógica estaba duplicada dentro de cada archivo .html; ahora vive en un solo lugar.
+ * Lógica compartida entre páginas: menú hamburguesa, carrusel, formulario multi-paso
+ * y micro-interacciones (scroll-reveal, navbar dinámica, efecto ripple en botones).
  */
 
 const GameStore = (function () {
@@ -24,6 +24,75 @@ const GameStore = (function () {
       if (el && typeof bootstrap !== 'undefined') {
         new bootstrap.Carousel(el, { interval: interval, ride: 'carousel' });
       }
+    });
+  }
+
+  // ── Scroll-reveal: los elementos con clase "reveal" aparecen con fundido + deslizamiento ──
+  // al entrar en el viewport. Si el navegador no soporta IntersectionObserver, se muestran directo.
+  function initScrollReveal() {
+    const items = document.querySelectorAll('.reveal');
+    if (!items.length) return;
+
+    if (!('IntersectionObserver' in window)) {
+      items.forEach(el => el.classList.add('is-visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    items.forEach(el => observer.observe(el));
+  }
+
+  // ── Navbar dinámica: agrega la clase "scrolled" cuando el usuario baja la página ──
+  function initNavbarScroll() {
+    const nav = document.querySelector('.navbar');
+    if (!nav) return;
+
+    function update() {
+      if (window.scrollY > 24) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+  }
+
+  // ── Efecto ripple: onda expansiva desde el punto de clic en botones ──
+  function initRippleButtons() {
+    const selector = '.btn-primary, .btn-outline, .btn-card, .btn-next, .btn-prev, .btn-submit';
+    document.querySelectorAll(selector).forEach(btn => {
+      btn.classList.add('has-ripple');
+      btn.addEventListener('click', function (e) {
+        const rect = btn.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        const size = Math.max(rect.width, rect.height) * 2;
+        ripple.className = 'ripple-effect';
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+        ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+        btn.appendChild(ripple);
+        ripple.addEventListener('animationend', () => ripple.remove());
+
+        // Si es un enlace normal (<a href>) con clic normal (sin Ctrl/Cmd/Shift/rueda),
+        // esperamos a que se vea el ripple antes de navegar, para que no se corte la animación.
+        const href = btn.getAttribute('href');
+        const isPlainLeftClick = e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey;
+        const isRealLink = btn.tagName === 'A' && href && !href.startsWith('#');
+
+        if (isRealLink && isPlainLeftClick && btn.target !== '_blank') {
+          e.preventDefault();
+          setTimeout(() => { window.location.href = href; }, 320);
+        }
+      });
     });
   }
 
@@ -79,6 +148,15 @@ const GameStore = (function () {
     });
   }
 
-  return { initMenuToggle, initCarousel, initMultiStepForm };
+  // ── Inicializador de las micro-interacciones, para llamar una sola vez por página ──
+  function initInteractions() {
+    document.addEventListener('DOMContentLoaded', function () {
+      initScrollReveal();
+      initNavbarScroll();
+      initRippleButtons();
+    });
+  }
+
+  return { initMenuToggle, initCarousel, initMultiStepForm, initInteractions };
 
 })();

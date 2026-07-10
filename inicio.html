@@ -215,13 +215,13 @@
   </div>
 
   <!-- CATEGORÍAS -->
-  <div class="section-title">
+  <div class="section-title reveal">
     <span class="eyebrow">Oferta especial</span>
     <h2>Explora nuestro <span>catálogo</span></h2>
   </div>
 
   <div class="grid-container">
-    <div class="grid-item">
+    <div class="grid-item reveal">
       <img src="IMAGENES/gifmario.gif" alt="Nintendo" />
       <div class="grid-item-body">
         <h3>Nintendo</h3>
@@ -229,7 +229,7 @@
         <a href="grillas.html#nintendo" class="btn-card">Ver más →</a>
       </div>
     </div>
-    <div class="grid-item">
+    <div class="grid-item reveal">
       <img src="IMAGENES/gifxbox.gif" alt="Microsoft Xbox" />
       <div class="grid-item-body">
         <h3>Microsoft Xbox</h3>
@@ -237,7 +237,7 @@
         <a href="grillas.html#microsoft" class="btn-card">Ver más →</a>
       </div>
     </div>
-    <div class="grid-item">
+    <div class="grid-item reveal">
       <img src="IMAGENES/playstation.gif" alt="PlayStation Sony" />
       <div class="grid-item-body">
         <h3>PlayStation · Sony</h3>
@@ -245,7 +245,7 @@
         <a href="grillas.html#ps_sony" class="btn-card">Ver más →</a>
       </div>
     </div>
-    <div class="grid-item">
+    <div class="grid-item reveal">
       <img src="IMAGENES/perifericos.jpg" alt="Periféricos" />
       <div class="grid-item-body">
         <h3>Periféricos</h3>
@@ -253,7 +253,7 @@
         <a href="grillas.html#perifericos" class="btn-card">Ver más →</a>
       </div>
     </div>
-    <div class="grid-item">
+    <div class="grid-item reveal">
       <img src="IMAGENES/oldschool.jpg" alt="Old School" />
       <div class="grid-item-body">
         <h3>Old School</h3>
@@ -261,7 +261,7 @@
         <a href="grillas.html#oldschool" class="btn-card">Ver más →</a>
       </div>
     </div>
-    <div class="grid-item">
+    <div class="grid-item reveal">
       <img src="IMAGENES/torneo.jpg" alt="Online" />
       <div class="grid-item-body">
         <h3>Online · Torneos</h3>
@@ -272,12 +272,12 @@
   </div>
 
   <!-- REGISTRO -->
-  <div class="section-title">
+  <div class="section-title reveal">
     <span class="eyebrow">Únete</span>
     <h2>Regístrate y <span>juega</span> con ventajas</h2>
   </div>
 
-  <div class="form-section">
+  <div class="form-section reveal">
     <div class="steps-indicator">
       <div class="step-dot active" id="dot1">1</div>
       <div class="step-line" id="line1"></div>
@@ -362,6 +362,7 @@
   <script>
     GameStore.initMenuToggle();
     GameStore.initCarousel('#Carrusel', 3500);
+    GameStore.initInteractions();
     GameStore.initMultiStepForm({
       formId: 'multiStepForm',
       successTitle: '¡Registro exitoso!',
