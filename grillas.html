@@ -47,7 +47,28 @@
     <h2>Nuestro <span>Catálogo</span></h2>
   </div>
 
+  <!-- BUSCADOR EN VIVO + FILTROS -->
+  <div class="catalog-controls reveal">
+    <div class="search-box">
+      <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
+        <line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <input type="text" id="catalogSearch" placeholder="Buscar consolas, accesorios, marcas..." aria-label="Buscar en el catálogo" autocomplete="off" />
+    </div>
+    <div class="filter-chips" id="filterChips" role="group" aria-label="Filtrar por categoría">
+      <button class="chip active" type="button" data-filter="all" aria-pressed="true">Todos</button>
+      <button class="chip" type="button" data-filter="nintendo" aria-pressed="false">Nintendo</button>
+      <button class="chip" type="button" data-filter="microsoft" aria-pressed="false">Xbox</button>
+      <button class="chip" type="button" data-filter="ps_sony" aria-pressed="false">PlayStation</button>
+      <button class="chip" type="button" data-filter="perifericos" aria-pressed="false">Periféricos</button>
+      <button class="chip" type="button" data-filter="oldschool" aria-pressed="false">Old School</button>
+      <button class="chip" type="button" data-filter="online" aria-pressed="false">Online</button>
+    </div>
+  </div>
+
   <!-- ── NINTENDO ── -->
+  <section class="category-block" data-category="nintendo" data-keywords="Nintendo Switch Switch OLED Switch Lite Mario Kart Mario Bros Zelda Pokémon Metroid consolas retro juegos físicos digitales control accesorios">
   <div id="nintendo" class="cat-header">
     <img src="IMAGENES/gifnintendo.gif" class="cat-hero" alt="Nintendo" />
     <div class="cat-header-overlay">
@@ -79,8 +100,10 @@
     </div>
   </div>
   <hr class="cat-divider" />
+  </section>
 
   <!-- ── MICROSOFT ── -->
+  <section class="category-block" data-category="microsoft" data-keywords="Xbox Series X Series S Microsoft Game Pass control Elite periférico gaming arena accesorios">
   <div id="microsoft" class="cat-header">
     <img src="IMAGENES/MICROSOFT.jpg" class="cat-hero" alt="Microsoft Xbox" />
     <div class="cat-header-overlay">
@@ -111,8 +134,10 @@
     </div>
   </div>
   <hr class="cat-divider" />
+  </section>
 
   <!-- ── PLAYSTATION ── -->
+  <section class="category-block" data-category="ps_sony" data-keywords="PlayStation PS5 PS4 DualSense PlayStation VR2 Sony exclusivos God of War Spider-Man Horizon control accesorios">
   <div id="ps_sony" class="cat-header">
     <img src="IMAGENES/dualshok.jpg" class="cat-hero" alt="PlayStation Sony" />
     <div class="cat-header-overlay">
@@ -143,8 +168,10 @@
     </div>
   </div>
   <hr class="cat-divider" />
+  </section>
 
   <!-- ── PERIFÉRICOS ── -->
+  <section class="category-block" data-category="perifericos" data-keywords="Periféricos teclado mecánico mouse audífonos sonido envolvente sillas ergonómicas monitores ASUS ROG Logitech Razer webcam setup accesorios">
   <div id="perifericos" class="cat-header">
     <img src="IMAGENES/perifericos.jpg" class="cat-hero" alt="Periféricos" />
     <div class="cat-header-overlay">
@@ -175,8 +202,10 @@
     </div>
   </div>
   <hr class="cat-divider" />
+  </section>
 
   <!-- ── OLD SCHOOL ── -->
+  <section class="category-block" data-category="oldschool" data-keywords="Old School retro Atari NES SNES Sega Genesis Game Boy Nintendo 64 arcade coleccionables cartuchos consolas accesorios">
   <div id="oldschool" class="cat-header">
     <img src="IMAGENES/oldschool.jpg" class="cat-hero" alt="Old School" />
     <div class="cat-header-overlay">
@@ -207,8 +236,10 @@
     </div>
   </div>
   <hr class="cat-divider" />
+  </section>
 
   <!-- ── ONLINE ── -->
+  <section class="category-block" data-category="online" data-keywords="Online torneos eSports streaming comunidad suscripciones cámaras competencia amigos familia accesorios">
   <div id="online" class="cat-header">
     <img src="IMAGENES/torneo.jpg" class="cat-hero" alt="Torneos Online" />
     <div class="cat-header-overlay">
@@ -237,6 +268,13 @@
       <img src="IMAGENES/pexels-viniciusvieirafotografia-29825629.jpg" alt="Gaming online" />
       <img src="IMAGENES/pexels-tombrand-1637438.jpg" alt="Gaming pro" />
     </div>
+  </div>
+  </section>
+
+  <!-- SIN RESULTADOS (buscador/filtros) -->
+  <div class="no-results" id="noResults" hidden>
+    <p>😕 No encontramos nada que coincida con tu búsqueda.</p>
+    <button class="btn-outline" id="clearFiltersBtn" type="button">Limpiar filtros</button>
   </div>
 
   <!-- FOOTER -->
@@ -271,6 +309,13 @@
   <script>
     GameStore.initMenuToggle();
     GameStore.initInteractions();
+    GameStore.initCatalogFilter({
+      searchId: 'catalogSearch',
+      chipsId: 'filterChips',
+      blockSelector: '.category-block',
+      noResultsId: 'noResults',
+      clearBtnId: 'clearFiltersBtn'
+    });
   </script>
 </body>
 </html>

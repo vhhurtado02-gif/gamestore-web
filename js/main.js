@@ -186,6 +186,77 @@ const GameStore = (function () {
     });
   }
 
-  return { initMenuToggle, initCarousel, initMultiStepForm, initInteractions };
+  // ── Buscador en vivo + filtros de categoría (usado en grillas.html) ──
+  // options: { searchId, chipsId, blockSelector, noResultsId, clearBtnId }
+  function initCatalogFilter(options) {
+    const searchInput = document.getElementById(options.searchId);
+    const chipsWrap = document.getElementById(options.chipsId);
+    const blocks = document.querySelectorAll(options.blockSelector);
+    const noResults = document.getElementById(options.noResultsId);
+    const clearBtn = document.getElementById(options.clearBtnId);
+    if (!searchInput || !chipsWrap || !blocks.length) return;
+
+    const chips = chipsWrap.querySelectorAll('.chip');
+    let activeCategory = 'all';
+    let debounceTimer = null;
+
+    // Quita tildes para que "pokemon" encuentre "Pokémon", etc.
+    function normalize(str) {
+      return (str || '')
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
+    }
+
+    function applyFilters() {
+      const query = normalize(searchInput.value.trim());
+      let visibleCount = 0;
+
+      blocks.forEach(function (block) {
+        const matchesCategory = activeCategory === 'all' || block.getAttribute('data-category') === activeCategory;
+        const keywords = normalize(block.getAttribute('data-keywords'));
+        const matchesQuery = query === '' || keywords.indexOf(query) !== -1;
+        const visible = matchesCategory && matchesQuery;
+
+        block.classList.toggle('is-hidden', !visible);
+        if (visible) visibleCount++;
+      });
+
+      if (noResults) noResults.hidden = visibleCount > 0;
+    }
+
+    searchInput.addEventListener('input', function () {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(applyFilters, 120);
+    });
+
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        chips.forEach(function (c) {
+          c.classList.remove('active');
+          c.setAttribute('aria-pressed', 'false');
+        });
+        chip.classList.add('active');
+        chip.setAttribute('aria-pressed', 'true');
+        activeCategory = chip.getAttribute('data-filter');
+        applyFilters();
+      });
+    });
+
+    if (clearBtn) {
+      clearBtn.addEventListener('click', function () {
+        searchInput.value = '';
+        activeCategory = 'all';
+        chips.forEach(function (c, i) {
+          c.classList.toggle('active', i === 0);
+          c.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+        });
+        applyFilters();
+        searchInput.focus();
+      });
+    }
+  }
+
+  return { initMenuToggle, initCarousel, initMultiStepForm, initInteractions, initCatalogFilter };
 
 })();
