@@ -85,6 +85,20 @@ body {
 [data-theme="light"] .footer-brand img {
   filter: invert(1);
 }
+/* Resalto de marca al pasar el cursor sobre el logo.
+   IMPORTANTE: este efecto va en el <a> (contenedor), NO en el <img>, porque el <img> ya tiene
+   un filter: invert() en modo claro — y el filter de CSS también altera el color del box-shadow
+   si están en el mismo elemento (lo pintaría verdoso/cian en vez de rojo). Al separarlos, el
+   brillo rojo se ve igual de bien en ambos temas. */
+.navbar .logo {
+  display: block;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease;
+}
+.navbar .logo:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 30px rgba(206, 1, 1, 0.4);
+  border-radius: 40px;
+}
 
 .menu { display: flex; gap: 6px; align-items: center; }
 

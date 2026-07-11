@@ -209,13 +209,17 @@ const GameStore = (function () {
     }
 
     function applyFilters() {
-      const query = normalize(searchInput.value.trim());
+      // Se busca por palabras sueltas: todas deben aparecer en algún lado de los keywords,
+      // sin importar el orden. Así "kart mario" también encuentra "Mario Kart".
+      const queryWords = normalize(searchInput.value.trim()).split(/\s+/).filter(Boolean);
       let visibleCount = 0;
 
       blocks.forEach(function (block) {
         const matchesCategory = activeCategory === 'all' || block.getAttribute('data-category') === activeCategory;
         const keywords = normalize(block.getAttribute('data-keywords'));
-        const matchesQuery = query === '' || keywords.indexOf(query) !== -1;
+        const matchesQuery = queryWords.length === 0 || queryWords.every(function (word) {
+          return keywords.indexOf(word) !== -1;
+        });
         const visible = matchesCategory && matchesQuery;
 
         block.classList.toggle('is-hidden', !visible);
