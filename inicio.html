@@ -287,6 +287,52 @@
     </div>
   </div>
 
+  <!-- QUIZ DE RECOMENDACIÓN -->
+  <div class="section-title reveal">
+    <span class="eyebrow">Descúbrelo</span>
+    <h2>¿Qué tipo de <span>gamer</span> eres?</h2>
+  </div>
+
+  <div class="quiz-section reveal" id="gamerQuiz">
+    <div class="quiz-dots">
+      <span class="quiz-dot active"></span>
+      <span class="quiz-dot"></span>
+      <span class="quiz-dot"></span>
+    </div>
+
+    <div class="quiz-questions">
+      <div class="quiz-step">
+        <h3>¿Qué prefieres jugar?</h3>
+        <div class="quiz-options">
+          <button class="quiz-option" type="button" data-category="ps_sony">🎬 Aventuras narrativas</button>
+          <button class="quiz-option" type="button" data-category="nintendo">🏎️ Carreras y fiesta</button>
+          <button class="quiz-option" type="button" data-category="microsoft">🔫 Shooters competitivos</button>
+          <button class="quiz-option" type="button" data-category="oldschool">👾 Clásicos retro</button>
+        </div>
+      </div>
+      <div class="quiz-step step-hidden">
+        <h3>¿Cómo te gusta jugar?</h3>
+        <div class="quiz-options">
+          <button class="quiz-option" type="button" data-category="ps_sony">🎧 Solo, bien inmersivo</button>
+          <button class="quiz-option" type="button" data-category="nintendo">👨‍👩‍👧 Con amigos o familia</button>
+          <button class="quiz-option" type="button" data-category="online">🌐 Online, competitivo</button>
+          <button class="quiz-option" type="button" data-category="perifericos">⚙️ Optimizando mi setup</button>
+        </div>
+      </div>
+      <div class="quiz-step step-hidden">
+        <h3>¿Qué buscas más en tu experiencia?</h3>
+        <div class="quiz-options">
+          <button class="quiz-option" type="button" data-category="microsoft">⚡ Gráficos de última gen</button>
+          <button class="quiz-option" type="button" data-category="nintendo">🎉 Diversión para todos</button>
+          <button class="quiz-option" type="button" data-category="perifericos">🖱️ Accesorios de gama alta</button>
+          <button class="quiz-option" type="button" data-category="oldschool">🕹️ Piezas únicas y nostalgia</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="quiz-result" id="quizResult" hidden></div>
+  </div>
+
   <!-- REGISTRO -->
   <div class="section-title reveal">
     <span class="eyebrow">Únete</span>
@@ -379,6 +425,8 @@
     GameStore.initMenuToggle();
     GameStore.initCarousel('#Carrusel', 3500);
     GameStore.initInteractions();
+    GameStore.initAchievements();
+    GameStore.initGamerQuiz({ quizId: 'gamerQuiz', resultId: 'quizResult' });
     GameStore.initMultiStepForm({
       formId: 'multiStepForm',
       successTitle: '¡Registro exitoso!',

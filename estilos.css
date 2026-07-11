@@ -94,9 +94,20 @@ body {
   display: block;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease;
 }
-.navbar .logo:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 30px rgba(206, 1, 1, 0.4);
+/* El efecto "flotante" solo se activa en dispositivos con puntero real (mouse/trackpad).
+   En touch (celular/tablet) no existe hover verdadero, así que ahí usamos :active para dar
+   una respuesta visual real al tocar el logo — antes el efecto dependía 100% de hover y por
+   eso nunca se veía en mobile. */
+@media (hover: hover) and (pointer: fine) {
+  .navbar .logo:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 30px rgba(206, 1, 1, 0.4);
+    border-radius: 40px;
+  }
+}
+.navbar .logo:active {
+  transform: translateY(-3px) scale(0.96);
+  box-shadow: 0 5px 26px rgba(206, 1, 1, 0.4);
   border-radius: 40px;
 }
 
@@ -794,4 +805,293 @@ footer {
   }
   .filter-chips { gap: 6px; }
   .chip { padding: 7px 12px; font-size: 12px; }
+}
+
+/* ============================================================
+   MINI-QUIZ DE RECOMENDACIÓN (inicio.html)
+   Manejado por GameStore.initGamerQuiz()
+   ============================================================ */
+
+.quiz-section {
+  max-width: 700px;
+  margin: 0 auto 90px;
+  padding: 40px 44px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+}
+
+.quiz-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.quiz-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--surface2);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.quiz-dot.active { background: var(--red); transform: scale(1.2); }
+
+.quiz-step.step-hidden { display: none; }
+
+.quiz-step h3 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--white);
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.quiz-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.quiz-option {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  padding: 16px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.15s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .quiz-option:hover {
+    border-color: var(--red);
+    background: var(--surface2-hover);
+    transform: translateY(-2px);
+  }
+}
+.quiz-option:active {
+  border-color: var(--red);
+  background: var(--surface2-hover);
+}
+
+.quiz-result {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  animation: fade-in-up 0.5s ease;
+}
+.quiz-result img {
+  width: 170px;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.quiz-result-text .eyebrow { display: block; margin-bottom: 4px; }
+.quiz-result-text h3 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+.quiz-result-text p { color: var(--muted); margin-bottom: 18px; font-size: 14px; }
+.quiz-result-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 700px) {
+  .quiz-section { padding: 28px 20px; margin-bottom: 60px; }
+  .quiz-options { grid-template-columns: 1fr; }
+  .quiz-result { flex-direction: column; text-align: center; }
+  .quiz-result img { width: 140px; height: 140px; }
+  .quiz-result-actions { justify-content: center; }
+}
+
+/* ============================================================
+   SISTEMA DE LOGROS (badges) — activo en todas las páginas
+   Manejado por GameStore.initAchievements()
+   ============================================================ */
+
+.badge-trigger {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 900;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border-strong, var(--border));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .badge-trigger:hover { transform: scale(1.08); border-color: var(--red); }
+}
+.badge-trigger:active { transform: scale(0.95); border-color: var(--red); }
+
+.badge-count {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 4px;
+  background: var(--red);
+  color: #fff;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 999px;
+  border: 2px solid var(--bg, #0a0a0f);
+}
+
+.badge-panel {
+  position: fixed;
+  bottom: 92px;
+  right: 24px;
+  width: 320px;
+  max-width: calc(100vw - 32px);
+  background: var(--surface);
+  border: 1px solid var(--border-strong, var(--border));
+  border-radius: 14px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+  z-index: 901;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
+}
+.badge-panel.open { opacity: 1; visibility: visible; transform: translateY(0); }
+
+.badge-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--border);
+}
+.badge-panel-header h3 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+}
+.badge-panel-close {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 16px;
+  cursor: pointer;
+  line-height: 1;
+}
+.badge-panel-close:hover { color: var(--red); }
+
+.badge-panel-list { padding: 8px; max-height: 340px; overflow-y: auto; }
+.badge-item {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border-radius: 10px;
+  opacity: 0.4;
+  filter: grayscale(1);
+  transition: opacity 0.3s ease, filter 0.3s ease, background-color 0.3s ease;
+}
+.badge-item.is-unlocked {
+  opacity: 1;
+  filter: none;
+  background: rgba(255, 45, 85, 0.08);
+}
+.badge-item-icon { font-size: 26px; flex-shrink: 0; }
+.badge-item-text h4 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 2px;
+}
+.badge-item-text p { font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+.badge-toast {
+  position: fixed;
+  top: calc(var(--nav-h, 70px) + 16px);
+  right: 24px;
+  max-width: 280px;
+  background: var(--surface);
+  border: 1px solid var(--red);
+  border-radius: 12px;
+  padding: 14px 18px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+  z-index: 1100;
+  font-size: 13px;
+  color: var(--white);
+  transform: translateX(130%);
+  opacity: 0;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+  pointer-events: none;
+}
+.badge-toast.show { transform: translateX(0); opacity: 1; }
+.badge-toast-icon { font-size: 26px; flex-shrink: 0; }
+
+@media (max-width: 600px) {
+  .badge-trigger { bottom: 16px; right: 16px; width: 50px; height: 50px; font-size: 20px; }
+  .badge-panel { bottom: 78px; right: 16px; }
+  .badge-toast { right: 16px; left: 16px; max-width: none; }
+}
+
+/* ── Código Konami: overlay a pantalla completa ── */
+.konami-fx {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, rgba(255, 45, 85, 0.28) 0%, rgba(10, 10, 15, 0.94) 70%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  padding: 20px;
+  text-align: center;
+}
+.konami-fx.show { opacity: 1; }
+.konami-fx-text {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #fff;
+  text-shadow: 0 0 24px var(--red);
+  animation: konami-pulse 1.2s ease infinite;
+}
+.konami-fx-text span { display: block; color: var(--red); font-size: 1.15rem; margin-top: 10px; }
+@keyframes konami-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .konami-fx-text { animation: none; }
+  .badge-toast, .badge-panel, .badge-trigger { transition: none; }
+}
+@media (max-width: 600px) {
+  .konami-fx-text { font-size: 1.3rem; }
+  .konami-fx-text span { font-size: 1rem; }
 }

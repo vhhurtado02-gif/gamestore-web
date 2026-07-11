@@ -259,8 +259,251 @@ const GameStore = (function () {
         searchInput.focus();
       });
     }
+
+    // Si se llega desde el quiz (grillas.html?cat=nintendo), preselecciona ese chip
+    const urlCategory = new URLSearchParams(window.location.search).get('cat');
+    if (urlCategory) {
+      const matchingChip = chipsWrap.querySelector('.chip[data-filter="' + urlCategory + '"]');
+      if (matchingChip) matchingChip.click();
+    }
   }
 
-  return { initMenuToggle, initCarousel, initMultiStepForm, initInteractions, initCatalogFilter };
+  // ── Sistema de logros (badges) + código Konami — activo en todas las páginas ──
+  // Expone GameStore.unlockBadge(id) para que otras features (quiz, buscador) desbloqueen logros.
+  function initAchievements() {
+    const STORAGE_KEY = 'gs-badges';
+    const BADGES = {
+      explorador: { icon: '🗺️', title: 'Explorador', desc: 'Recorriste las 6 categorías del catálogo' },
+      detective:  { icon: '🔍', title: 'Detective Gamer', desc: 'Usaste el buscador del catálogo' },
+      estratega:  { icon: '🎯', title: 'Estratega', desc: 'Completaste el quiz de recomendación' },
+      leyenda:    { icon: '👑', title: 'Leyenda Gamer', desc: 'Encontraste el código Konami' }
+    };
+    const ORDER = ['explorador', 'detective', 'estratega', 'leyenda'];
+
+    function getUnlocked() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        const parsed = raw ? JSON.parse(raw) : [];
+        return Array.isArray(parsed) ? parsed : [];
+      } catch (e) { return []; }
+    }
+    function saveUnlocked(list) {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(list)); } catch (e) {}
+    }
+
+    let unlocked = getUnlocked();
+
+    // Evita duplicar la UI si initAchievements se llamara más de una vez por error
+    if (document.querySelector('.badge-trigger')) return;
+
+    // ── Botón flotante + panel de logros, inyectados una sola vez por página ──
+    const trigger = document.createElement('button');
+    trigger.className = 'badge-trigger';
+    trigger.type = 'button';
+    trigger.setAttribute('aria-label', 'Ver mis logros gamer');
+    trigger.innerHTML = '🏆<span class="badge-count" id="badgeCount"></span>';
+    document.body.appendChild(trigger);
+
+    const panel = document.createElement('div');
+    panel.className = 'badge-panel';
+    panel.innerHTML =
+      '<div class="badge-panel-header">' +
+        '<h3>Mis Logros Gamer</h3>' +
+        '<button class="badge-panel-close" type="button" aria-label="Cerrar panel de logros">✕</button>' +
+      '</div>' +
+      '<div class="badge-panel-list">' +
+        ORDER.map(function (id) {
+          const b = BADGES[id];
+          return '<div class="badge-item" data-badge-id="' + id + '">' +
+            '<span class="badge-item-icon">' + b.icon + '</span>' +
+            '<div class="badge-item-text"><h4>' + b.title + '</h4><p>' + b.desc + '</p></div>' +
+          '</div>';
+        }).join('') +
+      '</div>';
+    document.body.appendChild(panel);
+
+    const toast = document.createElement('div');
+    toast.className = 'badge-toast';
+    document.body.appendChild(toast);
+
+    function paintPanel() {
+      const countEl = document.getElementById('badgeCount');
+      if (countEl) countEl.textContent = unlocked.length + '/' + ORDER.length;
+      panel.querySelectorAll('.badge-item').forEach(function (el) {
+        const id = el.getAttribute('data-badge-id');
+        el.classList.toggle('is-unlocked', unlocked.indexOf(id) !== -1);
+      });
+    }
+    paintPanel();
+
+    trigger.addEventListener('click', function () { panel.classList.toggle('open'); });
+    panel.querySelector('.badge-panel-close').addEventListener('click', function () {
+      panel.classList.remove('open');
+    });
+    document.addEventListener('click', function (e) {
+      if (panel.classList.contains('open') && !panel.contains(e.target) && e.target !== trigger) {
+        panel.classList.remove('open');
+      }
+    });
+
+    function showToast(badge) {
+      toast.innerHTML = '<span class="badge-toast-icon">' + badge.icon + '</span>' +
+        '<div><strong>¡Logro desbloqueado!</strong><br>' + badge.title + '</div>';
+      toast.classList.add('show');
+      clearTimeout(toast._timer);
+      toast._timer = setTimeout(function () { toast.classList.remove('show'); }, 4000);
+    }
+
+    function unlockBadge(id) {
+      if (!BADGES[id] || unlocked.indexOf(id) !== -1) return;
+      unlocked.push(id);
+      saveUnlocked(unlocked);
+      paintPanel();
+      showToast(BADGES[id]);
+    }
+    GameStore.unlockBadge = unlockBadge;
+
+    // ── Código Konami: ↑ ↑ ↓ ↓ ← → ← → B A ──
+    const KONAMI = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    let konamiIndex = 0;
+    document.addEventListener('keydown', function (e) {
+      const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+      const expected = KONAMI[konamiIndex];
+      if (key === expected) {
+        konamiIndex++;
+        if (konamiIndex === KONAMI.length) {
+          konamiIndex = 0;
+          triggerKonamiEffect();
+          unlockBadge('leyenda');
+        }
+      } else {
+        konamiIndex = (key === KONAMI[0]) ? 1 : 0;
+      }
+    });
+
+    function triggerKonamiEffect() {
+      const fx = document.createElement('div');
+      fx.className = 'konami-fx';
+      fx.innerHTML = '<div class="konami-fx-text">🎮 CÓDIGO KONAMI ACTIVADO<br><span>Bienvenido, Leyenda Gamer</span></div>';
+      document.body.appendChild(fx);
+      requestAnimationFrame(function () { fx.classList.add('show'); });
+      setTimeout(function () {
+        fx.classList.remove('show');
+        setTimeout(function () { fx.remove(); }, 500);
+      }, 2200);
+    }
+
+    // ── Logro "Explorador": recorrer las 6 categorías del catálogo (solo aplica en grillas.html) ──
+    const catBlocks = document.querySelectorAll('.category-block[data-category]');
+    if (catBlocks.length) {
+      const visited = new Set();
+      const catObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            visited.add(entry.target.getAttribute('data-category'));
+            if (visited.size >= catBlocks.length) {
+              unlockBadge('explorador');
+              catObserver.disconnect();
+            }
+          }
+        });
+      }, { threshold: 0.35 });
+      catBlocks.forEach(function (b) { catObserver.observe(b); });
+    }
+
+    // ── Logro "Detective Gamer": usar el buscador del catálogo (solo aplica en grillas.html) ──
+    const searchInput = document.getElementById('catalogSearch');
+    if (searchInput) {
+      const onFirstSearch = function () {
+        if (searchInput.value.trim().length > 0) {
+          unlockBadge('detective');
+          searchInput.removeEventListener('input', onFirstSearch);
+        }
+      };
+      searchInput.addEventListener('input', onFirstSearch);
+    }
+  }
+
+  // ── Mini-quiz de recomendación (usado en inicio.html) ──
+  // options: { quizId, resultId }
+  function initGamerQuiz(options) {
+    const quiz = document.getElementById(options.quizId);
+    const resultBox = document.getElementById(options.resultId);
+    if (!quiz || !resultBox) return;
+
+    const steps = quiz.querySelectorAll('.quiz-step');
+    const dots = quiz.querySelectorAll('.quiz-dot');
+    const questionsWrap = quiz.querySelector('.quiz-questions');
+    let current = 0;
+    let votes = [];
+
+    const RESULTS = {
+      nintendo:    { title: 'Nintendo',         tag: 'Diversión para todos, siempre.',       slug: 'nintendo',    img: 'IMAGENES/swithmario.jpg' },
+      microsoft:   { title: 'Xbox',              tag: 'Potencia y la vanguardia del gaming.', slug: 'microsoft',   img: 'IMAGENES/gaming.jpg' },
+      ps_sony:     { title: 'PlayStation',       tag: 'Las experiencias narrativas más intensas.', slug: 'ps_sony', img: 'IMAGENES/dualshok.jpg' },
+      perifericos: { title: 'Periféricos Pro',   tag: 'Tu setup, llevado al siguiente nivel.', slug: 'perifericos', img: 'IMAGENES/tecladocontr.jpg' },
+      oldschool:   { title: 'Old School',        tag: 'Nostalgia y coleccionismo puro.',      slug: 'oldschool',   img: 'IMAGENES/gameboy.jpg' },
+      online:      { title: 'Online · Torneos',  tag: 'Compite y conecta con el mundo.',      slug: 'online',      img: 'IMAGENES/torneo.jpg' }
+    };
+
+    function goTo(n) {
+      steps[current].classList.add('step-hidden');
+      current = n;
+      steps[current].classList.remove('step-hidden');
+      dots.forEach(function (d, i) { d.classList.toggle('active', i === current); });
+    }
+
+    quiz.querySelectorAll('.quiz-option').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        votes.push(btn.getAttribute('data-category'));
+        if (current < steps.length - 1) {
+          goTo(current + 1);
+        } else {
+          showResult();
+        }
+      });
+    });
+
+    function showResult() {
+      const tally = {};
+      votes.forEach(function (v) { tally[v] = (tally[v] || 0) + 1; });
+      let winner = votes[0];
+      let max = 0;
+      Object.keys(tally).forEach(function (k) {
+        if (tally[k] > max) { max = tally[k]; winner = k; }
+      });
+      const r = RESULTS[winner];
+
+      questionsWrap.hidden = true;
+      quiz.querySelector('.quiz-dots').hidden = true;
+      resultBox.hidden = false;
+      resultBox.innerHTML =
+        '<img src="' + r.img + '" alt="' + r.title + '" />' +
+        '<div class="quiz-result-text">' +
+          '<span class="eyebrow">Tu perfil gamer</span>' +
+          '<h3>' + r.title + '</h3>' +
+          '<p>' + r.tag + '</p>' +
+          '<div class="quiz-result-actions">' +
+            '<a href="grillas.html?cat=' + r.slug + '#' + r.slug + '" class="btn-primary">Ver mi categoría →</a>' +
+            '<button type="button" class="btn-outline quiz-retry">Repetir quiz</button>' +
+          '</div>' +
+        '</div>';
+      resultBox.querySelector('.quiz-retry').addEventListener('click', resetQuiz);
+
+      if (typeof GameStore.unlockBadge === 'function') GameStore.unlockBadge('estratega');
+    }
+
+    function resetQuiz() {
+      votes = [];
+      steps.forEach(function (s, i) { s.classList.toggle('step-hidden', i !== 0); });
+      dots.forEach(function (d, i) { d.classList.toggle('active', i === 0); });
+      current = 0;
+      questionsWrap.hidden = false;
+      quiz.querySelector('.quiz-dots').hidden = false;
+      resultBox.hidden = true;
+    }
+  }
+
+  return { initMenuToggle, initCarousel, initMultiStepForm, initInteractions, initCatalogFilter, initAchievements, initGamerQuiz };
 
 })();
