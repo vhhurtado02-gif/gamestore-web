@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gamestore-web-tau.vercel.app/sitemap.xml

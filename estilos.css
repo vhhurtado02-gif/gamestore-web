@@ -42,6 +42,14 @@
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
+/* El <picture> (agregado para servir WebP con fallback) se comporta como bloque normal,
+   ocupando el mismo espacio que el <img> original. Se evita "display: contents" porque
+   tiene comportamiento inconsistente dentro de layouts CSS Grid en algunos navegadores
+   (rompía el grid de 2 columnas en la sección "Nosotros"). display:block es 100% robusto
+   tanto en Grid como en Flexbox, ya que los hijos de un contenedor flex/grid se
+   "blockifican" automáticamente sin importar el display declarado. */
+picture { display: block; }
+
 html { scroll-behavior: smooth; }
 
 body {
