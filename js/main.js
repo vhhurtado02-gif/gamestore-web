@@ -393,6 +393,48 @@ const GameStore = (function () {
       }, 2200);
     }
 
+    // ── Equivalente táctil del código Konami (mobile no tiene flechas/teclado) ──
+    // Mismo espíritu, gestos en vez de teclas: deslizar arriba-arriba-abajo-abajo-
+    // izquierda-derecha-izquierda-derecha, y terminar con dos toques rápidos (equivalente a B-A).
+    const TOUCH_KONAMI = ['up', 'up', 'down', 'down', 'left', 'right', 'left', 'right', 'tap', 'tap'];
+    let touchIndex = 0;
+    let touchStartX = 0, touchStartY = 0, touchStartTime = 0;
+
+    document.addEventListener('touchstart', function (e) {
+      const t = e.changedTouches[0];
+      touchStartX = t.clientX;
+      touchStartY = t.clientY;
+      touchStartTime = Date.now();
+    }, { passive: true });
+
+    document.addEventListener('touchend', function (e) {
+      const t = e.changedTouches[0];
+      const dx = t.clientX - touchStartX;
+      const dy = t.clientY - touchStartY;
+      const dt = Date.now() - touchStartTime;
+      const absDx = Math.abs(dx), absDy = Math.abs(dy);
+
+      let gesture = null;
+      if (absDx < 12 && absDy < 12 && dt < 300) {
+        gesture = 'tap';
+      } else if (Math.max(absDx, absDy) > 40) {
+        gesture = absDx > absDy ? (dx > 0 ? 'right' : 'left') : (dy > 0 ? 'down' : 'up');
+      }
+      if (!gesture) return;
+
+      const expected = TOUCH_KONAMI[touchIndex];
+      if (gesture === expected) {
+        touchIndex++;
+        if (touchIndex === TOUCH_KONAMI.length) {
+          touchIndex = 0;
+          triggerKonamiEffect();
+          unlockBadge('leyenda');
+        }
+      } else {
+        touchIndex = (gesture === TOUCH_KONAMI[0]) ? 1 : 0;
+      }
+    }, { passive: true });
+
     // ── Logro "Explorador": recorrer las 6 categorías del catálogo (solo aplica en grillas.html) ──
     const catBlocks = document.querySelectorAll('.category-block[data-category]');
     if (catBlocks.length) {
