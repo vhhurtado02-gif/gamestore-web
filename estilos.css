@@ -79,7 +79,7 @@ body {
   height: calc(var(--nav-h) - 10px);
 }
 
-.navbar .logo img { height: 44px; display: block; transition: filter 0.3s ease; }
+.navbar .logo img { height: 44px; width: auto; display: block; transition: filter 0.3s ease; }
 /* El logo es blanco (pensado para fondo oscuro); en modo claro se invierte para seguir siendo visible */
 [data-theme="light"] .navbar .logo img,
 [data-theme="light"] .footer-brand img {
@@ -389,7 +389,7 @@ footer {
   gap: 40px;
   margin-bottom: 32px;
 }
-.footer-brand img { height: 40px; margin-bottom: 12px; transition: filter 0.3s ease; }
+.footer-brand img { height: 40px; width: auto; margin-bottom: 12px; transition: filter 0.3s ease; }
 .footer-brand p { color: var(--muted); font-size: 13px; line-height: 1.7; }
 .footer-col h4 {
   font-family: 'Rajdhani', sans-serif;
