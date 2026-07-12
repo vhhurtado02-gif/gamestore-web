@@ -198,6 +198,8 @@ body {
   text-align: center;
   padding: 56px 20px 32px;
 }
+/* Variante usada cuando la sección va justo después de la navbar (sin carrusel/hero encima) */
+.section-title--flush-top { padding-top: 48px; }
 .section-title .eyebrow {
   display: inline-block;
   font-family: 'Rajdhani', sans-serif;
@@ -431,6 +433,8 @@ footer {
   gap: 48px;
   align-items: center;
 }
+/* Variante para cuando este bloque va inmediatamente después de otro about-hero, sin doble espacio */
+.about-hero--flush-top { margin-top: 0; }
 .about-hero img {
   width: 100%;
   border-radius: 14px;
@@ -536,6 +540,14 @@ footer {
   margin-bottom: 12px;
 }
 .cat-text p { color: var(--muted); line-height: 1.8; font-size: 14px; }
+/* Etiqueta destacada bajo la descripción de cada categoría (ej: "Switch · Switch OLED...") */
+.cat-text__highlight {
+  color: var(--red);
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+}
 .cat-divider {
   max-width: 1100px;
   margin: 0 auto 16px;
@@ -581,6 +593,8 @@ footer {
   transition: background 0.2s, transform 0.15s;
 }
 .btn-primary:hover { background: #e0003f; transform: scale(1.03); color: #fff; }
+/* Variante con separación superior, para cuando el botón va justo debajo de un párrafo */
+.btn-primary--spaced { margin-top: 8px; }
 .btn-outline {
   display: inline-flex;
   align-items: center;
