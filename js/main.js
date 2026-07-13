@@ -276,9 +276,10 @@ const GameStore = (function () {
       explorador: { icon: '🗺️', title: 'Explorador', desc: 'Recorriste las 6 categorías del catálogo' },
       detective:  { icon: '🔍', title: 'Detective Gamer', desc: 'Usaste el buscador del catálogo' },
       estratega:  { icon: '🎯', title: 'Estratega', desc: 'Completaste el quiz de recomendación' },
-      leyenda:    { icon: '👑', title: 'Leyenda Gamer', desc: 'Encontraste el código Konami' }
+      leyenda:    { icon: '👑', title: 'Leyenda Gamer', desc: 'Encontraste el código Konami' },
+      historiador:{ icon: '📜', title: 'Historiador', desc: 'Exploraste la historia de las 5 compañías' }
     };
-    const ORDER = ['explorador', 'detective', 'estratega', 'leyenda'];
+    const ORDER = ['explorador', 'detective', 'estratega', 'leyenda', 'historiador'];
 
     function getUnlocked() {
       try {
@@ -546,6 +547,36 @@ const GameStore = (function () {
     }
   }
 
-  return { initMenuToggle, initCarousel, initMultiStepForm, initInteractions, initCatalogFilter, initAchievements, initGamerQuiz };
+  // ── Timeline de historia de compañías gamer (usado en historia.html) ──
+  // Expande/colapsa cada tarjeta de compañía y desbloquea "Historiador" al explorar las 5.
+  function initHistoryTimeline(options) {
+    const grids = document.querySelectorAll(options.gridSelector);
+    if (!grids.length) return;
+
+    const cards = document.querySelectorAll('.history-card');
+    if (!cards.length) return;
+
+    const explored = new Set();
+    const TOTAL_COMPANIES = cards.length;
+
+    cards.forEach(function (card) {
+      const toggle = card.querySelector('.history-card-toggle');
+      const company = card.getAttribute('data-company');
+
+      toggle.addEventListener('click', function () {
+        const isOpen = card.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+
+        if (isOpen) {
+          explored.add(company);
+          if (explored.size >= TOTAL_COMPANIES && typeof GameStore.unlockBadge === 'function') {
+            GameStore.unlockBadge('historiador');
+          }
+        }
+      });
+    });
+  }
+
+  return { initMenuToggle, initCarousel, initMultiStepForm, initInteractions, initCatalogFilter, initAchievements, initGamerQuiz, initHistoryTimeline };
 
 })();

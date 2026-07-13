@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Aplica el tema guardado ANTES de pintar la página, para evitar parpadeo -->
+  <script>
+  (function () {
+    try {
+      var t = localStorage.getItem('gs-theme');
+      if (t === 'light') { document.documentElement.setAttribute('data-theme', 'light'); }
+    } catch (e) {}
+  })();
+  </script>
+  <title>GameStore — Historia de los Videojuegos</title>
+
+  <!-- SEO -->
+  <meta name="description" content="Explora la historia de los videojuegos: Atari, Nintendo, Sega, PlayStation y Xbox. Sus consolas icónicas, juegos insignia y los momentos que definieron la industria." />
+  <link rel="canonical" href="https://gamestore-web-tau.vercel.app/historia.html" />
+
+  <!-- Open Graph (Facebook, WhatsApp, LinkedIn...) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="GameStore" />
+  <meta property="og:title" content="Historia de los Videojuegos — GameStore" />
+  <meta property="og:description" content="De Atari a PlayStation y Xbox: la historia completa de las compañías que construyeron la industria gamer." />
+  <meta property="og:image" content="https://gamestore-web-tau.vercel.app/IMAGENES/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:url" content="https://gamestore-web-tau.vercel.app/historia.html" />
+  <meta property="og:locale" content="es_CO" />
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Historia de los Videojuegos — GameStore" />
+  <meta name="twitter:description" content="De Atari a PlayStation y Xbox: la historia completa de las compañías que construyeron la industria gamer." />
+  <meta name="twitter:image" content="https://gamestore-web-tau.vercel.app/IMAGENES/og-image.jpg" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="IMAGENES/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="IMAGENES/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="IMAGENES/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="IMAGENES/apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="theme-color" content="#ff2d55" />
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="inicio.html" class="logo">
+      <picture><source srcset="IMAGENES/mysite.webp" type="image/webp" /><img src="IMAGENES/mysite.png" alt="GameStore" class="MySiteGamesLogo" width="240" height="240" /></picture>
+    </a>
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <div class="menu" id="menu">
+      <a href="inicio.html">Home</a>
+      <a href="grillas.html">Catálogo</a>
+      <a href="historia.html" class="active">Historia</a>
+      <a href="acerca_de.html">Nosotros</a>
+      <a href="contacto.html">Contacto</a>
+    </div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar a modo claro" title="Cambiar tema">🌙</button>
+  </nav>
+
+  <!-- HEADER -->
+  <div class="section-title reveal section-title--flush-top">
+    <span class="eyebrow">De 1972 a hoy</span>
+    <h2>La <span>Historia</span> de los Videojuegos</h2>
+    <p class="history-intro">Cinco compañías, cinco décadas, una industria que empezó con un punto rebotando en una pantalla y hoy mueve más dinero que el cine y la música juntos. Esta es la historia real detrás de las marcas que definieron el gaming.</p>
+  </div>
+
+  <!-- TIMELINE NAV -->
+  <nav class="history-timeline reveal" aria-label="Navegación por era">
+    <a href="#pioneros" class="history-timeline-item">
+      <span class="history-timeline-dot"></span>
+      <span class="history-timeline-label">Los Pioneros</span>
+      <span class="history-timeline-years">1972 – 1983</span>
+    </a>
+    <a href="#guerra-consolas" class="history-timeline-item">
+      <span class="history-timeline-dot"></span>
+      <span class="history-timeline-label">La Guerra de Consolas</span>
+      <span class="history-timeline-years">1983 – 1994</span>
+    </a>
+    <a href="#era-moderna" class="history-timeline-item">
+      <span class="history-timeline-dot"></span>
+      <span class="history-timeline-label">La Era Moderna</span>
+      <span class="history-timeline-years">1994 – Hoy</span>
+    </a>
+  </nav>
+
+  <!-- ═══════════════ ERA 1: LOS PIONEROS ═══════════════ -->
+  <div class="section-title reveal" id="pioneros">
+    <span class="eyebrow">1972 – 1983</span>
+    <h2>Los <span>Pioneros</span></h2>
+  </div>
+
+  <div class="history-grid">
+    <div class="history-card reveal" data-company="atari">
+      <button class="history-card-toggle" type="button" aria-expanded="false">
+        <div class="history-card-head">
+          <span class="history-year">1972</span>
+          <div>
+            <h3>Atari</h3>
+            <p class="history-tagline">Los que inventaron la industria desde cero</p>
+          </div>
+        </div>
+        <span class="history-toggle-icon">+</span>
+      </button>
+      <div class="history-card-body">
+        <p>
+          Fundada en 1972 por Nolan Bushnell y Ted Dabney en Sunnyvale, California, Atari es la
+          compañía que convirtió los videojuegos en un negocio real. Su primer gran éxito, <strong>Pong</strong>,
+          nació como una máquina arcade y se volvió un fenómeno cultural. En 1977 lanzaron el
+          <strong>Atari 2600</strong>, la consola que llevó los videojuegos a millones de salas de estar y
+          estableció el modelo de cartuchos intercambiables que toda la industria copiaría después.
+        </p>
+        <p>
+          Atari dominó el mercado sin rival real hasta 1983, cuando una avalancha de juegos de
+          pésima calidad — el más infame, <em>E.T. the Extra-Terrestrial</em>, desarrollado en solo
+          cinco semanas — saturó el mercado y hundió la confianza del consumidor. El resultado fue el
+          tristemente célebre <strong>Crash de los videojuegos de 1983</strong>, que casi borra la industria
+          completa en Norteamérica y dejaría la puerta abierta para que una compañía japonesa la
+          revivsiera dos años después.
+        </p>
+        <div class="history-block">
+          <h4>Consolas icónicas</h4>
+          <div class="history-tags"><span>Atari 2600</span><span>Atari 5200</span><span>Atari 7800</span></div>
+        </div>
+        <div class="history-block">
+          <h4>Juegos insignia</h4>
+          <div class="history-tags"><span>Pong</span><span>Asteroids</span><span>Missile Command</span><span>Centipede</span><span>Adventure</span></div>
+        </div>
+        <div class="history-fact">💡 <strong>Dato curioso:</strong> circuló por décadas el mito de que Atari enterró millones de cartuchos sin vender de <em>E.T.</em> en un vertedero de Nuevo México. En 2014, una excavación real desenterró miles de cartuchos — el mito era cierto.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ ERA 2: LA GUERRA DE CONSOLAS ═══════════════ -->
+  <div class="section-title reveal" id="guerra-consolas">
+    <span class="eyebrow">1983 – 1994</span>
+    <h2>La <span>Guerra de Consolas</span></h2>
+  </div>
+
+  <div class="history-grid">
+    <div class="history-card reveal" data-company="nintendo">
+      <button class="history-card-toggle" type="button" aria-expanded="false">
+        <div class="history-card-head">
+          <span class="history-year">1985</span>
+          <div>
+            <h3>Nintendo</h3>
+            <p class="history-tagline">La compañía de naipes que salvó los videojuegos</p>
+          </div>
+        </div>
+        <span class="history-toggle-icon">+</span>
+      </button>
+      <div class="history-card-body">
+        <p>
+          Nintendo existía desde 1889 en Kyoto, Japón — casi un siglo antes de tocar un videojuego,
+          fabricando naipes Hanafuda pintados a mano. Cuando el mercado norteamericano estaba
+          devastado tras el Crash de 1983, Nintendo se atrevió a relanzarlo con el
+          <strong>Nintendo Entertainment System (NES, 1985)</strong>, acompañado de un plomero llamado
+          Mario. <em>Super Mario Bros.</em> no solo vendió consolas: redefinió lo que un videojuego
+          podía ser. Su estricto "Seal of Quality" restauró una confianza que la industria había perdido
+          por completo.
+        </p>
+        <p>
+          En 1989 lanzaron el <strong>Game Boy</strong>, la portátil más exitosa de su generación, empujada
+          por un fenómeno inesperado: <em>Tetris</em>. Durante los 90, la rivalidad Mario contra Sonic —
+          Nintendo contra Sega — definió la llamada "Guerra de consolas de 16 bits" entre el
+          <strong>SNES</strong> y el Sega Genesis, una batalla de marketing tan intensa como la de las
+          consolas mismas.
+        </p>
+        <div class="history-block">
+          <h4>Consolas icónicas</h4>
+          <div class="history-tags"><span>NES (1985)</span><span>Game Boy (1989)</span><span>SNES (1990)</span><span>Nintendo 64 (1996)</span><span>GameCube (2001)</span><span>Wii (2006)</span><span>Switch (2017)</span></div>
+        </div>
+        <div class="history-block">
+          <h4>Juegos insignia</h4>
+          <div class="history-tags"><span>Super Mario Bros.</span><span>The Legend of Zelda</span><span>Pokémon</span><span>Metroid</span><span>Donkey Kong</span></div>
+        </div>
+        <div class="history-fact">💡 <strong>Dato curioso:</strong> Nintendo llevaba 90 años vendiendo cartas antes de fabricar su primer videojuego — literalmente empezó como una empresa de naipes tradicionales japoneses.</div>
+      </div>
+    </div>
+
+    <div class="history-card reveal" data-company="sega">
+      <button class="history-card-toggle" type="button" aria-expanded="false">
+        <div class="history-card-head">
+          <span class="history-year">1988</span>
+          <div>
+            <h3>Sega</h3>
+            <p class="history-tagline">El rival que se atrevió a desafiar a Nintendo</p>
+          </div>
+        </div>
+        <span class="history-toggle-icon">+</span>
+      </button>
+      <div class="history-card-body">
+        <p>
+          Con raíces desde 1940 fabricando máquinas arcade para bases militares en EE.UU., Sega se
+          convirtió en el gran rival de Nintendo durante los 80 y 90. El <strong>Genesis/Mega Drive</strong>
+          (1988-89) y su mascota <strong>Sonic the Hedgehog</strong> (1991) llegaron como respuesta directa
+          a Mario, con campañas de marketing tan agresivas como memorables ("Genesis does what
+          Nintendon't"). Por unos años, Sega llegó a superar a Nintendo en cuota de mercado en EE.UU.
+        </p>
+        <p>
+          Pero una serie de tropiezos de hardware — el Sega CD, el 32X, y finalmente la derrota
+          comercial del <strong>Saturn</strong> frente al PlayStation — debilitaron a la compañía. El
+          <strong>Dreamcast</strong> (1998), pese a ser genuinamente innovador, no alcanzó a revertir la
+          caída. En 2001, Sega tomó la difícil decisión de abandonar el negocio del hardware para
+          siempre y reinventarse como desarrolladora de software multiplataforma.
+        </p>
+        <div class="history-block">
+          <h4>Consolas icónicas</h4>
+          <div class="history-tags"><span>Master System (1985)</span><span>Genesis / Mega Drive (1988)</span><span>Game Gear (1990)</span><span>Saturn (1994)</span><span>Dreamcast (1998)</span></div>
+        </div>
+        <div class="history-block">
+          <h4>Juegos insignia</h4>
+          <div class="history-tags"><span>Sonic the Hedgehog</span><span>Streets of Rage</span><span>Shinobi</span><span>Golden Axe</span><span>Virtua Fighter</span></div>
+        </div>
+        <div class="history-fact">💡 <strong>Dato curioso:</strong> el Dreamcast fue la primera consola de la historia con módem incorporado de fábrica para jugar online — años antes de que PlayStation o Xbox lo hicieran estándar.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ ERA 3: LA ERA MODERNA ═══════════════ -->
+  <div class="section-title reveal" id="era-moderna">
+    <span class="eyebrow">1994 – Hoy</span>
+    <h2>La <span>Era Moderna</span></h2>
+  </div>
+
+  <div class="history-grid">
+    <div class="history-card reveal" data-company="playstation">
+      <button class="history-card-toggle" type="button" aria-expanded="false">
+        <div class="history-card-head">
+          <span class="history-year">1994</span>
+          <div>
+            <h3>PlayStation</h3>
+            <p class="history-tagline">Nació de una traición y terminó dominando el mercado</p>
+          </div>
+        </div>
+        <span class="history-toggle-icon">+</span>
+      </button>
+      <div class="history-card-body">
+        <p>
+          La historia de PlayStation empieza, irónicamente, como un proyecto conjunto con Nintendo:
+          un add-on de CD para el SNES. En el último momento, Nintendo rompió el acuerdo para
+          aliarse en su lugar con Philips — dejando a Sony con la tecnología a medio construir y,
+          según cuenta la leyenda, bastante furiosa. Sony decidió terminar la consola por su cuenta.
+          El resultado fue la <strong>PlayStation original (1994)</strong>, que apostó por gráficos 3D y
+          discos CD en vez de cartuchos, atrayendo desarrolladores con costos de producción mucho
+          más bajos y muchísima más capacidad de almacenamiento.
+        </p>
+        <p>
+          El <strong>PlayStation 2 (2000)</strong> se convirtió en la consola más vendida de la historia —
+          más de 155 millones de unidades — ayudado por doblar como reproductor de DVD en una
+          época en la que eso todavía era una novedad cara. PS3 y PS4 consolidaron a Sony como el
+          líder indiscutido del mercado, con el PS4 superando los 117 millones de unidades vendidas.
+        </p>
+        <div class="history-block">
+          <h4>Consolas icónicas</h4>
+          <div class="history-tags"><span>PlayStation (1994)</span><span>PS2 (2000)</span><span>PS3 (2006)</span><span>PS4 (2013)</span><span>PS5 (2020)</span></div>
+        </div>
+        <div class="history-block">
+          <h4>Juegos insignia</h4>
+          <div class="history-tags"><span>Gran Turismo</span><span>Metal Gear Solid</span><span>God of War</span><span>The Last of Us</span><span>Uncharted</span></div>
+        </div>
+        <div class="history-fact">💡 <strong>Dato curioso:</strong> PlayStation existe porque Nintendo canceló un acuerdo con Sony en la última semana antes de un anuncio conjunto — convirtiendo por accidente a su socio en su rival más grande de las siguientes tres décadas.</div>
+      </div>
+    </div>
+
+    <div class="history-card reveal" data-company="xbox">
+      <button class="history-card-toggle" type="button" aria-expanded="false">
+        <div class="history-card-head">
+          <span class="history-year">2001</span>
+          <div>
+            <h3>Xbox</h3>
+            <p class="history-tagline">Microsoft entra a pelear por la sala de estar</p>
+          </div>
+        </div>
+        <span class="history-toggle-icon">+</span>
+      </button>
+      <div class="history-card-body">
+        <p>
+          Microsoft, temiendo que las consolas —especialmente el dominante PlayStation 2— desplazaran
+          a la PC como el centro del entretenimiento del hogar, lanzó el <strong>Xbox original</strong> en
+          noviembre de 2001: esencialmente una PC compacta con procesador Intel y arquitectura basada
+          en Windows. Su gran golpe de autoridad fue <em>Halo: Combat Evolved</em>, que se convirtió en
+          un fenómeno cultural y redefinió el shooter en consola.
+        </p>
+        <p>
+          Con el <strong>Xbox 360 (2005)</strong> y el servicio Xbox Live, Microsoft popularizó el
+          multijugador online masivo en consolas y el sistema de logros que hoy da por sentado toda
+          la industria. Tras un Xbox One (2013) con un lanzamiento cuesta arriba frente al PS4,
+          Microsoft giró su estrategia hacia las adquisiciones masivas de estudios — Bethesda en 2021,
+          y Activision Blizzard en 2023 por cerca de 69 mil millones de dólares — apostando fuerte por
+          su servicio de suscripción <strong>Game Pass</strong> como su gran diferenciador de cara al futuro.
+        </p>
+        <div class="history-block">
+          <h4>Consolas icónicas</h4>
+          <div class="history-tags"><span>Xbox (2001)</span><span>Xbox 360 (2005)</span><span>Xbox One (2013)</span><span>Xbox Series X/S (2020)</span></div>
+        </div>
+        <div class="history-block">
+          <h4>Juegos insignia</h4>
+          <div class="history-tags"><span>Halo</span><span>Gears of War</span><span>Forza Horizon</span><span>Fable</span></div>
+        </div>
+        <div class="history-fact">💡 <strong>Dato curioso:</strong> la compra de Activision Blizzard por parte de Microsoft en 2023 (~69 mil millones de dólares) sigue siendo, hasta hoy, la adquisición más grande en la historia de la industria de los videojuegos.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="history-cta reveal">
+    <h3>¿Listo para ser parte de la próxima generación?</h3>
+    <p>Explora nuestro catálogo y encuentra la consola, el periférico o el clásico retro que buscas.</p>
+    <a href="grillas.html" class="btn-primary">Ver catálogo →</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <picture><source srcset="IMAGENES/mysite.webp" type="image/webp" /><img src="IMAGENES/mysite.png" alt="GameStore" width="240" height="240" loading="lazy" /></picture>
+        <p>Tu tienda de videojuegos de confianza.<br>Consolas, periféricos y mucho más.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <a href="inicio.html">Home</a>
+        <a href="grillas.html">Catálogo</a>
+        <a href="historia.html">Historia</a>
+        <a href="acerca_de.html">Nosotros</a>
+        <a href="contacto.html">Contacto</a>
+      </div>
+      <div class="footer-col">
+        <h4>Categorías</h4>
+        <a href="grillas.html#nintendo">Nintendo</a>
+        <a href="grillas.html#microsoft">Xbox</a>
+        <a href="grillas.html#ps_sony">PlayStation</a>
+        <a href="grillas.html#oldschool">Old School</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 <span>GameStore</span> · Programación y Servicios WEB · CIAF III Semestre</p>
+      <p>Hecho con <span>♥</span> para gamers</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    GameStore.initMenuToggle();
+    GameStore.initInteractions();
+    GameStore.initAchievements();
+    GameStore.initHistoryTimeline({ gridSelector: '.history-grid' });
+  </script>
+</body>
+</html>

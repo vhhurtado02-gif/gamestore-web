@@ -1164,3 +1164,236 @@ footer {
   .konami-fx-text { font-size: 1.3rem; }
   .konami-fx-text span { font-size: 1rem; }
 }
+/* ============================================================
+   HISTORIA DE LOS VIDEOJUEGOS (historia.html)
+   Timeline de eras + tarjetas de compañía expandibles
+   Manejado por GameStore.initHistoryTimeline()
+   ============================================================ */
+
+.history-intro {
+  max-width: 720px;
+  margin: 14px auto 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+/* ── Navegación por era ── */
+.history-timeline {
+  max-width: 900px;
+  margin: 40px auto 70px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  position: relative;
+}
+.history-timeline::before {
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 32px;
+  right: 32px;
+  height: 2px;
+  background: var(--border);
+  z-index: 0;
+}
+.history-timeline-item {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  gap: 6px;
+}
+.history-timeline-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--surface2);
+  border: 2px solid var(--red);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.history-timeline-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--white);
+}
+.history-timeline-years {
+  font-size: 11px;
+  color: var(--muted);
+}
+@media (hover: hover) and (pointer: fine) {
+  .history-timeline-item:hover .history-timeline-dot { background: var(--red); transform: scale(1.25); }
+}
+.history-timeline-item:active .history-timeline-dot { background: var(--red); transform: scale(1.15); }
+
+/* ── Grid de tarjetas de compañía ── */
+.history-grid {
+  max-width: 1100px;
+  margin: 0 auto 60px;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.history-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 0.25s ease;
+  scroll-margin-top: calc(var(--nav-h) + 16px);
+}
+.history-card.is-open { border-color: rgba(255,45,85,0.4); }
+
+.history-card-toggle {
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 22px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  text-align: left;
+}
+.history-card-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.history-year {
+  flex-shrink: 0;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--red);
+  background: rgba(255,45,85,0.12);
+  border: 1px solid rgba(255,45,85,0.3);
+  border-radius: 999px;
+  padding: 4px 12px;
+}
+.history-card-head h3 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--white);
+}
+.history-tagline {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.history-toggle-icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--surface2);
+  color: var(--white);
+  font-size: 18px;
+  font-weight: 700;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.history-card.is-open .history-toggle-icon {
+  transform: rotate(45deg);
+  background: var(--red);
+}
+
+.history-card-body {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 24px;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+}
+.history-card.is-open .history-card-body {
+  max-height: 2000px;
+  padding: 0 24px 26px;
+}
+.history-card-body p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+.history-card-body strong { color: var(--white); }
+.history-card-body em { color: var(--red); font-style: normal; }
+
+.history-block { margin-bottom: 16px; }
+.history-block h4 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.history-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.history-tags span {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--white);
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+
+.history-fact {
+  background: rgba(255,45,85,0.08);
+  border: 1px solid rgba(255,45,85,0.25);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.history-fact strong { color: var(--white); }
+
+/* ── CTA final ── */
+.history-cta {
+  max-width: 700px;
+  margin: 0 auto 90px;
+  padding: 48px 40px;
+  text-align: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.history-cta h3 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+.history-cta p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 22px;
+}
+
+@media (max-width: 800px) {
+  .history-grid { grid-template-columns: 1fr; padding: 0 16px; }
+  .history-timeline { flex-direction: column; align-items: flex-start; gap: 20px; padding: 0 24px; }
+  .history-timeline::before { top: 0; bottom: 0; left: 6px; right: auto; width: 2px; height: auto; }
+  .history-timeline-item { flex-direction: row; text-align: left; }
+  .history-card-toggle { padding: 18px; }
+  .history-card-head h3 { font-size: 1.1rem; }
+  .history-cta { padding: 32px 24px; margin-bottom: 60px; }
+}
