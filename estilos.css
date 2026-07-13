@@ -121,13 +121,13 @@ body {
 @media (hover: hover) and (pointer: fine) {
   .navbar .logo:hover, .footer-brand .logo:hover {
     transform: translateY(-5px);
-    box-shadow: 0 5px 30px rgba(206, 1, 1, 0.4);
+    box-shadow: 0 0 28px rgba(206, 1, 1, 0.45);
     border-radius: 40px;
   }
 }
 .navbar .logo:active, .footer-brand .logo:active {
   transform: translateY(-3px) scale(0.96);
-  box-shadow: 0 5px 26px rgba(206, 1, 1, 0.4);
+  box-shadow: 0 0 24px rgba(206, 1, 1, 0.45);
   border-radius: 40px;
 }
 
@@ -437,13 +437,13 @@ footer {
   gap: 40px;
   margin-bottom: 32px;
 }
-.footer-brand img { height: 40px; width: auto; margin-bottom: 12px; transition: filter 0.3s ease; }
+.footer-brand img { height: 44px; width: auto; transition: filter 0.3s ease; }
 /* El logo del navbar vive en un contenedor flex (se ajusta solo a su contenido).
    El del footer vive dentro de una columna de grid, donde un <a> en bloque se estira
    por defecto a ocupar TODO el ancho de la columna — por eso, sin esto, el brillo del
    hover se veía como una barra alargada en vez de abrazar justo el logo, igual que en
    el navbar (misma imagen, mismas proporciones, mismo tamaño casi cuadrado). */
-.footer-brand .logo { width: fit-content; }
+.footer-brand .logo { width: fit-content; margin-bottom: 12px; }
 .footer-brand p { color: var(--muted); font-size: 13px; line-height: 1.7; }
 .footer-col h4 {
   font-family: 'Rajdhani', sans-serif;
@@ -698,6 +698,7 @@ footer {
     height: var(--nav-h);
   }
   .navbar .logo img { height: 36px; }
+  .footer-brand img { height: 36px; }
   /* En mobile el navbar NO reduce su altura al hacer scroll (solo cambia fondo/sombra),
      para no desalinear el menú desplegable que se posiciona justo debajo */
   .navbar.scrolled { height: var(--nav-h); }
