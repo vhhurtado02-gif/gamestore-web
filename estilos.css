@@ -681,6 +681,13 @@ footer {
   .btn-outline:hover { border-color: var(--red); background: rgba(255,45,85,0.1); color: #fff; }
 }
 .btn-outline:active { border-color: var(--red); background: rgba(255,45,85,0.1); color: #fff; }
+/* Variante compacta para usar dentro de tarjetas de categoría */
+.btn-outline--sm {
+  padding: 8px 18px;
+  font-size: 12px;
+  margin-top: 6px;
+}
+
 
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {

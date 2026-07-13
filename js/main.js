@@ -261,12 +261,25 @@ const GameStore = (function () {
       });
     }
 
-    // Si se llega desde el quiz (grillas.html?cat=nintendo), preselecciona ese chip
+    
+    // Si se llega con ?cat=nintendo (desde inicio, quiz, etc.), preselecciona ese chip
+    // y hace scroll al ancla de la categoría para que el usuario quede posicionado ahí.
     const urlCategory = new URLSearchParams(window.location.search).get('cat');
     if (urlCategory) {
       const matchingChip = chipsWrap.querySelector('.chip[data-filter="' + urlCategory + '"]');
       if (matchingChip) matchingChip.click();
+
+      // Scroll suave al ancla de la categoría (después de un breve delay para que el filtro aplique)
+      setTimeout(function () {
+        var anchor = document.getElementById(urlCategory);
+        if (anchor) {
+          var navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 70;
+          var top = anchor.getBoundingClientRect().top + window.scrollY - navH - 12;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+      }, 150);
     }
+
   }
 
   // ── Sistema de logros (badges) + código Konami — activo en todas las páginas ──
