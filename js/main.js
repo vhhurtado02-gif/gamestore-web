@@ -12,7 +12,8 @@ const GameStore = (function () {
     const menu = document.getElementById('menu');
     if (toggle && menu) {
       toggle.addEventListener('click', function () {
-        menu.classList.toggle('active');
+        const isOpen = menu.classList.toggle('active');
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       });
     }
   }

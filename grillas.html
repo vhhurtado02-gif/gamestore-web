@@ -42,6 +42,9 @@
   <link rel="apple-touch-icon" sizes="180x180" href="IMAGENES/apple-touch-icon.png" />
   <link rel="manifest" href="site.webmanifest" />
   <meta name="theme-color" content="#ff2d55" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" />
   <link rel="stylesheet" href="estilos.css" />
 
 </head>
@@ -52,7 +55,7 @@
     <a href="inicio.html" class="logo">
       <picture><source srcset="IMAGENES/mysite.webp" type="image/webp" /><img src="IMAGENES/mysite.png" alt="GameStore" class="MySiteGamesLogo" width="240" height="240" /></picture>
     </a>
-    <button class="menu-toggle" id="menuToggle">☰</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="menu">☰</button>
     <div class="menu" id="menu">
       <a href="inicio.html">Home</a>
       <a href="grillas.html" class="active">Catálogo</a>
@@ -303,7 +306,7 @@
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
-        <picture><source srcset="IMAGENES/mysite.webp" type="image/webp" /><img src="IMAGENES/mysite.png" alt="GameStore" width="240" height="240" loading="lazy" /></picture>
+        <a href="inicio.html" class="logo"><picture><source srcset="IMAGENES/mysite.webp" type="image/webp" /><img src="IMAGENES/mysite.png" alt="GameStore" width="240" height="240" loading="lazy" /></picture></a>
         <p>Tu tienda de videojuegos de confianza.<br>Consolas, periféricos y mucho más.</p>
       </div>
       <div class="footer-col">

@@ -5,7 +5,10 @@
    Tipografía: 'Rajdhani' display (gamer) + 'Inter' cuerpo
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+/* Tipografía cargada desde el <head> de cada página con <link rel="preconnect"> +
+   <link rel="stylesheet">, en vez de @import aquí — @import es render-blocking y
+   retrasa el descubrimiento de las fuentes hasta que el navegador termina de
+   descargar y parsear TODO este archivo CSS primero. */
 
 :root {
   --bg:         #0a0a0f;
@@ -49,6 +52,15 @@
    tanto en Grid como en Flexbox, ya que los hijos de un contenedor flex/grid se
    "blockifican" automáticamente sin importar el display declarado. */
 picture { display: block; }
+
+/* Foco de teclado visible y con identidad de marca — cubre TODO elemento interactivo
+   del sitio de una sola vez (botones, links, tarjetas, chips...). Solo aparece en
+   navegación por teclado (:focus-visible), nunca al hacer clic con mouse/touch. */
+:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
 
 html { scroll-behavior: smooth; }
 
@@ -98,7 +110,7 @@ body {
    un filter: invert() en modo claro — y el filter de CSS también altera el color del box-shadow
    si están en el mismo elemento (lo pintaría verdoso/cian en vez de rojo). Al separarlos, el
    brillo rojo se ve igual de bien en ambos temas. */
-.navbar .logo {
+.navbar .logo, .footer-brand .logo {
   display: block;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-radius 0.3s ease;
 }
@@ -107,13 +119,13 @@ body {
    una respuesta visual real al tocar el logo — antes el efecto dependía 100% de hover y por
    eso nunca se veía en mobile. */
 @media (hover: hover) and (pointer: fine) {
-  .navbar .logo:hover {
+  .navbar .logo:hover, .footer-brand .logo:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 30px rgba(206, 1, 1, 0.4);
     border-radius: 40px;
   }
 }
-.navbar .logo:active {
+.navbar .logo:active, .footer-brand .logo:active {
   transform: translateY(-3px) scale(0.96);
   box-shadow: 0 5px 26px rgba(206, 1, 1, 0.4);
   border-radius: 40px;
@@ -426,6 +438,12 @@ footer {
   margin-bottom: 32px;
 }
 .footer-brand img { height: 40px; width: auto; margin-bottom: 12px; transition: filter 0.3s ease; }
+/* El logo del navbar vive en un contenedor flex (se ajusta solo a su contenido).
+   El del footer vive dentro de una columna de grid, donde un <a> en bloque se estira
+   por defecto a ocupar TODO el ancho de la columna — por eso, sin esto, el brillo del
+   hover se veía como una barra alargada en vez de abrazar justo el logo, igual que en
+   el navbar (misma imagen, mismas proporciones, mismo tamaño casi cuadrado). */
+.footer-brand .logo { width: fit-content; }
 .footer-brand p { color: var(--muted); font-size: 13px; line-height: 1.7; }
 .footer-col h4 {
   font-family: 'Rajdhani', sans-serif;
