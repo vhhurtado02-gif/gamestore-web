@@ -591,6 +591,23 @@ const GameStore = (function () {
     });
   }
 
-  return { initMenuToggle, initCarousel, initMultiStepForm, initInteractions, initCatalogFilter, initAchievements, initGamerQuiz, initHistoryTimeline };
+  // ── Tarjetas de historia embebidas dentro del catálogo (grillas.html) ──
+  // Mismo componente visual que historia.html, pero con su propio toggle independiente:
+  // NO participa en el conteo del logro "Historiador" (ese vive solo en historia.html),
+  // para no desbloquearlo de forma incompleta con menos compañías de las reales.
+  function initEmbeddedHistoryCards() {
+    const cards = document.querySelectorAll('.history-card--embed');
+    if (!cards.length) return;
+
+    cards.forEach(function (card) {
+      const toggle = card.querySelector('.history-card-toggle');
+      toggle.addEventListener('click', function () {
+        const isOpen = card.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    });
+  }
+
+  return { initMenuToggle, initCarousel, initMultiStepForm, initInteractions, initCatalogFilter, initAchievements, initGamerQuiz, initHistoryTimeline, initEmbeddedHistoryCards };
 
 })();
