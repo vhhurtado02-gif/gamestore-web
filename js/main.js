@@ -291,9 +291,10 @@ const GameStore = (function () {
       detective:  { icon: '🔍', title: 'Detective Gamer', desc: 'Usaste el buscador del catálogo' },
       estratega:  { icon: '🎯', title: 'Estratega', desc: 'Completaste el quiz de recomendación' },
       leyenda:    { icon: '👑', title: 'Leyenda Gamer', desc: 'Encontraste el código Konami' },
-      historiador:{ icon: '📜', title: 'Historiador', desc: 'Exploraste la historia de las 5 compañías' }
+      historiador:{ icon: '📜', title: 'Historiador', desc: 'Exploraste la historia de las 5 compañías' },
+      comprador:  { icon: '🛒', title: 'Comprador', desc: 'Completaste tu primera compra simulada' }
     };
-    const ORDER = ['explorador', 'detective', 'estratega', 'leyenda', 'historiador'];
+    const ORDER = ['explorador', 'detective', 'estratega', 'leyenda', 'historiador', 'comprador'];
 
     function getUnlocked() {
       try {

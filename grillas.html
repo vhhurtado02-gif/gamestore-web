@@ -63,7 +63,9 @@
       <a href="acerca_de.html">Nosotros</a>
       <a href="contacto.html">Contacto</a>
     </div>
-    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar a modo claro" title="Cambiar tema">🌙</button>
+    <div class="navbar-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Cambiar a modo claro" title="Cambiar tema">🌙</button>
+    </div>
   </nav>
 
   <!-- PAGE HEADER -->
@@ -447,11 +449,13 @@
   </footer>
 
   <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
   <script src="js/main.js"></script>
   <script>
     GameStore.initMenuToggle();
     GameStore.initInteractions();
     GameStore.initAchievements();
+    GameStoreCart.initCart();
     GameStore.initEmbeddedHistoryCards();
     GameStoreCatalog.initProductGrids();
     GameStoreCatalog.initProductModal();

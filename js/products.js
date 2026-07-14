@@ -262,11 +262,20 @@ const GameStoreCatalog = (function () {
           '<p class="product-modal-price">' + formatCOP(product.price) + (product.priceSuffix || '') + '</p>' +
           '<p class="product-modal-desc">' + product.description + '</p>' +
           '<ul class="product-modal-specs">' + product.specs.map(function (s) { return '<li>' + s + '</li>'; }).join('') + '</ul>' +
-          '<button class="btn-primary" type="button">Agregar al carrito</button>' +
+          '<button class="btn-primary" type="button" id="addToCartBtn">Agregar al carrito</button>' +
         '</div>';
       modal.classList.add('open');
       document.body.classList.add('modal-open');
       closeBtn.focus();
+
+      const addBtn = body.querySelector('#addToCartBtn');
+      addBtn.addEventListener('click', function () {
+        if (typeof GameStoreCart !== 'undefined') {
+          GameStoreCart.addItem(product);
+          addBtn.textContent = '✓ Agregado';
+          setTimeout(function () { addBtn.textContent = 'Agregar al carrito'; }, 1500);
+        }
+      });
     }
 
     function closeModal() {
