@@ -717,13 +717,35 @@ footer {
 }
 
 @media (max-width: 600px) {
-  /* Navbar */
+  /* Navbar — layout mobile: logo | [carrito a la izq] | hamburguesa centrado | [tema a la der] */
   .navbar {
     padding: 0 16px;
     height: var(--nav-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
   .navbar .logo img { height: 36px; }
   .footer-brand img { height: 36px; }
+
+  /* Hamburguesa siempre centrada en mobile */
+  .menu-toggle {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Navbar-actions: carrito se desplaza un poco a la izquierda */
+  .navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .navbar-actions .cart-trigger {
+    margin-right: 6px;
+    order: -1;
+  }
+
   /* En mobile el navbar NO reduce su altura al hacer scroll (solo cambia fondo/sombra),
      para no desalinear el menú desplegable que se posiciona justo debajo */
   .navbar.scrolled { height: var(--nav-h); }
