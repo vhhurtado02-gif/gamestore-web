@@ -753,7 +753,7 @@ footer {
     align-items: center;
     gap: 6px;
   }
-  .navbar-actions .cart-trigger {
+  .navbar-actions .cart-trigger-wrap {
     margin-right: 6px;
     order: -1;
   }
@@ -1712,6 +1712,10 @@ body.modal-open { overflow: hidden; }
    Manejado por GameStoreCart.initCart() / .addItem()
    ============================================================ */
 
+.cart-trigger-wrap {
+  position: relative;
+  display: inline-flex;
+}
 .cart-trigger {
   position: relative;
   background: var(--surface2);
@@ -1747,6 +1751,7 @@ body.modal-open { overflow: hidden; }
   text-align: center;
   border-radius: 999px;
   border: 2px solid var(--bg, #0a0a0f);
+  z-index: 1;
 }
 
 @keyframes cart-bump {
@@ -1754,9 +1759,9 @@ body.modal-open { overflow: hidden; }
   40% { transform: scale(1.2); }
   70% { transform: scale(0.95); }
 }
-.cart-trigger.cart-bump { animation: cart-bump 0.4s ease; }
+.cart-trigger-wrap.cart-bump { animation: cart-bump 0.4s ease; }
 @media (prefers-reduced-motion: reduce) {
-  .cart-trigger.cart-bump { animation: none; }
+  .cart-trigger-wrap.cart-bump { animation: none; }
 }
 
 /* ── Drawer lateral ── */

@@ -44,16 +44,31 @@ const GameStoreCart = (function () {
     const navbar = document.querySelector('.navbar');
     if (!navbar) return;
 
+    const wrap = document.createElement('span');
+    wrap.className = 'cart-trigger-wrap';
+
     const trigger = document.createElement('button');
     trigger.className = 'cart-trigger';
     trigger.type = 'button';
     trigger.setAttribute('aria-label', 'Ver carrito de compras');
-    trigger.innerHTML = '🛒<span class="cart-count" id="cartCount"></span>';
+    trigger.textContent = '🛒';
+
+    const countEl = document.createElement('span');
+    countEl.className = 'cart-count';
+    countEl.id = 'cartCount';
+
+    // El contador va como HERMANO del botón (no adentro) a propósito: el botón necesita
+    // overflow:hidden para recortar el efecto ripple dentro de su forma redondeada, y ese
+    // mismo overflow:hidden recortaba el contador (que sobresale un poco del borde con
+    // top/right negativos). Al vivir afuera, en este contenedor, ya no lo recorta nada.
+    wrap.appendChild(trigger);
+    wrap.appendChild(countEl);
+
     const actions = navbar.querySelector('.navbar-actions');
     const themeToggle = navbar.querySelector('.theme-toggle');
-    if (actions) actions.insertBefore(trigger, themeToggle);
-    else if (themeToggle) navbar.insertBefore(trigger, themeToggle);
-    else navbar.appendChild(trigger);
+    if (actions) actions.insertBefore(wrap, themeToggle);
+    else if (themeToggle) navbar.insertBefore(wrap, themeToggle);
+    else navbar.appendChild(wrap);
 
     const drawer = document.createElement('div');
     drawer.className = 'cart-drawer';
@@ -77,7 +92,6 @@ const GameStoreCart = (function () {
     const closeBtn = drawer.querySelector('.cart-drawer-close');
     const itemsWrap = drawer.querySelector('#cartItems');
     const totalEl = drawer.querySelector('#cartTotal');
-    const countEl = trigger.querySelector('#cartCount');
     const checkoutBtn = drawer.querySelector('#cartCheckoutBtn');
     const clearBtn = drawer.querySelector('#cartClearBtn');
 
@@ -117,19 +131,7 @@ const GameStoreCart = (function () {
     render();
 
     function openDrawer() { drawer.classList.add('open'); document.body.classList.add('modal-open'); }
-    function closeDrawer() {
-      drawer.classList.remove('open');
-      document.body.classList.remove('modal-open');
-      // Forzar un repintado del navbar al cerrar. El combo "quitar overflow:hidden del body"
-      // + "backdrop-filter: blur() en el navbar" hace que Chrome en Android a veces deje el
-      // contador del carrito (position:absolute) mal pintado hasta el próximo repintado real
-      // (cambiar de pestaña, redimensionar). Este micro-toque de transform es invisible pero
-      // obliga al navegador a recomponer esa capa de inmediato.
-      requestAnimationFrame(function () {
-        navbar.style.transform = 'translateZ(0)';
-        requestAnimationFrame(function () { navbar.style.transform = ''; });
-      });
-    }
+    function closeDrawer() { drawer.classList.remove('open'); document.body.classList.remove('modal-open'); }
 
     trigger.addEventListener('click', openDrawer);
     overlay.addEventListener('click', closeDrawer);
@@ -218,7 +220,7 @@ const GameStoreCart = (function () {
     saveCart(cart);
     document.dispatchEvent(new CustomEvent('gs-cart-updated'));
 
-    const trigger = document.querySelector('.cart-trigger');
+    const trigger = document.querySelector('.cart-trigger-wrap');
     if (trigger) {
       trigger.classList.remove('cart-bump');
       void trigger.offsetWidth;

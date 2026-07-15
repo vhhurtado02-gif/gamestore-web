@@ -281,15 +281,6 @@ const GameStoreCatalog = (function () {
     function closeModal() {
       modal.classList.remove('open');
       document.body.classList.remove('modal-open');
-      // Mismo ajuste que en el carrito: fuerza el repintado del navbar para que el contador
-      // del carrito no quede visualmente "atascado" tras cerrar este modal (ver cart.js).
-      const navbar = document.querySelector('.navbar');
-      if (navbar) {
-        requestAnimationFrame(function () {
-          navbar.style.transform = 'translateZ(0)';
-          requestAnimationFrame(function () { navbar.style.transform = ''; });
-        });
-      }
     }
 
     document.addEventListener('click', function (e) {
