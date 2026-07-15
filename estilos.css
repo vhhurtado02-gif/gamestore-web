@@ -979,6 +979,12 @@ footer {
   text-align: center;
   margin-bottom: 22px;
 }
+/* Recibe el foco por JS al cambiar de pregunta (accesibilidad); anillo de marca en vez del azul por defecto */
+.quiz-step h3:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
 
 .quiz-options {
   display: grid;

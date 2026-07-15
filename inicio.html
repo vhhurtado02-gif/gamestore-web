@@ -324,6 +324,7 @@
   </div>
 
   <div class="quiz-section reveal" id="gamerQuiz">
+    <p class="visually-hidden" aria-live="polite" id="quizProgress">Pregunta 1 de 3</p>
     <div class="quiz-dots">
       <span class="quiz-dot active"></span>
       <span class="quiz-dot"></span>
@@ -332,30 +333,30 @@
 
     <div class="quiz-questions">
       <div class="quiz-step">
-        <h3>¿Qué prefieres jugar?</h3>
+        <h3 tabindex="-1">¿Qué prefieres jugar?</h3>
         <div class="quiz-options">
-          <button class="quiz-option" type="button" data-category="ps_sony">🎬 Aventuras narrativas</button>
-          <button class="quiz-option" type="button" data-category="nintendo">🏎️ Carreras y fiesta</button>
-          <button class="quiz-option" type="button" data-category="microsoft">🔫 Shooters competitivos</button>
-          <button class="quiz-option" type="button" data-category="oldschool">👾 Clásicos retro</button>
+          <button class="quiz-option" type="button" data-category="ps_sony" aria-pressed="false">🎬 Aventuras narrativas</button>
+          <button class="quiz-option" type="button" data-category="nintendo" aria-pressed="false">🏎️ Carreras y fiesta</button>
+          <button class="quiz-option" type="button" data-category="microsoft" aria-pressed="false">🔫 Shooters competitivos</button>
+          <button class="quiz-option" type="button" data-category="oldschool" aria-pressed="false">👾 Clásicos retro</button>
         </div>
       </div>
       <div class="quiz-step step-hidden">
-        <h3>¿Cómo te gusta jugar?</h3>
+        <h3 tabindex="-1">¿Cómo te gusta jugar?</h3>
         <div class="quiz-options">
-          <button class="quiz-option" type="button" data-category="ps_sony">🎧 Solo, bien inmersivo</button>
-          <button class="quiz-option" type="button" data-category="nintendo">👨‍👩‍👧 Con amigos o familia</button>
-          <button class="quiz-option" type="button" data-category="online">🌐 Online, competitivo</button>
-          <button class="quiz-option" type="button" data-category="perifericos">⚙️ Optimizando mi setup</button>
+          <button class="quiz-option" type="button" data-category="ps_sony" aria-pressed="false">🎧 Solo, bien inmersivo</button>
+          <button class="quiz-option" type="button" data-category="nintendo" aria-pressed="false">👨‍👩‍👧 Con amigos o familia</button>
+          <button class="quiz-option" type="button" data-category="online" aria-pressed="false">🌐 Online, competitivo</button>
+          <button class="quiz-option" type="button" data-category="perifericos" aria-pressed="false">⚙️ Optimizando mi setup</button>
         </div>
       </div>
       <div class="quiz-step step-hidden">
-        <h3>¿Qué buscas más en tu experiencia?</h3>
+        <h3 tabindex="-1">¿Qué buscas más en tu experiencia?</h3>
         <div class="quiz-options">
-          <button class="quiz-option" type="button" data-category="microsoft">⚡ Gráficos de última gen</button>
-          <button class="quiz-option" type="button" data-category="nintendo">🎉 Diversión para todos</button>
-          <button class="quiz-option" type="button" data-category="perifericos">🖱️ Accesorios de gama alta</button>
-          <button class="quiz-option" type="button" data-category="oldschool">🕹️ Piezas únicas y nostalgia</button>
+          <button class="quiz-option" type="button" data-category="microsoft" aria-pressed="false">⚡ Gráficos de última gen</button>
+          <button class="quiz-option" type="button" data-category="nintendo" aria-pressed="false">🎉 Diversión para todos</button>
+          <button class="quiz-option" type="button" data-category="perifericos" aria-pressed="false">🖱️ Accesorios de gama alta</button>
+          <button class="quiz-option" type="button" data-category="oldschool" aria-pressed="false">🕹️ Piezas únicas y nostalgia</button>
         </div>
       </div>
     </div>

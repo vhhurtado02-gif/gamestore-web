@@ -522,10 +522,18 @@ const GameStore = (function () {
       current = n;
       steps[current].classList.remove('step-hidden');
       dots.forEach(function (d, i) { d.classList.toggle('active', i === current); });
+
+      // Accesibilidad: anunciar el avance y mover el foco a la nueva pregunta,
+      // para que un lector de pantalla note el cambio (antes quedaba en silencio)
+      const progressEl = document.getElementById('quizProgress');
+      if (progressEl) progressEl.textContent = 'Pregunta ' + (current + 1) + ' de ' + steps.length;
+      const heading = steps[current].querySelector('h3');
+      if (heading) heading.focus();
     }
 
     quiz.querySelectorAll('.quiz-option').forEach(function (btn) {
       btn.addEventListener('click', function () {
+        btn.setAttribute('aria-pressed', 'true');
         votes.push(btn.getAttribute('data-category'));
         if (current < steps.length - 1) {
           goTo(current + 1);
