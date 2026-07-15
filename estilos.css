@@ -290,19 +290,23 @@ body {
   border-color: rgba(255,45,85,0.5);
   box-shadow: 0 16px 40px rgba(255,45,85,0.25);
 }
-.grid-item img {
+.grid-item img,
+.grid-item video {
   width: 100%;
   height: 190px;
   object-fit: cover;
   display: block;
   transition: transform 0.4s ease;
+  background: var(--surface);
 }
 @media (hover: hover) and (pointer: fine) {
-  .grid-item:hover img {
+  .grid-item:hover img,
+  .grid-item:hover video {
     transform: scale(1.08);
   }
 }
-.grid-item:active img {
+.grid-item:active img,
+.grid-item:active video {
   transform: scale(1.08);
 }
 .grid-item-body { padding: 16px 18px 20px; }
@@ -826,6 +830,28 @@ footer {
   transform: scale(0);
   animation: ripple-anim 0.6s ease-out;
   pointer-events: none;
+}
+/* En modo claro, los botones/chips con fondo claro (var(--surface2)) o transparente
+   sobre el navbar/tarjetas claras hacían que el ripple blanco fuera invisible.
+   Aquí se oscurece SOLO para esos elementos; los botones rojos (--red, igual en
+   ambos temas) y los controles del carrusel (sobre foto) mantienen el ripple blanco,
+   que ahí sí se ve bien en cualquier tema. */
+[data-theme="light"] .chip .ripple-effect,
+[data-theme="light"] .quiz-option .ripple-effect,
+[data-theme="light"] .cart-trigger .ripple-effect,
+[data-theme="light"] .qty-btn .ripple-effect,
+[data-theme="light"] .btn-prev .ripple-effect,
+[data-theme="light"] .btn-outline .ripple-effect,
+[data-theme="light"] .menu-toggle .ripple-effect,
+[data-theme="light"] .theme-toggle .ripple-effect,
+[data-theme="light"] .cart-drawer-close .ripple-effect,
+[data-theme="light"] .cart-item-remove .ripple-effect,
+[data-theme="light"] .badge-trigger .ripple-effect,
+[data-theme="light"] .badge-panel-close .ripple-effect,
+[data-theme="light"] .product-detail-btn .ripple-effect,
+[data-theme="light"] .product-modal-close .ripple-effect,
+[data-theme="light"] .history-card-toggle .ripple-effect {
+  background: rgba(20,20,31,0.14);
 }
 @keyframes ripple-anim {
   to {

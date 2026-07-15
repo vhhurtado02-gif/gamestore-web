@@ -51,6 +51,28 @@ const GameStore = (function () {
     items.forEach(el => observer.observe(el));
   }
 
+  // ── Vídeos de categoría (reemplazan los GIF animados): solo reproducen mientras están ──
+  // visibles en pantalla. Ahorra datos y batería; si no hay soporte de IntersectionObserver,
+  // el atributo autoplay del <video> ya cubre la reproducción normal.
+  function initLazyVideos() {
+    const videos = document.querySelectorAll('video[preload="none"]');
+    if (!videos.length || !('IntersectionObserver' in window)) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        const video = entry.target;
+        if (entry.isIntersecting) {
+          if (video.readyState === 0) { video.load(); }
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.25 });
+
+    videos.forEach(v => observer.observe(v));
+  }
+
   // ── Navbar dinámica: agrega la clase "scrolled" cuando el usuario baja la página ──
   function initNavbarScroll() {
     const nav = document.querySelector('.navbar');
@@ -197,6 +219,7 @@ const GameStore = (function () {
       initNavbarScroll();
       initRippleButtons();
       initThemeToggle();
+      initLazyVideos();
     });
   }
 
