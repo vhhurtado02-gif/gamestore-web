@@ -810,6 +810,15 @@ footer {
   position: relative;
   overflow: hidden;
 }
+/* Las flechas del carrusel (Bootstrap) ya vienen con position:absolute para quedar
+   fijas y centradas verticalmente sin importar el contenido. Como estilos.css se carga
+   después que Bootstrap, el position:relative de .has-ripple (misma especificidad)
+   les ganaba la pelea en el primer clic y las sacaba de su lugar. Esta regla, al tener
+   una especificidad más alta (dos clases), siempre gana y restaura su posición fija. */
+.carousel-control-prev.has-ripple,
+.carousel-control-next.has-ripple {
+  position: absolute;
+}
 .ripple-effect {
   position: absolute;
   border-radius: 50%;
