@@ -581,7 +581,14 @@ footer {
 .cat-header-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, rgba(10,10,15,0.85) 40%, transparent);
+  /* Degradado doble: el horizontal (izquierda oscura) ya existía; se le suma uno vertical
+     anclado abajo, justo donde cae el texto (align-items:flex-end). El logo animado de
+     Nintendo es brillante y detallado, y con un solo degradado horizontal no oscurecía lo
+     suficiente esa franja inferior — el texto se enredaba visualmente con el logo de fondo,
+     sobre todo en mobile donde la caja es más baja y el logo ocupa casi todo el espacio. */
+  background:
+    linear-gradient(to top, rgba(6,6,10,0.92) 0%, rgba(6,6,10,0.65) 38%, transparent 72%),
+    linear-gradient(to right, rgba(10,10,15,0.88) 42%, transparent);
   display: flex;
   align-items: flex-end;
   padding: 32px 40px;
@@ -593,6 +600,7 @@ footer {
   font-weight: 700;
   color: var(--white);
   line-height: 1;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.9), 0 1px 3px rgba(0,0,0,0.9);
 }
 .cat-header-overlay h2 span { color: var(--red); }
 .cat-section {
