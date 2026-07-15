@@ -117,7 +117,19 @@ const GameStoreCart = (function () {
     render();
 
     function openDrawer() { drawer.classList.add('open'); document.body.classList.add('modal-open'); }
-    function closeDrawer() { drawer.classList.remove('open'); document.body.classList.remove('modal-open'); }
+    function closeDrawer() {
+      drawer.classList.remove('open');
+      document.body.classList.remove('modal-open');
+      // Forzar un repintado del navbar al cerrar. El combo "quitar overflow:hidden del body"
+      // + "backdrop-filter: blur() en el navbar" hace que Chrome en Android a veces deje el
+      // contador del carrito (position:absolute) mal pintado hasta el próximo repintado real
+      // (cambiar de pestaña, redimensionar). Este micro-toque de transform es invisible pero
+      // obliga al navegador a recomponer esa capa de inmediato.
+      requestAnimationFrame(function () {
+        navbar.style.transform = 'translateZ(0)';
+        requestAnimationFrame(function () { navbar.style.transform = ''; });
+      });
+    }
 
     trigger.addEventListener('click', openDrawer);
     overlay.addEventListener('click', closeDrawer);

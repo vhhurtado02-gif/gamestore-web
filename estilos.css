@@ -564,13 +564,20 @@ footer {
   height: 320px;
   object-fit: cover;
   display: block;
-  position: relative;
 }
 .cat-header {
   position: relative;
   overflow: hidden;
   margin-bottom: 0;
+  /* isolation:isolate crea un contexto de apilamiento propio y cerrado para esta sección.
+     Es necesario porque en Android real, un <video> con aceleración por hardware puede
+     pintarse en una capa de composición aparte que ignora el z-index normal y "tapa"
+     el texto superpuesto (bug conocido de <video> en navegadores móviles). Al aislar el
+     contexto y darle z-index explícito al overlay, forzamos al navegador a respetar el
+     orden de apilamiento en vez de dejarlo a discreción del compositor de video. */
+  isolation: isolate;
 }
+.cat-header .cat-hero { position: relative; z-index: 0; }
 .cat-header-overlay {
   position: absolute;
   inset: 0;
@@ -578,6 +585,7 @@ footer {
   display: flex;
   align-items: flex-end;
   padding: 32px 40px;
+  z-index: 2;
 }
 .cat-header-overlay h2 {
   font-family: 'Rajdhani', sans-serif;
