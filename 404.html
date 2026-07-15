@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Aplica el tema guardado ANTES de pintar la página, para evitar parpadeo -->
+  <script>
+  (function () {
+    try {
+      var t = localStorage.getItem('gs-theme');
+      if (t === 'light') { document.documentElement.setAttribute('data-theme', 'light'); }
+    } catch (e) {}
+  })();
+  </script>
+  <title>404 — Página no encontrada | GameStore</title>
+
+  <!-- SEO: esta página no debe indexarse ni aparecer en buscadores -->
+  <meta name="description" content="La página que buscas no existe o fue movida. Vuelve al catálogo de GameStore." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="IMAGENES/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="IMAGENES/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="IMAGENES/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="IMAGENES/apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
+  <meta name="theme-color" content="#ff2d55" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" />
+  <link rel="stylesheet" href="estilos.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="inicio.html" class="logo">
+      <picture><source srcset="IMAGENES/mysite.webp" type="image/webp" /><img src="IMAGENES/mysite.png" alt="GameStore" class="MySiteGamesLogo" width="240" height="240" /></picture>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="menu">☰</button>
+    <div class="menu" id="menu">
+      <a href="inicio.html">Home</a>
+      <a href="grillas.html">Catálogo</a>
+      <a href="historia.html">Historia</a>
+      <a href="acerca_de.html">Nosotros</a>
+      <a href="contacto.html">Contacto</a>
+    </div>
+    <div class="navbar-actions">
+      <button class="theme-toggle" id="themeToggle" aria-label="Cambiar a modo claro" title="Cambiar tema">🌙</button>
+    </div>
+  </nav>
+
+  <!-- 404 -->
+  <div class="notfound-hero reveal">
+    <div class="notfound-code" aria-hidden="true">404</div>
+    <h1>Game Over<span>·</span>por ahora</h1>
+    <p>Esta página no existe, cambió de lugar o un jefe final se la llevó. Pero tranquilo, todavía tienes vidas extra.</p>
+    <div class="notfound-btns">
+      <a href="inicio.html" class="btn-primary">Volver al inicio</a>
+      <a href="grillas.html" class="btn-outline">Ver catálogo</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="inicio.html" class="logo"><picture><source srcset="IMAGENES/mysite.webp" type="image/webp" /><img src="IMAGENES/mysite.png" alt="GameStore" width="240" height="240" loading="lazy" /></picture></a>
+        <p>Tu tienda de videojuegos de confianza.<br>Consolas, periféricos y mucho más.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <a href="inicio.html">Home</a>
+        <a href="grillas.html">Catálogo</a>
+        <a href="historia.html">Historia</a>
+        <a href="acerca_de.html">Nosotros</a>
+        <a href="contacto.html">Contacto</a>
+      </div>
+      <div class="footer-col">
+        <h4>Categorías</h4>
+        <a href="grillas.html#nintendo">Nintendo</a>
+        <a href="grillas.html#microsoft">Xbox</a>
+        <a href="grillas.html#ps_sony">PlayStation</a>
+        <a href="grillas.html#oldschool">Old School</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 <span>GameStore</span> · Programación y Servicios WEB · CIAF III Semestre</p>
+      <p>Hecho con <span>♥</span> para gamers</p>
+    </div>
+  </footer>
+
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    GameStore.initMenuToggle();
+    GameStore.initInteractions();
+    GameStore.initAchievements();
+    GameStoreCart.initCart();
+  </script>
+</body>
+</html>

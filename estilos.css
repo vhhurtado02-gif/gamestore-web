@@ -1974,3 +1974,204 @@ body.modal-open { overflow: hidden; }
   .cart-added-toast-img { width: 46px; height: 46px; }
   .cart-added-toast-text span { max-width: 180px; }
 }
+/* ============================================================
+   TESTIMONIOS — carrusel de reseñas (prueba social, inicio.html)
+   Mismo mecanismo que el hero (Bootstrap Carousel vía GameStore.initCarousel),
+   pero con controles y puntos propios: los del hero están pensados para ir
+   sobre una foto oscura, y esta sección vive sobre el fondo normal de la
+   página, que sí cambia entre modo claro/oscuro.
+   ============================================================ */
+.testimonials-wrap {
+  max-width: 720px;
+  margin: 0 auto 80px;
+  padding: 0 20px;
+  position: relative;
+}
+.testimonial-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 44px 40px 32px;
+  text-align: center;
+  position: relative;
+}
+.testimonial-quote-mark {
+  position: absolute;
+  top: 8px;
+  left: 24px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--red);
+  opacity: 0.35;
+  line-height: 1;
+  user-select: none;
+}
+.testimonial-stars {
+  color: var(--red);
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+}
+.testimonial-text {
+  color: var(--white);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 24px;
+  min-height: 90px;
+}
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.testimonial-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+  flex-shrink: 0;
+}
+.testimonial-author-text { text-align: left; }
+.testimonial-author-text h4 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+}
+.testimonial-tag {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ── Controles prev/next propios: círculo fijo en rojo de marca, para que el
+   ícono blanco de Bootstrap tenga contraste garantizado en cualquier tema ── */
+.testimonials-carousel { padding: 0 8px; }
+.testimonials-carousel .carousel-control-prev,
+.testimonials-carousel .carousel-control-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: var(--red);
+  border-radius: 50%;
+  opacity: 1;
+  box-shadow: 0 6px 18px rgba(255,45,85,0.35);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.testimonials-carousel .carousel-control-prev { left: -8px; }
+.testimonials-carousel .carousel-control-next { right: -8px; }
+@media (hover: hover) and (pointer: fine) {
+  .testimonials-carousel .carousel-control-prev:hover,
+  .testimonials-carousel .carousel-control-next:hover {
+    background: var(--red-hover, #e0003f);
+    transform: translateY(-50%) scale(1.08);
+  }
+}
+.testimonials-carousel .carousel-control-prev:active,
+.testimonials-carousel .carousel-control-next:active {
+  transform: translateY(-50%) scale(0.94);
+}
+.testimonials-carousel .carousel-control-prev-icon,
+.testimonials-carousel .carousel-control-next-icon {
+  width: 16px;
+  height: 16px;
+  filter: none;
+}
+
+/* ── Puntos indicadores: mismo lenguaje visual que .quiz-dot ── */
+.testimonial-dots {
+  position: static;
+  margin: 0 0 20px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+.testimonial-dots [data-bs-target] {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--surface2);
+  border: none;
+  opacity: 1;
+  text-indent: -9999px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.testimonial-dots [data-bs-target].active {
+  background: var(--red);
+  transform: scale(1.25);
+}
+
+@media (max-width: 600px) {
+  .testimonial-card { padding: 36px 24px 26px; }
+  .testimonial-text { font-size: 14px; min-height: 120px; }
+  .testimonials-carousel .carousel-control-prev { left: -4px; }
+  .testimonials-carousel .carousel-control-next { right: -4px; }
+}
+
+/* ============================================================
+   PÁGINA 404 — personalizada con la marca GameStore
+   ============================================================ */
+.notfound-hero {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 120px 20px 100px;
+  text-align: center;
+}
+.notfound-code {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 8rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--red);
+  text-shadow: 0 0 30px rgba(255,45,85,0.45);
+  letter-spacing: 0.02em;
+  animation: notfound-flicker 4s infinite;
+}
+@keyframes notfound-flicker {
+  0%, 92%, 100% { opacity: 1; }
+  93% { opacity: 0.55; }
+  94% { opacity: 1; }
+  95% { opacity: 0.65; }
+  96% { opacity: 1; }
+}
+.notfound-hero h1 {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--white);
+  margin: 16px 0 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.notfound-hero h1 span { color: var(--red); margin: 0 8px; }
+.notfound-hero p {
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+.notfound-btns {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notfound-code { animation: none; }
+}
+@media (max-width: 600px) {
+  .notfound-hero { padding: 90px 20px 70px; }
+  .notfound-code { font-size: 5rem; }
+  .notfound-hero h1 { font-size: 1.4rem; }
+  .notfound-btns { flex-direction: column; align-items: stretch; }
+}
