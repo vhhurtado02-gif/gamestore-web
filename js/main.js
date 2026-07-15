@@ -68,32 +68,45 @@ const GameStore = (function () {
   }
 
   // ── Efecto ripple: onda expansiva desde el punto de clic en botones ──
+  // Usa delegación de eventos (un solo listener en document) para cubrir TODOS los botones
+  // del sitio, incluidos los que se crean dinámicamente después de cargar la página
+  // (modal de producto, ítems del carrito, resultado del quiz, etc.), sin tener que
+  // volver a escanear el DOM cada vez que algo nuevo aparece.
   function initRippleButtons() {
-    const selector = '.btn-primary, .btn-outline, .btn-card, .btn-next, .btn-prev, .btn-submit';
-    document.querySelectorAll(selector).forEach(btn => {
+    const selector = [
+      '.btn-primary', '.btn-outline', '.btn-card', '.btn-next', '.btn-prev', '.btn-submit',
+      '.chip', '.quiz-option', '.menu-toggle', '.theme-toggle',
+      '.carousel-control-prev', '.carousel-control-next',
+      '.cart-trigger', '.cart-drawer-close', '.cart-item-remove', '.qty-btn',
+      '.badge-trigger', '.badge-panel-close',
+      '.history-card-toggle', '.product-detail-btn', '.product-modal-close'
+    ].join(', ');
+
+    document.addEventListener('click', function (e) {
+      const btn = e.target.closest(selector);
+      if (!btn) return;
+
       btn.classList.add('has-ripple');
-      btn.addEventListener('click', function (e) {
-        const rect = btn.getBoundingClientRect();
-        const ripple = document.createElement('span');
-        const size = Math.max(rect.width, rect.height) * 2;
-        ripple.className = 'ripple-effect';
-        ripple.style.width = ripple.style.height = size + 'px';
-        ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
-        ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
-        btn.appendChild(ripple);
-        ripple.addEventListener('animationend', () => ripple.remove());
+      const rect = btn.getBoundingClientRect();
+      const ripple = document.createElement('span');
+      const size = Math.max(rect.width, rect.height) * 2;
+      ripple.className = 'ripple-effect';
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+      ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+      btn.appendChild(ripple);
+      ripple.addEventListener('animationend', () => ripple.remove());
 
-        // Si es un enlace normal (<a href>) con clic normal (sin Ctrl/Cmd/Shift/rueda),
-        // esperamos a que se vea el ripple antes de navegar, para que no se corte la animación.
-        const href = btn.getAttribute('href');
-        const isPlainLeftClick = e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey;
-        const isRealLink = btn.tagName === 'A' && href && !href.startsWith('#');
+      // Si es un enlace normal (<a href>) con clic normal (sin Ctrl/Cmd/Shift/rueda),
+      // esperamos a que se vea el ripple antes de navegar, para que no se corte la animación.
+      const href = btn.getAttribute('href');
+      const isPlainLeftClick = e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey;
+      const isRealLink = btn.tagName === 'A' && href && !href.startsWith('#');
 
-        if (isRealLink && isPlainLeftClick && btn.target !== '_blank') {
-          e.preventDefault();
-          setTimeout(() => { window.location.href = href; }, 320);
-        }
-      });
+      if (isRealLink && isPlainLeftClick && btn.target !== '_blank') {
+        e.preventDefault();
+        setTimeout(() => { window.location.href = href; }, 320);
+      }
     });
   }
 

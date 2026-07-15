@@ -1314,7 +1314,7 @@ footer {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  transition: border-color 0.25s ease;
+  transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.25s ease;
   scroll-margin-top: calc(var(--nav-h) + 16px);
 }
 .history-card.is-open { border-color: rgba(255,45,85,0.4); }
@@ -1486,7 +1486,7 @@ footer {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  transition: opacity 0.6s ease, transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 @media (hover: hover) and (pointer: fine) {
   .product-card:hover {
