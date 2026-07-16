@@ -352,7 +352,6 @@ const GameStore = (function () {
     const trigger = document.createElement('button');
     trigger.className = 'badge-trigger';
     trigger.type = 'button';
-    trigger.setAttribute('aria-label', 'Ver mis logros gamer');
     trigger.innerHTML = '🏆<span class="badge-count" id="badgeCount"></span>';
     document.body.appendChild(trigger);
 
@@ -380,7 +379,11 @@ const GameStore = (function () {
 
     function paintPanel() {
       const countEl = document.getElementById('badgeCount');
-      if (countEl) countEl.textContent = unlocked.length + '/' + ORDER.length;
+      const countText = unlocked.length + '/' + ORDER.length;
+      if (countEl) countEl.textContent = countText;
+      // El aria-label debe incluir el texto visible ("0/6") para que el nombre accesible
+      // no quede desincronizado de lo que se ve en pantalla (voice control, lectores de pantalla).
+      trigger.setAttribute('aria-label', 'Ver mis logros gamer, ' + countText + ' desbloqueados');
       panel.querySelectorAll('.badge-item').forEach(function (el) {
         const id = el.getAttribute('data-badge-id');
         el.classList.toggle('is-unlocked', unlocked.indexOf(id) !== -1);

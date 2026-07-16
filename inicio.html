@@ -64,7 +64,10 @@
     .hero-text { max-width: 460px; }
     .hero-text .tag {
       display: inline-block;
-      background: var(--red);
+      /* #e0003f en vez de var(--red): con texto blanco pequeño y negrita, var(--red) da
+         3.64:1 de contraste (falla WCAG AA, que exige 4.5:1). Este tono, que ya usas en
+         los estados :hover, sí cumple (4.95:1) sin salirse de la misma familia de rojo. */
+      background: #e0003f;
       color: #fff;
       font-family: 'Rajdhani', sans-serif;
       font-size: 11px;
@@ -103,7 +106,8 @@
 
     /* Ticker */
     .ticker-bar {
-      background: var(--red);
+      /* Mismo motivo que .tag: var(--red) + texto blanco no cumple 4.5:1 de contraste */
+      background: #e0003f;
       overflow: hidden;
       white-space: nowrap;
       padding: 9px 0;
@@ -210,8 +214,10 @@
     </div>
   </nav>
 
+  <main id="main-content">
+
   <!-- CARRUSEL CON OVERLAY -->
-  <div class="carousel-wrapper" id="main-content">
+  <div class="carousel-wrapper">
     <div class="hero-overlay">
       <div class="hero-text">
         <span class="tag">🎮 Tienda Gamer</span>
@@ -404,7 +410,7 @@
             <div class="testimonial-author">
               <span class="testimonial-avatar testimonial-avatar--red">CR</span>
               <div class="testimonial-author-text">
-                <h4>Camilo R.</h4>
+                <h3>Camilo R.</h3>
                 <span class="testimonial-tag">Fan de Nintendo</span>
               </div>
             </div>
@@ -419,7 +425,7 @@
             <div class="testimonial-author">
               <span class="testimonial-avatar testimonial-avatar--cyan">VG</span>
               <div class="testimonial-author-text">
-                <h4>Valentina G.</h4>
+                <h3>Valentina G.</h3>
                 <span class="testimonial-tag">Setup gamer</span>
               </div>
             </div>
@@ -434,7 +440,7 @@
             <div class="testimonial-author">
               <span class="testimonial-avatar testimonial-avatar--red">AM</span>
               <div class="testimonial-author-text">
-                <h4>Andrés M.</h4>
+                <h3>Andrés M.</h3>
                 <span class="testimonial-tag">Coleccionista Old School</span>
               </div>
             </div>
@@ -449,7 +455,7 @@
             <div class="testimonial-author">
               <span class="testimonial-avatar testimonial-avatar--cyan">LP</span>
               <div class="testimonial-author-text">
-                <h4>Laura P.</h4>
+                <h3>Laura P.</h3>
                 <span class="testimonial-tag">Team PlayStation</span>
               </div>
             </div>
@@ -464,7 +470,7 @@
             <div class="testimonial-author">
               <span class="testimonial-avatar testimonial-avatar--red">SD</span>
               <div class="testimonial-author-text">
-                <h4>Santiago D.</h4>
+                <h3>Santiago D.</h3>
                 <span class="testimonial-tag">Xbox &amp; Game Pass</span>
               </div>
             </div>
@@ -479,7 +485,7 @@
             <div class="testimonial-author">
               <span class="testimonial-avatar testimonial-avatar--cyan">MT</span>
               <div class="testimonial-author-text">
-                <h4>Mariana T.</h4>
+                <h3>Mariana T.</h3>
                 <span class="testimonial-tag">Gamer familiar</span>
               </div>
             </div>
@@ -557,6 +563,8 @@
   </div>
 
   <!-- FOOTER -->
+  </main>
+
   <footer>
     <div class="footer-grid">
       <div class="footer-brand">
@@ -564,7 +572,7 @@
         <p>Tu tienda de videojuegos de confianza.<br>Consolas, periféricos y mucho más.</p>
       </div>
       <div class="footer-col">
-        <h4>Navegación</h4>
+        <h3>Navegación</h3>
         <a href="inicio.html">Home</a>
         <a href="grillas.html">Catálogo</a>
         <a href="historia.html">Historia</a>
@@ -572,7 +580,7 @@
         <a href="contacto.html">Contacto</a>
       </div>
       <div class="footer-col">
-        <h4>Categorías</h4>
+        <h3>Categorías</h3>
         <a href="grillas.html#nintendo">Nintendo</a>
         <a href="grillas.html#microsoft">Xbox</a>
         <a href="grillas.html#ps_sony">PlayStation</a>

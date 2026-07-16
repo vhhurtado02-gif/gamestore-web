@@ -324,7 +324,8 @@ body {
   align-items: center;
   gap: 6px;
   padding: 8px 18px;
-  background: var(--red);
+  /* Mismo motivo que .btn-primary: var(--red) + texto blanco a 13px/600 no cumple 4.5:1 */
+  background: #e0003f;
   color: #fff;
   font-family: 'Rajdhani', sans-serif;
   font-size: 13px;
@@ -336,9 +337,9 @@ body {
   transition: background 0.2s, transform 0.15s;
 }
 @media (hover: hover) and (pointer: fine) {
-  .btn-card:hover { background: #e0003f; transform: scale(1.04); color: #fff; }
+  .btn-card:hover { background: #c10036; transform: scale(1.04); color: #fff; }
 }
-.btn-card:active { background: #e0003f; transform: scale(0.98); color: #fff; }
+.btn-card:active { background: #c10036; transform: scale(0.98); color: #fff; }
 
 /* ── FORMULARIO MULTI-PASO ── */
 .form-section {
@@ -434,7 +435,8 @@ body {
 .btn-prev:active { background: var(--surface2-hover); }
 .btn-next, .btn-submit {
   flex: 1; padding: 11px;
-  background: var(--red);
+  /* Mismo motivo que .btn-primary: var(--red) + texto blanco a 15px/600 no cumple 4.5:1 */
+  background: #e0003f;
   color: #fff;
   border: none; border-radius: 8px;
   font-family: 'Rajdhani', sans-serif;
@@ -442,9 +444,9 @@ body {
   cursor: pointer; transition: background 0.2s;
 }
 @media (hover: hover) and (pointer: fine) {
-  .btn-next:hover, .btn-submit:hover { background: #e0003f; }
+  .btn-next:hover, .btn-submit:hover { background: #c10036; }
 }
-.btn-next:active, .btn-submit:active { background: #e0003f; }
+.btn-next:active, .btn-submit:active { background: #c10036; }
 
 /* ── FOOTER ── */
 footer {
@@ -468,7 +470,7 @@ footer {
    el navbar (misma imagen, mismas proporciones, mismo tamaño casi cuadrado). */
 .footer-brand .logo { width: fit-content; margin-bottom: 12px; }
 .footer-brand p { color: var(--muted); font-size: 13px; line-height: 1.7; }
-.footer-col h4 {
+.footer-col h3 {
   font-family: 'Rajdhani', sans-serif;
   font-size: 13px;
   font-weight: 700;
@@ -680,7 +682,10 @@ footer {
   align-items: center;
   gap: 8px;
   padding: 12px 28px;
-  background: var(--red);
+  /* #e0003f en vez de var(--red): con texto blanco a 14px/600 no llega al "texto grande"
+     de WCAG (necesitaría 700 o más), así que necesita 4.5:1 de contraste. var(--red) solo
+     da 3.64:1; este tono (el mismo que ya usabas en :hover) sí cumple, con 4.95:1. */
+  background: #e0003f;
   color: #fff;
   font-family: 'Rajdhani', sans-serif;
   font-size: 14px;
@@ -694,9 +699,9 @@ footer {
   transition: background 0.2s, transform 0.15s;
 }
 @media (hover: hover) and (pointer: fine) {
-  .btn-primary:hover { background: #e0003f; transform: scale(1.03); color: #fff; }
+  .btn-primary:hover { background: #c10036; transform: scale(1.03); color: #fff; }
 }
-.btn-primary:active { background: #e0003f; transform: scale(0.98); color: #fff; }
+.btn-primary:active { background: #c10036; transform: scale(0.98); color: #fff; }
 /* Variante con separación superior, para cuando el botón va justo debajo de un párrafo */
 .btn-primary--spaced { margin-top: 8px; }
 .btn-outline {
@@ -1141,7 +1146,9 @@ footer {
   min-width: 20px;
   height: 20px;
   padding: 0 4px;
-  background: var(--red);
+  /* Mismo motivo que .btn-primary: a 11px, ni siquiera font-weight:700 alcanza el umbral
+     de "texto grande" de WCAG (necesita 18.66px+), así que sigue exigiendo 4.5:1 */
+  background: #e0003f;
   color: #fff;
   font-family: 'Rajdhani', sans-serif;
   font-size: 11px;
@@ -1752,7 +1759,9 @@ body.modal-open { overflow: hidden; }
   min-width: 18px;
   height: 18px;
   padding: 0 4px;
-  background: var(--red);
+  /* Mismo motivo que .badge-count: a 10px, ni font-weight:700 alcanza el umbral de
+     "texto grande" de WCAG, así que necesita 4.5:1 de contraste */
+  background: #e0003f;
   color: #fff;
   font-family: 'Rajdhani', sans-serif;
   font-size: 10px;
@@ -2101,7 +2110,7 @@ body.modal-open { overflow: hidden; }
 .testimonial-avatar--red { background: var(--red); }
 .testimonial-avatar--cyan { background: var(--cyan); color: #0a0a0f; }
 .testimonial-author-text { text-align: left; }
-.testimonial-author-text h4 {
+.testimonial-author-text h3 {
   font-family: 'Rajdhani', sans-serif;
   font-size: 14px;
   font-weight: 700;
