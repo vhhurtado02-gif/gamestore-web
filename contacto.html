@@ -104,6 +104,8 @@
 <body>
 
   <!-- NAVBAR -->
+  <a href="#main-content" class="skip-link">Saltar al contenido</a>
+
   <nav class="navbar">
     <a href="inicio.html" class="logo">
       <picture><source srcset="IMAGENES/mysite.webp" type="image/webp" /><img src="IMAGENES/mysite.png" alt="GameStore" class="MySiteGamesLogo" width="240" height="240" /></picture>
@@ -122,7 +124,7 @@
   </nav>
 
   <!-- HERO BANNER -->
-  <div class="contact-hero">
+  <div class="contact-hero" id="main-content">
     <h1>Contáctanos y<br><span>juguemos juntos</span></h1>
     <p>¿Tienes preguntas, sugerencias o quieres conocer nuestras promociones? Escríbenos.</p>
   </div>
@@ -131,16 +133,16 @@
   <div id="CarruselContact" class="carousel slide contact-carousel contact-carousel--sized" data-bs-ride="carousel" data-bs-interval="3000">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <picture><source srcset="IMAGENES/estudio.webp" type="image/webp" /><img src="IMAGENES/estudio.jpg" class="d-block w-100" alt="Estudio" width="1280" height="853" /></picture>
+        <picture><source srcset="IMAGENES/estudio.webp" type="image/webp" /><img src="IMAGENES/estudio.jpg" class="d-block w-100" alt="Sala de streaming gamer con iluminación ambiental" width="1280" height="853" /></picture>
       </div>
       <div class="carousel-item">
-        <picture><source srcset="IMAGENES/controlonfire.webp" type="image/webp" /><img src="IMAGENES/controlonfire.jpg" class="d-block w-100" alt="Control" width="1280" height="720" loading="lazy" /></picture>
+        <picture><source srcset="IMAGENES/controlonfire.webp" type="image/webp" /><img src="IMAGENES/controlonfire.jpg" class="d-block w-100" alt="Control de videojuegos con efecto de luces" width="1280" height="720" loading="lazy" /></picture>
       </div>
       <div class="carousel-item">
-        <picture><source srcset="IMAGENES/pexels-tima-miroshnichenko-6498789.webp" type="image/webp" /><img src="IMAGENES/pexels-tima-miroshnichenko-6498789.jpg" class="d-block w-100" alt="Gaming" width="1000" height="667" loading="lazy" /></picture>
+        <picture><source srcset="IMAGENES/pexels-tima-miroshnichenko-6498789.webp" type="image/webp" /><img src="IMAGENES/pexels-tima-miroshnichenko-6498789.jpg" class="d-block w-100" alt="Grupo jugando realidad virtual con visores y controles" width="1000" height="667" loading="lazy" /></picture>
       </div>
       <div class="carousel-item">
-        <picture><source srcset="IMAGENES/pexels-yankrukov-9069368.webp" type="image/webp" /><img src="IMAGENES/pexels-yankrukov-9069368.jpg" class="d-block w-100" alt="Gaming 2" width="1000" height="667" loading="lazy" /></picture>
+        <picture><source srcset="IMAGENES/pexels-yankrukov-9069368.webp" type="image/webp" /><img src="IMAGENES/pexels-yankrukov-9069368.jpg" class="d-block w-100" alt="Dos amigos jugando videojuegos juntos en el sofá" width="1000" height="667" loading="lazy" /></picture>
       </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#CarruselContact" data-bs-slide="prev">
@@ -205,11 +207,11 @@
         <!-- Paso 1 -->
         <div class="step">
           <div class="form-group">
-            <label>Nombre completo</label>
+            <label for="nombre">Nombre completo</label>
             <input type="text" id="nombre" placeholder="Tu nombre" required />
           </div>
           <div class="form-group">
-            <label>Correo electrónico</label>
+            <label for="email">Correo electrónico</label>
             <input type="email" id="email" placeholder="vhhm@mail.com" required />
           </div>
           <div class="form-btns">
@@ -219,11 +221,11 @@
         <!-- Paso 2 -->
         <div class="step step-hidden">
           <div class="form-group">
-            <label>Teléfono</label>
+            <label for="telefono">Teléfono</label>
             <input type="tel" id="telefono" placeholder="300 000 0000" required />
           </div>
           <div class="form-group">
-            <label>Edad</label>
+            <label for="edad">Edad</label>
             <input type="number" id="edad" min="1" max="120" placeholder="Tu edad" required />
           </div>
           <div class="form-btns">
@@ -234,7 +236,7 @@
         <!-- Paso 3 -->
         <div class="step step-hidden">
           <div class="form-group">
-            <label>¿En qué podemos ayudarte?</label>
+            <label for="mensaje">¿En qué podemos ayudarte?</label>
             <textarea id="mensaje" placeholder="Cuéntanos tu consulta, sugerencia o pedido especial..." required></textarea>
           </div>
           <div class="form-btns">

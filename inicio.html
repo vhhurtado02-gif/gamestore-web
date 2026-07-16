@@ -191,6 +191,8 @@
 <body>
 
   <!-- NAVBAR -->
+  <a href="#main-content" class="skip-link">Saltar al contenido</a>
+
   <nav class="navbar">
     <a href="inicio.html" class="logo">
       <picture><source srcset="IMAGENES/mysite.webp" type="image/webp" /><img src="IMAGENES/mysite.png" alt="GameStore" class="MySiteGamesLogo" width="240" height="240" /></picture>
@@ -209,7 +211,7 @@
   </nav>
 
   <!-- CARRUSEL CON OVERLAY -->
-  <div class="carousel-wrapper">
+  <div class="carousel-wrapper" id="main-content">
     <div class="hero-overlay">
       <div class="hero-text">
         <span class="tag">🎮 Tienda Gamer</span>
@@ -400,7 +402,7 @@
             <div class="testimonial-stars" aria-label="5 de 5 estrellas">★★★★★</div>
             <p class="testimonial-text">Compré mi Switch OLED en GameStore y llegó en perfecto estado, con el empaque sellado. La atención fue rápida y clara desde el primer mensaje.</p>
             <div class="testimonial-author">
-              <span class="testimonial-avatar" style="background: var(--red);">CR</span>
+              <span class="testimonial-avatar testimonial-avatar--red">CR</span>
               <div class="testimonial-author-text">
                 <h4>Camilo R.</h4>
                 <span class="testimonial-tag">Fan de Nintendo</span>
@@ -415,7 +417,7 @@
             <div class="testimonial-stars" aria-label="5 de 5 estrellas">★★★★★</div>
             <p class="testimonial-text">Armé todo mi setup con ellos: teclado, silla y monitor. La asesoría me ayudó a no gastar de más y quedó increíble.</p>
             <div class="testimonial-author">
-              <span class="testimonial-avatar" style="background: var(--cyan); color:#0a0a0f;">VG</span>
+              <span class="testimonial-avatar testimonial-avatar--cyan">VG</span>
               <div class="testimonial-author-text">
                 <h4>Valentina G.</h4>
                 <span class="testimonial-tag">Setup gamer</span>
@@ -430,7 +432,7 @@
             <div class="testimonial-stars" aria-label="5 de 5 estrellas">★★★★★</div>
             <p class="testimonial-text">Encontré piezas retro que llevaba años buscando. La Game Boy que compré está impecable, se nota que revisan cada producto.</p>
             <div class="testimonial-author">
-              <span class="testimonial-avatar" style="background: var(--red);">AM</span>
+              <span class="testimonial-avatar testimonial-avatar--red">AM</span>
               <div class="testimonial-author-text">
                 <h4>Andrés M.</h4>
                 <span class="testimonial-tag">Coleccionista Old School</span>
@@ -445,7 +447,7 @@
             <div class="testimonial-stars" aria-label="4 de 5 estrellas">★★★★☆</div>
             <p class="testimonial-text">Mi PS5 llegó rápido y en excelente estado. Me hubiera gustado más variedad de accesorios, pero la experiencia de compra fue impecable.</p>
             <div class="testimonial-author">
-              <span class="testimonial-avatar" style="background: var(--cyan); color:#0a0a0f;">LP</span>
+              <span class="testimonial-avatar testimonial-avatar--cyan">LP</span>
               <div class="testimonial-author-text">
                 <h4>Laura P.</h4>
                 <span class="testimonial-tag">Team PlayStation</span>
@@ -460,7 +462,7 @@
             <div class="testimonial-stars" aria-label="5 de 5 estrellas">★★★★★</div>
             <p class="testimonial-text">Cambié de consola después de años y en GameStore me asesoraron sin presionarme a comprar de más. Mi Xbox Series X llegó perfecta.</p>
             <div class="testimonial-author">
-              <span class="testimonial-avatar" style="background: var(--red);">SD</span>
+              <span class="testimonial-avatar testimonial-avatar--red">SD</span>
               <div class="testimonial-author-text">
                 <h4>Santiago D.</h4>
                 <span class="testimonial-tag">Xbox &amp; Game Pass</span>
@@ -475,7 +477,7 @@
             <div class="testimonial-stars" aria-label="5 de 5 estrellas">★★★★★</div>
             <p class="testimonial-text">Compramos consolas para los niños y quedamos felices con la calidad y el trato. Se nota que son gamers de verdad, no solo vendedores.</p>
             <div class="testimonial-author">
-              <span class="testimonial-avatar" style="background: var(--cyan); color:#0a0a0f;">MT</span>
+              <span class="testimonial-avatar testimonial-avatar--cyan">MT</span>
               <div class="testimonial-author-text">
                 <h4>Mariana T.</h4>
                 <span class="testimonial-tag">Gamer familiar</span>
@@ -514,11 +516,11 @@
       <!-- Paso 1 -->
       <div class="step">
         <div class="form-group">
-          <label>Nombre completo</label>
+          <label for="nombre">Nombre completo</label>
           <input type="text" id="nombre" placeholder="Ej: Salomón" required />
         </div>
         <div class="form-group">
-          <label>Correo electrónico</label>
+          <label for="email">Correo electrónico</label>
           <input type="email" id="email" placeholder="vhhm@mail.com" required />
         </div>
         <div class="form-btns">
@@ -528,11 +530,11 @@
       <!-- Paso 2 -->
       <div class="step step-hidden">
         <div class="form-group">
-          <label>Teléfono</label>
+          <label for="telefono">Teléfono</label>
           <input type="tel" id="telefono" placeholder="300 000 0000" required />
         </div>
         <div class="form-group">
-          <label>Edad</label>
+          <label for="edad">Edad</label>
           <input type="number" id="edad" min="1" max="120" placeholder="Tu edad" required />
         </div>
         <div class="form-btns">
@@ -543,7 +545,7 @@
       <!-- Paso 3 -->
       <div class="step step-hidden">
         <div class="form-group">
-          <label>Mensaje</label>
+          <label for="mensaje">Mensaje</label>
           <textarea id="mensaje" placeholder="¿Qué buscas en GameStore?" required></textarea>
         </div>
         <div class="form-btns">

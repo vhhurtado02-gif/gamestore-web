@@ -19,11 +19,11 @@ const GameStore = (function () {
   }
 
   // ── Carrusel Bootstrap (usado en inicio.html y contacto.html) ──
-  function initCarousel(selector, interval) {
+  function initCarousel(selector, interval, options) {
     document.addEventListener('DOMContentLoaded', function () {
       const el = document.querySelector(selector);
       if (el && typeof bootstrap !== 'undefined') {
-        new bootstrap.Carousel(el, { interval: interval, ride: 'carousel' });
+        new bootstrap.Carousel(el, Object.assign({ interval: interval, ride: 'carousel', pause: 'hover' }, options));
       }
     });
   }
@@ -620,11 +620,13 @@ const GameStore = (function () {
 
     cards.forEach(function (card) {
       const toggle = card.querySelector('.history-card-toggle');
+      const body = card.querySelector('.history-card-body');
       const company = card.getAttribute('data-company');
 
       toggle.addEventListener('click', function () {
         const isOpen = card.classList.toggle('is-open');
         toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        if (body) body.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
 
         if (isOpen) {
           explored.add(company);
@@ -646,9 +648,11 @@ const GameStore = (function () {
 
     cards.forEach(function (card) {
       const toggle = card.querySelector('.history-card-toggle');
+      const body = card.querySelector('.history-card-body');
       toggle.addEventListener('click', function () {
         const isOpen = card.classList.toggle('is-open');
         toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        if (body) body.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
       });
     });
   }

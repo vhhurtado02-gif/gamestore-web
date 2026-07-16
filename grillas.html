@@ -51,6 +51,8 @@
 <body>
 
   <!-- NAVBAR -->
+  <a href="#main-content" class="skip-link">Saltar al contenido</a>
+
   <nav class="navbar">
     <a href="inicio.html" class="logo">
       <picture><source srcset="IMAGENES/mysite.webp" type="image/webp" /><img src="IMAGENES/mysite.png" alt="GameStore" class="MySiteGamesLogo" width="240" height="240" /></picture>
@@ -69,7 +71,7 @@
   </nav>
 
   <!-- PAGE HEADER -->
-  <div class="section-title reveal section-title--flush-top">
+  <div class="section-title reveal section-title--flush-top" id="main-content">
     <span class="eyebrow">Explora todo</span>
     <h2>Nuestro <span>Catálogo</span></h2>
   </div>
@@ -120,7 +122,7 @@
       </p>
 
       <div class="history-card history-card--embed" data-company="nintendo">
-        <button class="history-card-toggle" type="button" aria-expanded="false">
+        <button class="history-card-toggle" type="button" aria-expanded="false" aria-controls="history-body-embed-nintendo">
           <div class="history-card-head">
             <span class="history-year">1985</span>
             <div>
@@ -130,7 +132,7 @@
           </div>
           <span class="history-toggle-icon">+</span>
         </button>
-        <div class="history-card-body">
+        <div class="history-card-body" id="history-body-embed-nintendo" aria-hidden="true">
           <p>
             Nintendo existía desde 1889 en Kyoto, Japón — casi un siglo antes de tocar un videojuego,
             fabricando naipes Hanafuda pintados a mano. Cuando el mercado norteamericano estaba
@@ -185,7 +187,7 @@
       </p>
 
       <div class="history-card history-card--embed" data-company="xbox">
-        <button class="history-card-toggle" type="button" aria-expanded="false">
+        <button class="history-card-toggle" type="button" aria-expanded="false" aria-controls="history-body-embed-xbox">
           <div class="history-card-head">
             <span class="history-year">2001</span>
             <div>
@@ -195,7 +197,7 @@
           </div>
           <span class="history-toggle-icon">+</span>
         </button>
-        <div class="history-card-body">
+        <div class="history-card-body" id="history-body-embed-xbox" aria-hidden="true">
           <p>
             Microsoft, temiendo que las consolas —especialmente el dominante PlayStation 2— desplazaran
             a la PC como el centro del entretenimiento del hogar, lanzó el <strong>Xbox original</strong> en
@@ -249,7 +251,7 @@
       </p>
 
       <div class="history-card history-card--embed" data-company="playstation">
-        <button class="history-card-toggle" type="button" aria-expanded="false">
+        <button class="history-card-toggle" type="button" aria-expanded="false" aria-controls="history-body-embed-playstation">
           <div class="history-card-head">
             <span class="history-year">1994</span>
             <div>
@@ -259,7 +261,7 @@
           </div>
           <span class="history-toggle-icon">+</span>
         </button>
-        <div class="history-card-body">
+        <div class="history-card-body" id="history-body-embed-playstation" aria-hidden="true">
           <p>
             La historia de PlayStation empieza, irónicamente, como un proyecto conjunto con Nintendo:
             un add-on de CD para el SNES. En el último momento, Nintendo rompió el acuerdo para
@@ -340,7 +342,7 @@
       </p>
 
       <div class="history-card history-card--embed" data-company="atari">
-        <button class="history-card-toggle" type="button" aria-expanded="false">
+        <button class="history-card-toggle" type="button" aria-expanded="false" aria-controls="history-body-embed-atari">
           <div class="history-card-head">
             <span class="history-year">1972</span>
             <div>
@@ -350,7 +352,7 @@
           </div>
           <span class="history-toggle-icon">+</span>
         </button>
-        <div class="history-card-body">
+        <div class="history-card-body" id="history-body-embed-atari" aria-hidden="true">
           <p>
             Fundada en 1972 por Nolan Bushnell y Ted Dabney en Sunnyvale, California, Atari es la
             compañía que convirtió los videojuegos en un negocio real. Su primer gran éxito, <strong>Pong</strong>,

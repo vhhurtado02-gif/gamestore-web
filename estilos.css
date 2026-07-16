@@ -241,6 +241,7 @@ body {
 .section-title {
   text-align: center;
   padding: 56px 20px 32px;
+  scroll-margin-top: var(--nav-h);
 }
 /* Variante usada cuando la sección va justo después de la navbar (sin carrusel/hero encima) */
 .section-title--flush-top { padding-top: 48px; }
@@ -626,6 +627,7 @@ footer {
 .cat-images img:active { border-color: rgba(255,45,85,0.4); }
 .cat-text {
   max-width: 760px;
+  margin: 0 auto;
   background: var(--surface);
   border-radius: var(--radius);
   padding: 28px 24px;
@@ -2061,6 +2063,7 @@ body.modal-open { overflow: hidden; }
   color: var(--red);
   opacity: 0.35;
   line-height: 1;
+  -webkit-user-select: none;
   user-select: none;
 }
 .testimonial-stars {
@@ -2095,6 +2098,8 @@ body.modal-open { overflow: hidden; }
   color: #fff;
   flex-shrink: 0;
 }
+.testimonial-avatar--red { background: var(--red); }
+.testimonial-avatar--cyan { background: var(--cyan); color: #0a0a0f; }
 .testimonial-author-text { text-align: left; }
 .testimonial-author-text h4 {
   font-family: 'Rajdhani', sans-serif;
@@ -2107,8 +2112,10 @@ body.modal-open { overflow: hidden; }
   color: var(--muted);
 }
 
-/* ── Controles prev/next propios: círculo fijo en rojo de marca, para que el
-   ícono blanco de Bootstrap tenga contraste garantizado en cualquier tema ── */
+/* ── Controles prev/next propios: mismo lenguaje visual que .theme-toggle / .cart-trigger
+   (círculo var(--surface2) + borde), en vez del ícono blanco fijo de Bootstrap que no se
+   adapta al tema. El ícono se dibuja con CSS (borde rotado) para que sí responda a
+   var(--white)/var(--red) en modo claro y oscuro. ── */
 .testimonials-carousel { padding: 0 8px; }
 .testimonials-carousel .carousel-control-prev,
 .testimonials-carousel .carousel-control-next {
@@ -2117,18 +2124,18 @@ body.modal-open { overflow: hidden; }
   transform: translateY(-50%);
   width: 40px;
   height: 40px;
-  background: var(--red);
+  background: var(--surface2);
+  border: 1px solid var(--border-strong, var(--border));
   border-radius: 50%;
   opacity: 1;
-  box-shadow: 0 6px 18px rgba(255,45,85,0.35);
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition: border-color 0.2s ease, transform 0.2s ease;
 }
 .testimonials-carousel .carousel-control-prev { left: -8px; }
 .testimonials-carousel .carousel-control-next { right: -8px; }
 @media (hover: hover) and (pointer: fine) {
   .testimonials-carousel .carousel-control-prev:hover,
   .testimonials-carousel .carousel-control-next:hover {
-    background: var(--red-hover, #e0003f);
+    border-color: var(--red);
     transform: translateY(-50%) scale(1.08);
   }
 }
@@ -2138,9 +2145,21 @@ body.modal-open { overflow: hidden; }
 }
 .testimonials-carousel .carousel-control-prev-icon,
 .testimonials-carousel .carousel-control-next-icon {
-  width: 16px;
-  height: 16px;
-  filter: none;
+  width: 8px;
+  height: 8px;
+  background-image: none;
+  border-style: solid;
+  border-color: var(--white);
+  border-width: 0 2px 2px 0;
+  transition: border-color 0.2s ease;
+}
+.testimonials-carousel .carousel-control-prev-icon { transform: rotate(135deg); margin-left: 3px; }
+.testimonials-carousel .carousel-control-next-icon { transform: rotate(-45deg); margin-right: 3px; }
+@media (hover: hover) and (pointer: fine) {
+  .testimonials-carousel .carousel-control-prev:hover .carousel-control-prev-icon,
+  .testimonials-carousel .carousel-control-next:hover .carousel-control-next-icon {
+    border-color: var(--red);
+  }
 }
 
 /* ── Puntos indicadores: mismo lenguaje visual que .quiz-dot ── */
@@ -2171,4 +2190,28 @@ body.modal-open { overflow: hidden; }
   .testimonial-text { font-size: 14px; min-height: 120px; }
   .testimonials-carousel .carousel-control-prev { left: -4px; }
   .testimonials-carousel .carousel-control-next { right: -4px; }
+}
+/* ============================================================
+   SKIP LINK — accesibilidad para navegación por teclado
+   Invisible hasta que se recibe foco (Tab), permite saltar el menú
+   e ir directo al contenido principal de cada página.
+   ============================================================ */
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: 12px;
+  z-index: 10000;
+  background: var(--red);
+  color: #fff;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.03em;
+  padding: 12px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 12px;
 }
