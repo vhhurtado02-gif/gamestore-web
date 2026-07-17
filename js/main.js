@@ -195,14 +195,32 @@ const GameStore = (function () {
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      Swal.fire({
-        title: options.successTitle,
-        text: options.successText,
-        icon: 'success',
-        confirmButtonColor: '#ff2d55',
-        timer: 3000,
-        timerProgressBar: true,
-      });
+      // SweetAlert2 se carga desde un CDN externo. Si por lo que sea no cargó (bloqueador
+      // de anuncios, red restringida, caída del CDN), Swal quedaría "undefined" y el envío
+      // fallaría en silencio: el usuario haría clic y no vería ninguna confirmación. Este
+      // respaldo usa el mismo toast propio que ya se usa para el carrito/logros, así el
+      // mensaje de éxito SIEMPRE se muestra, con o sin el CDN.
+      if (typeof Swal !== 'undefined') {
+        Swal.fire({
+          title: options.successTitle,
+          text: options.successText,
+          icon: 'success',
+          confirmButtonColor: '#ff2d55',
+          timer: 3000,
+          timerProgressBar: true,
+        });
+      } else {
+        const toast = document.createElement('div');
+        toast.className = 'badge-toast';
+        toast.innerHTML = '<span class="badge-toast-icon">✅</span>' +
+          '<div><strong>' + options.successTitle + '</strong><br>' + options.successText + '</div>';
+        document.body.appendChild(toast);
+        requestAnimationFrame(function () { toast.classList.add('show'); });
+        setTimeout(function () {
+          toast.classList.remove('show');
+          setTimeout(function () { toast.remove(); }, 400);
+        }, 4000);
+      }
       this.reset();
       steps.forEach((s, i) => { s.style.display = i === 0 ? 'block' : 'none'; });
       dots.forEach(d => { d.classList.remove('active', 'done'); });
