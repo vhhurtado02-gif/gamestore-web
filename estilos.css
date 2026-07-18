@@ -1393,6 +1393,10 @@ footer {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 24px;
+  /* Sin esto, al abrir una tarjeta (crece de alto), la de al lado en la misma fila se
+     "estira" para igualarla (comportamiento por defecto de CSS Grid), dejando un espacio
+     vacío debajo de su encabezado aunque su contenido siga cerrado. */
+  align-items: start;
 }
 
 .history-card {
