@@ -130,8 +130,19 @@ const GameStoreCart = (function () {
 
     render();
 
-    function openDrawer() { drawer.classList.add('open'); document.body.classList.add('modal-open'); }
-    function closeDrawer() { drawer.classList.remove('open'); document.body.classList.remove('modal-open'); }
+    const panel = drawer.querySelector('.cart-drawer-panel');
+    const focusTrap = (typeof GameStore !== 'undefined' && GameStore.createFocusTrap) ? GameStore.createFocusTrap(panel) : null;
+
+    function openDrawer() {
+      drawer.classList.add('open');
+      document.body.classList.add('modal-open');
+      if (focusTrap) focusTrap.activate();
+    }
+    function closeDrawer() {
+      drawer.classList.remove('open');
+      document.body.classList.remove('modal-open');
+      if (focusTrap) focusTrap.deactivate();
+    }
 
     trigger.addEventListener('click', openDrawer);
     overlay.addEventListener('click', closeDrawer);

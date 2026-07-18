@@ -252,6 +252,7 @@ const GameStoreCatalog = (function () {
     const overlay = modal.querySelector('.product-modal-overlay');
     const closeBtn = modal.querySelector('.product-modal-close');
     const body = modal.querySelector('.product-modal-body');
+    const focusTrap = (typeof GameStore !== 'undefined' && GameStore.createFocusTrap) ? GameStore.createFocusTrap(modal) : null;
 
     function openModal(product) {
       body.innerHTML =
@@ -266,7 +267,8 @@ const GameStoreCatalog = (function () {
         '</div>';
       modal.classList.add('open');
       document.body.classList.add('modal-open');
-      closeBtn.focus();
+      if (focusTrap) focusTrap.activate();
+      else closeBtn.focus();
 
       const addBtn = body.querySelector('#addToCartBtn');
       addBtn.addEventListener('click', function () {
@@ -281,6 +283,7 @@ const GameStoreCatalog = (function () {
     function closeModal() {
       modal.classList.remove('open');
       document.body.classList.remove('modal-open');
+      if (focusTrap) focusTrap.deactivate();
     }
 
     document.addEventListener('click', function (e) {

@@ -367,11 +367,24 @@ const GameStore = (function () {
     if (document.querySelector('.badge-trigger')) return;
 
     // ── Botón flotante + panel de logros, inyectados una sola vez por página ──
+    const triggerWrap = document.createElement('span');
+    triggerWrap.className = 'badge-trigger-wrap';
+
     const trigger = document.createElement('button');
     trigger.className = 'badge-trigger';
     trigger.type = 'button';
-    trigger.innerHTML = '🏆<span class="badge-count" id="badgeCount"></span>';
-    document.body.appendChild(trigger);
+    trigger.textContent = '🏆';
+
+    const badgeCountEl = document.createElement('span');
+    badgeCountEl.className = 'badge-count';
+    badgeCountEl.id = 'badgeCount';
+
+    // El contador vive como HERMANO del botón, no adentro — mismo motivo que el contador
+    // del carrito (ver cart.js): el botón necesita overflow:hidden para el ripple, y eso
+    // recortaba el contador, que sobresale un poco del borde con bottom/right negativos.
+    triggerWrap.appendChild(trigger);
+    triggerWrap.appendChild(badgeCountEl);
+    document.body.appendChild(triggerWrap);
 
     const panel = document.createElement('div');
     panel.className = 'badge-panel';
@@ -409,13 +422,27 @@ const GameStore = (function () {
     }
     paintPanel();
 
-    trigger.addEventListener('click', function () { panel.classList.toggle('open'); });
+    const panelFocusTrap = createFocusTrap(panel);
+
+    trigger.addEventListener('click', function () {
+      const nowOpen = panel.classList.toggle('open');
+      if (nowOpen) panelFocusTrap.activate();
+      else panelFocusTrap.deactivate();
+    });
     panel.querySelector('.badge-panel-close').addEventListener('click', function () {
       panel.classList.remove('open');
+      panelFocusTrap.deactivate();
     });
     document.addEventListener('click', function (e) {
       if (panel.classList.contains('open') && !panel.contains(e.target) && e.target !== trigger) {
         panel.classList.remove('open');
+        panelFocusTrap.deactivate();
+      }
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && panel.classList.contains('open')) {
+        panel.classList.remove('open');
+        panelFocusTrap.deactivate();
       }
     });
 
@@ -678,6 +705,74 @@ const GameStore = (function () {
     });
   }
 
-  return { initMenuToggle, initCarousel, initMultiStepForm, initInteractions, initCatalogFilter, initAchievements, initGamerQuiz, initHistoryTimeline, initEmbeddedHistoryCards };
+  // ── Atrapado de foco para modales/paneles (carrito, modal de producto, logros) ──
+  // Sin esto, al abrir cualquiera de estos con teclado, un simple Tab se escapa hacia
+  // el contenido de fondo (ej. el navbar detrás), aunque visualmente el modal esté
+  // "encima" — quien navega solo con teclado puede terminar interactuando con la
+  // página de fondo sin darse cuenta de que el modal sigue "abierto". Esto hace que
+  // Tab/Shift+Tab se queden dando vueltas SOLO entre los elementos enfocables de
+  // adentro, y devuelve el foco a quien abrió el modal quede al cerrarlo.
+  function createFocusTrap(container) {
+    let lastFocused = null;
+
+    function getFocusable() {
+      return Array.from(
+        container.querySelectorAll(
+          'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+      ).filter(function (el) { return el.offsetParent !== null; });
+    }
+
+    function onKeydown(e) {
+      if (e.key !== 'Tab') return;
+      const focusable = getFocusable();
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+
+    return {
+      activate: function () {
+        lastFocused = document.activeElement;
+        container.addEventListener('keydown', onKeydown);
+
+        let done = false;
+        function focusFirst() {
+          if (done) return;
+          const focusable = getFocusable();
+          if (!focusable.length) return;
+          focusable[0].focus();
+          if (document.activeElement === focusable[0]) {
+            done = true;
+            container.removeEventListener('transitionend', focusFirst);
+          }
+        }
+        // Primer intento inmediato: funciona sin demora en modales que solo alternan
+        // display:none/block (carrito, panel de logros). Si el contenedor en vez de eso usa
+        // una transición CSS de opacity/visibility (ej. el modal de producto, ~0.3s), este
+        // intento inmediato falla en silencio porque el elemento aún no es interactivo — ahí
+        // se reintenta al terminar la transición real, con un timeout de respaldo por si acaso.
+        focusFirst();
+        if (!done) {
+          container.addEventListener('transitionend', focusFirst);
+          setTimeout(focusFirst, 350);
+        }
+      },
+      deactivate: function () {
+        container.removeEventListener('keydown', onKeydown);
+        if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+        lastFocused = null;
+      }
+    };
+  }
+
+  return { initMenuToggle, initCarousel, initMultiStepForm, initInteractions, initCatalogFilter, initAchievements, initGamerQuiz, initHistoryTimeline, initEmbeddedHistoryCards, createFocusTrap };
 
 })();
