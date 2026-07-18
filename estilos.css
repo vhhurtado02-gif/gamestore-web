@@ -171,6 +171,10 @@ body {
 
 .menu-toggle {
   display: none;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
   font-size: 26px;
   cursor: pointer;
   color: var(--white);
@@ -761,6 +765,16 @@ footer {
     left: 50%;
     transform: translateX(-50%);
   }
+  /* .has-ripple (agregada por JS al primer clic, para cualquier botón con efecto ripple)
+     trae su propio "position: relative" y, al declararse más abajo en este archivo,
+     pisaba el "position: absolute" de arriba — el botón se descentraba por completo
+     después del primer clic y quedaba así para siempre en esa carga de página. Esta
+     regla, al ser más específica (dos clases en vez de una), gana sin importar el orden. */
+  .menu-toggle.has-ripple {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
   /* Navbar-actions: carrito se desplaza un poco a la izquierda */
   .navbar-actions {
@@ -790,7 +804,7 @@ footer {
   }
   .menu.active { display: flex; }
   .menu a { padding: 14px 24px; border-radius: 0; font-size: 16px; }
-  .menu-toggle { display: block; }
+  .menu-toggle { display: flex; }
 
   /* Carrusel más compacto en mobile */
   .carousel-inner img { height: 220px; }
