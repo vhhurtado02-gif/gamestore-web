@@ -73,6 +73,73 @@ const GameStore = (function () {
     videos.forEach(v => observer.observe(v));
   }
 
+  // ── Footer: widget de logros en vivo + newsletter + botón volver arriba ──
+  // Todo esto vive en una sola función para no repetir la lógica en cada página;
+  // se auto-detecta qué hay en el DOM de cada página y arma solo lo que encuentra.
+  function initFooterExtras() {
+    // Widget de logros: lee del mismo sistema de achievements (localStorage 'gs-badges'),
+    // se actualiza solo cuando se desbloquea uno nuevo en cualquier parte del sitio.
+    const achWrap = document.querySelector('.footer-achievements');
+    if (achWrap) {
+      function paintAchievements() {
+        if (typeof GameStore === 'undefined' || !GameStore.getBadgesSummary) return;
+        const summary = GameStore.getBadgesSummary();
+        const pct = Math.round((summary.unlocked / summary.total) * 100);
+        achWrap.innerHTML =
+          '<div class="footer-achievements-inner">' +
+            '<span class="footer-achievements-icon">🏆</span>' +
+            '<div class="footer-achievements-text">' +
+              '<strong>Tu progreso gamer</strong>' +
+              '<div class="footer-achievements-bar"><div class="footer-achievements-bar-fill" style="width:' + pct + '%"></div></div>' +
+            '</div>' +
+            '<span class="footer-achievements-count">' + summary.unlocked + '/' + summary.total + '</span>' +
+          '</div>';
+      }
+      paintAchievements();
+      document.addEventListener('gs-badges-updated', paintAchievements);
+    }
+
+    // Newsletter: validación + confirmación visual. Sin backend propio todavía, así que
+    // por ahora solo guarda el correo en localStorage (para no perderlo) y muestra la
+    // misma confirmación "toast" que ya usan el carrito y los logros — queda listo para
+    // conectar a un servicio real de email (Mailchimp, Brevo, etc.) más adelante.
+    const newsletterForm = document.querySelector('.newsletter-form');
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const input = newsletterForm.querySelector('input[type="email"]');
+        const email = input.value.trim();
+        const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        if (!isValid) {
+          newsletterForm.classList.remove('is-invalid');
+          void newsletterForm.offsetWidth;
+          newsletterForm.classList.add('is-invalid');
+          input.focus();
+          return;
+        }
+        try {
+          const raw = localStorage.getItem('gs-newsletter-emails');
+          const list = raw ? JSON.parse(raw) : [];
+          if (!list.includes(email)) { list.push(email); }
+          localStorage.setItem('gs-newsletter-emails', JSON.stringify(list));
+        } catch (e2) {}
+
+        const toast = document.createElement('div');
+        toast.className = 'badge-toast';
+        toast.innerHTML = '<span class="badge-toast-icon">📬</span>' +
+          '<div><strong>¡Listo!</strong><br>Te avisaremos de ofertas y lanzamientos.</div>';
+        document.body.appendChild(toast);
+        requestAnimationFrame(function () { toast.classList.add('show'); });
+        setTimeout(function () {
+          toast.classList.remove('show');
+          setTimeout(function () { toast.remove(); }, 400);
+        }, 3500);
+
+        newsletterForm.reset();
+      });
+    }
+  }
+
   // ── Navbar dinámica: agrega la clase "scrolled" cuando el usuario baja la página ──
   function initNavbarScroll() {
     const nav = document.querySelector('.navbar');
@@ -101,7 +168,8 @@ const GameStore = (function () {
       '.carousel-control-prev', '.carousel-control-next',
       '.cart-trigger', '.cart-drawer-close', '.cart-item-remove', '.qty-btn',
       '.badge-trigger', '.badge-panel-close',
-      '.history-card-toggle', '.product-detail-btn', '.product-modal-close'
+      '.history-card-toggle', '.product-detail-btn', '.product-modal-close',
+      '.newsletter-form button'
     ].join(', ');
 
     document.addEventListener('click', function (e) {
@@ -238,6 +306,7 @@ const GameStore = (function () {
       initRippleButtons();
       initThemeToggle();
       initLazyVideos();
+      initFooterExtras();
     });
   }
 
@@ -460,8 +529,12 @@ const GameStore = (function () {
       saveUnlocked(unlocked);
       paintPanel();
       showToast(BADGES[id]);
+      document.dispatchEvent(new CustomEvent('gs-badges-updated'));
     }
     GameStore.unlockBadge = unlockBadge;
+    GameStore.getBadgesSummary = function () {
+      return { unlocked: getUnlocked().length, total: ORDER.length };
+    };
 
     // ── Código Konami: ↑ ↑ ↓ ↓ ← → ← → B A ──
     const KONAMI = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];

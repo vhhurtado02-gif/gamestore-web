@@ -64,6 +64,20 @@ picture { display: block; }
 
 html { scroll-behavior: smooth; }
 
+/* Texto solo para lectores de pantalla — normalmente lo trae Bootstrap, pero se define
+   también aquí para que no dependa de que ese CDN cargue correctamente. */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
 body {
   background-color: var(--bg);
   color: var(--white);
@@ -456,15 +470,17 @@ body {
 footer {
   background: var(--surface);
   border-top: 1px solid var(--border);
-  padding: 48px 32px 28px;
+  padding: 0 32px 28px;
+  position: relative;
 }
 .footer-grid {
   max-width: 1100px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr;
+  grid-template-columns: 1.3fr 0.9fr 0.9fr 1.2fr;
   gap: 40px;
   margin-bottom: 32px;
+  padding-top: 48px;
 }
 .footer-brand img { height: 44px; width: auto; transition: filter 0.3s ease; }
 /* El logo del navbar vive en un contenedor flex (se ajusta solo a su contenido).
@@ -485,14 +501,31 @@ footer {
 }
 .footer-col a {
   display: block;
+  position: relative;
+  width: fit-content;
   color: var(--muted);
   text-decoration: none;
   font-size: 13px;
   margin-bottom: 8px;
   transition: color 0.2s;
 }
+/* Subrayado animado: crece de izquierda a derecha al pasar el mouse, en vez de un
+   simple cambio de color — un detalle vivo que el footer no tenía antes. */
+.footer-col a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100%;
+  height: 1px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
 @media (hover: hover) and (pointer: fine) {
   .footer-col a:hover { color: var(--white); }
+  .footer-col a:hover::after { transform: scaleX(1); }
 }
 .footer-col a:active { color: var(--white); }
 .footer-bottom {
@@ -506,6 +539,168 @@ footer {
 }
 .footer-bottom p { color: var(--muted); font-size: 12px; }
 .footer-bottom span { color: var(--red); }
+
+/* ── Redes sociales ── */
+.footer-social {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+.footer-social a {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.footer-social a svg { width: 17px; height: 17px; fill: currentColor; }
+@media (hover: hover) and (pointer: fine) {
+  .footer-social a:hover { color: var(--white); border-color: var(--red); transform: translateY(-3px); }
+}
+.footer-social a:active { color: var(--white); border-color: var(--red); transform: scale(0.94); }
+
+/* ── Newsletter ── */
+.footer-newsletter p { color: var(--muted); font-size: 13px; line-height: 1.6; margin-bottom: 14px; }
+.newsletter-form { display: flex; gap: 8px; }
+.newsletter-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 10px 12px;
+  background: var(--bg);
+  border: 1px solid var(--border-strong, var(--border));
+  border-radius: 8px;
+  color: var(--white);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.newsletter-form input:focus { border-color: var(--red); }
+.newsletter-form input::placeholder { color: var(--muted); }
+.newsletter-form button {
+  flex-shrink: 0;
+  padding: 10px 16px;
+  /* Mismo motivo que .btn-primary: var(--red) con texto blanco solo da 3.65:1, no
+     alcanza 4.5:1. Este tono sí cumple (ya usado en el resto del sitio para esto). */
+  background: #e0003f;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+.newsletter-form button:hover { background: #c10036; }
+.newsletter-form button:active { background: #c10036; transform: scale(0.96); }
+.newsletter-form.is-invalid input { border-color: var(--red); animation: newsletter-shake 0.3s ease; }
+@keyframes newsletter-shake {
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .newsletter-form.is-invalid input { animation: none; }
+}
+
+/* ── Sellos de confianza / métodos de pago ── */
+.footer-trust {
+  max-width: 1100px;
+  margin: 0 auto 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 28px;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-trust-badges { display: flex; flex-wrap: wrap; gap: 10px; }
+.trust-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.trust-badge svg { width: 14px; height: 14px; flex-shrink: 0; }
+.footer-payment-methods { display: flex; gap: 8px; align-items: center; }
+.payment-icon {
+  padding: 6px 10px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+}
+
+/* ── Widget de logros en vivo: reaprovecha el sistema de achievements ya existente ── */
+.footer-achievements {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px 0 0;
+}
+.footer-achievements-inner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.footer-achievements-icon { font-size: 22px; flex-shrink: 0; }
+.footer-achievements-text { flex: 1; min-width: 0; }
+.footer-achievements-text strong {
+  display: block;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 4px;
+}
+.footer-achievements-bar {
+  height: 6px;
+  background: var(--bg);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.footer-achievements-bar-fill {
+  height: 100%;
+  background: var(--red);
+  border-radius: 999px;
+  transition: width 0.5s ease;
+}
+.footer-achievements-count {
+  font-family: 'Rajdhani', sans-serif;
+  /* 19px + bold ya cuenta como "texto grande" de WCAG (necesita 3:1, no 4.5:1) — así se
+     resuelve el contraste en ambos temas sin tocar el tono del rojo de marca. */
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--red);
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .footer-trust { flex-direction: column; align-items: flex-start; }
+}
 
 /* ── ABOUT ── */
 .about-hero {
@@ -742,6 +937,7 @@ footer {
 @media (max-width: 900px) {
   .grid-container { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-brand { grid-column: 1 / -1; }
   .about-hero { grid-template-columns: 1fr; }
   .about-values { grid-template-columns: repeat(2, 1fr); }
   .cat-section { grid-template-columns: 1fr; }
